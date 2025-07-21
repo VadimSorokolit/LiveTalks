@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD2BABBD2E2E5C26004DF3F4 /* Friend+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABB92E2E5C26004DF3F4 /* Friend+CoreDataClass.swift */; };
+		DD2BABBE2E2E5C26004DF3F4 /* Friend+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABBA2E2E5C26004DF3F4 /* Friend+CoreDataProperties.swift */; };
+		DD2BABBF2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABBC2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift */; };
+		DD2BABC02E2E5C26004DF3F4 /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABBB2E2E5C26004DF3F4 /* Message+CoreDataClass.swift */; };
 		DDD5B45C2E2E0AD100664B3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4502E2E0AD100664B3A /* AppDelegate.swift */; };
-		DDD5B45D2E2E0AD100664B3A /* LiveTalks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4552E2E0AD100664B3A /* LiveTalks.xcdatamodeld */; };
+		DDD5B45D2E2E0AD100664B3A /* LiveTalks 2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4552E2E0AD100664B3A /* LiveTalks 2.xcdatamodeld */; };
 		DDD5B45E2E2E0AD100664B3A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4582E2E0AD100664B3A /* SceneDelegate.swift */; };
 		DDD5B45F2E2E0AD100664B3A /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4592E2E0AD100664B3A /* ChatViewController.swift */; };
 		DDD5B4602E2E0AD100664B3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDD5B4512E2E0AD100664B3A /* Assets.xcassets */; };
@@ -26,6 +30,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD2BABB92E2E5C26004DF3F4 /* Friend+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DD2BABBA2E2E5C26004DF3F4 /* Friend+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DD2BABBB2E2E5C26004DF3F4 /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DD2BABBC2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DDD5B4222E2E08E400664B3A /* LiveTalks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveTalks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDD5B4502E2E0AD100664B3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDD5B4512E2E0AD100664B3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,6 +65,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD10E8D22E2E54A8008F5FB6 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B4552E2E0AD100664B3A /* LiveTalks 2.xcdatamodeld */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		DD10E8D32E2E54A8008F5FB6 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DD2BABB92E2E5C26004DF3F4 /* Friend+CoreDataClass.swift */,
+				DD2BABBA2E2E5C26004DF3F4 /* Friend+CoreDataProperties.swift */,
+				DD2BABBB2E2E5C26004DF3F4 /* Message+CoreDataClass.swift */,
+				DD2BABBC2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift */,
+				DD10E8D22E2E54A8008F5FB6 /* Entities */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		DDD5B4192E2E08E400664B3A = {
 			isa = PBXGroup;
 			children = (
@@ -78,10 +106,10 @@
 			children = (
 				DDD5B4642E2E0AD600664B3A /* App */,
 				DDD5B46D2E2E0D5B00664B3A /* Tab */,
+				DD10E8D32E2E54A8008F5FB6 /* Service */,
 				DDD5B4522E2E0AD100664B3A /* Info.plist */,
-				DDD5B4512E2E0AD100664B3A /* Assets.xcassets */,
 				DDD5B4542E2E0AD100664B3A /* LaunchScreen.storyboard */,
-				DDD5B4552E2E0AD100664B3A /* LiveTalks.xcdatamodeld */,
+				DDD5B4512E2E0AD100664B3A /* Assets.xcassets */,
 				DDD5B4572E2E0AD100664B3A /* Main.storyboard */,
 			);
 			path = LiveTalks;
@@ -297,7 +325,7 @@
 				DDD5B45C2E2E0AD100664B3A /* AppDelegate.swift in Sources */,
 				DDD5B4822E2E135200664B3A /* ChatHistoryView.swift in Sources */,
 				DDD5B46F2E2E0D9F00664B3A /* TabBarController.swift in Sources */,
-				DDD5B45D2E2E0AD100664B3A /* LiveTalks.xcdatamodeld in Sources */,
+				DDD5B45D2E2E0AD100664B3A /* LiveTalks 2.xcdatamodeld in Sources */,
 				DDD5B47E2E2E11E100664B3A /* ChatView.swift in Sources */,
 				DDD5B46B2E2E0CA500664B3A /* SettingsViewController.swift in Sources */,
 				DDD5B45E2E2E0AD100664B3A /* SceneDelegate.swift in Sources */,
@@ -305,6 +333,10 @@
 				DDD5B4692E2E0C3A00664B3A /* LocationViewController.swift in Sources */,
 				DDD5B4842E2E136C00664B3A /* SettingsView.swift in Sources */,
 				DDD5B45F2E2E0AD100664B3A /* ChatViewController.swift in Sources */,
+				DD2BABBD2E2E5C26004DF3F4 /* Friend+CoreDataClass.swift in Sources */,
+				DD2BABBE2E2E5C26004DF3F4 /* Friend+CoreDataProperties.swift in Sources */,
+				DD2BABBF2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift in Sources */,
+				DD2BABC02E2E5C26004DF3F4 /* Message+CoreDataClass.swift in Sources */,
 				DDD5B4672E2E0B9D00664B3A /* ChatListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,13 +585,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		DDD5B4552E2E0AD100664B3A /* LiveTalks.xcdatamodeld */ = {
+		DDD5B4552E2E0AD100664B3A /* LiveTalks 2.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				DDD5B45B2E2E0AD100664B3A /* LiveTalks.xcdatamodel */,
 			);
 			currentVersion = DDD5B45B2E2E0AD100664B3A /* LiveTalks.xcdatamodel */;
-			path = LiveTalks.xcdatamodeld;
+			path = "LiveTalks 2.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
