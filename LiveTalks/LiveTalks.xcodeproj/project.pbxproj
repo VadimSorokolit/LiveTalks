@@ -6,36 +6,51 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DDD5B45C2E2E0AD100664B3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4502E2E0AD100664B3A /* AppDelegate.swift */; };
+		DDD5B45D2E2E0AD100664B3A /* LiveTalks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4552E2E0AD100664B3A /* LiveTalks.xcdatamodeld */; };
+		DDD5B45E2E2E0AD100664B3A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4582E2E0AD100664B3A /* SceneDelegate.swift */; };
+		DDD5B45F2E2E0AD100664B3A /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4592E2E0AD100664B3A /* ChatViewController.swift */; };
+		DDD5B4602E2E0AD100664B3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDD5B4512E2E0AD100664B3A /* Assets.xcassets */; };
+		DDD5B4622E2E0AD100664B3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDD5B4542E2E0AD100664B3A /* LaunchScreen.storyboard */; };
+		DDD5B4632E2E0AD100664B3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDD5B4572E2E0AD100664B3A /* Main.storyboard */; };
+		DDD5B4672E2E0B9D00664B3A /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4662E2E0B9B00664B3A /* ChatListViewController.swift */; };
+		DDD5B4692E2E0C3A00664B3A /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4682E2E0C3500664B3A /* LocationViewController.swift */; };
+		DDD5B46B2E2E0CA500664B3A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B46A2E2E0C9900664B3A /* SettingsViewController.swift */; };
+		DDD5B46F2E2E0D9F00664B3A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B46E2E2E0D9B00664B3A /* TabBarController.swift */; };
+		DDD5B47E2E2E11E100664B3A /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B47D2E2E11E000664B3A /* ChatView.swift */; };
+		DDD5B4802E2E12AA00664B3A /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B47F2E2E12A900664B3A /* LocationView.swift */; };
+		DDD5B4822E2E135200664B3A /* ChatHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4812E2E134900664B3A /* ChatHistoryView.swift */; };
+		DDD5B4842E2E136C00664B3A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4832E2E136500664B3A /* SettingsView.swift */; };
+		DDD5B4872E2E13B300664B3A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DDD5B4862E2E13B300664B3A /* SnapKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		DDD5B4222E2E08E400664B3A /* LiveTalks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveTalks.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDD5B4502E2E0AD100664B3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DDD5B4512E2E0AD100664B3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DDD5B4522E2E0AD100664B3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDD5B4532E2E0AD100664B3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DDD5B4562E2E0AD100664B3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DDD5B4582E2E0AD100664B3A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		DDD5B4592E2E0AD100664B3A /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		DDD5B45B2E2E0AD100664B3A /* LiveTalks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LiveTalks.xcdatamodel; sourceTree = "<group>"; };
+		DDD5B4662E2E0B9B00664B3A /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
+		DDD5B4682E2E0C3500664B3A /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		DDD5B46A2E2E0C9900664B3A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		DDD5B46E2E2E0D9B00664B3A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		DDD5B47D2E2E11E000664B3A /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		DDD5B47F2E2E12A900664B3A /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		DDD5B4812E2E134900664B3A /* ChatHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryView.swift; sourceTree = "<group>"; };
+		DDD5B4832E2E136500664B3A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		DDD5B4372E2E08E600664B3A /* Exceptions for "LiveTalks" folder in "LiveTalks" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = DDD5B4212E2E08E400664B3A /* LiveTalks */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		DDD5B4242E2E08E400664B3A /* LiveTalks */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				DDD5B4372E2E08E600664B3A /* Exceptions for "LiveTalks" folder in "LiveTalks" target */,
-			);
-			path = LiveTalks;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		DDD5B41F2E2E08E400664B3A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDD5B4872E2E13B300664B3A /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,7 +60,7 @@
 		DDD5B4192E2E08E400664B3A = {
 			isa = PBXGroup;
 			children = (
-				DDD5B4242E2E08E400664B3A /* LiveTalks */,
+				DDD5B45A2E2E0AD100664B3A /* LiveTalks */,
 				DDD5B4232E2E08E400664B3A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +71,149 @@
 				DDD5B4222E2E08E400664B3A /* LiveTalks.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		DDD5B45A2E2E0AD100664B3A /* LiveTalks */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B4642E2E0AD600664B3A /* App */,
+				DDD5B46D2E2E0D5B00664B3A /* Tab */,
+				DDD5B4522E2E0AD100664B3A /* Info.plist */,
+				DDD5B4512E2E0AD100664B3A /* Assets.xcassets */,
+				DDD5B4542E2E0AD100664B3A /* LaunchScreen.storyboard */,
+				DDD5B4552E2E0AD100664B3A /* LiveTalks.xcdatamodeld */,
+				DDD5B4572E2E0AD100664B3A /* Main.storyboard */,
+			);
+			path = LiveTalks;
+			sourceTree = "<group>";
+		};
+		DDD5B4642E2E0AD600664B3A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B4502E2E0AD100664B3A /* AppDelegate.swift */,
+				DDD5B4582E2E0AD100664B3A /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DDD5B46D2E2E0D5B00664B3A /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B46E2E2E0D9B00664B3A /* TabBarController.swift */,
+				DDD5B4702E2E10B500664B3A /* Tabs */,
+			);
+			path = Tab;
+			sourceTree = "<group>";
+		};
+		DDD5B4702E2E10B500664B3A /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B4762E2E10EF00664B3A /* TabChat */,
+				DDD5B4752E2E10EB00664B3A /* TabLocation */,
+				DDD5B4742E2E10E600664B3A /* TabChatHistory */,
+				DDD5B4712E2E10C400664B3A /* TabSettings */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		DDD5B4712E2E10C400664B3A /* TabSettings */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B4732E2E10E000664B3A /* Views */,
+				DDD5B4722E2E10C900664B3A /* ViewControllers */,
+			);
+			path = TabSettings;
+			sourceTree = "<group>";
+		};
+		DDD5B4722E2E10C900664B3A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B46A2E2E0C9900664B3A /* SettingsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DDD5B4732E2E10E000664B3A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B4832E2E136500664B3A /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DDD5B4742E2E10E600664B3A /* TabChatHistory */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B4782E2E10F900664B3A /* Views */,
+				DDD5B4772E2E10F400664B3A /* ViewControllers */,
+			);
+			path = TabChatHistory;
+			sourceTree = "<group>";
+		};
+		DDD5B4752E2E10EB00664B3A /* TabLocation */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B47A2E2E110300664B3A /* Views */,
+				DDD5B4792E2E10FE00664B3A /* ViewControllers */,
+			);
+			path = TabLocation;
+			sourceTree = "<group>";
+		};
+		DDD5B4762E2E10EF00664B3A /* TabChat */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B47C2E2E111900664B3A /* Views */,
+				DDD5B47B2E2E110C00664B3A /* ViewControllers */,
+			);
+			path = TabChat;
+			sourceTree = "<group>";
+		};
+		DDD5B4772E2E10F400664B3A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B4662E2E0B9B00664B3A /* ChatListViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DDD5B4782E2E10F900664B3A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B4812E2E134900664B3A /* ChatHistoryView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DDD5B4792E2E10FE00664B3A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B4682E2E0C3500664B3A /* LocationViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DDD5B47A2E2E110300664B3A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B47F2E2E12A900664B3A /* LocationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DDD5B47B2E2E110C00664B3A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B4592E2E0AD100664B3A /* ChatViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DDD5B47C2E2E111900664B3A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DDD5B47D2E2E11E000664B3A /* ChatView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -73,11 +231,9 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				DDD5B4242E2E08E400664B3A /* LiveTalks */,
-			);
 			name = LiveTalks;
 			packageProductDependencies = (
+				DDD5B4862E2E13B300664B3A /* SnapKit */,
 			);
 			productName = LiveTalks;
 			productReference = DDD5B4222E2E08E400664B3A /* LiveTalks.app */;
@@ -107,6 +263,9 @@
 			);
 			mainGroup = DDD5B4192E2E08E400664B3A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				DDD5B4852E2E13B300664B3A /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DDD5B4232E2E08E400664B3A /* Products */;
 			projectDirPath = "";
@@ -122,6 +281,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDD5B4602E2E0AD100664B3A /* Assets.xcassets in Resources */,
+				DDD5B4622E2E0AD100664B3A /* LaunchScreen.storyboard in Resources */,
+				DDD5B4632E2E0AD100664B3A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,10 +294,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDD5B45C2E2E0AD100664B3A /* AppDelegate.swift in Sources */,
+				DDD5B4822E2E135200664B3A /* ChatHistoryView.swift in Sources */,
+				DDD5B46F2E2E0D9F00664B3A /* TabBarController.swift in Sources */,
+				DDD5B45D2E2E0AD100664B3A /* LiveTalks.xcdatamodeld in Sources */,
+				DDD5B47E2E2E11E100664B3A /* ChatView.swift in Sources */,
+				DDD5B46B2E2E0CA500664B3A /* SettingsViewController.swift in Sources */,
+				DDD5B45E2E2E0AD100664B3A /* SceneDelegate.swift in Sources */,
+				DDD5B4802E2E12AA00664B3A /* LocationView.swift in Sources */,
+				DDD5B4692E2E0C3A00664B3A /* LocationViewController.swift in Sources */,
+				DDD5B4842E2E136C00664B3A /* SettingsView.swift in Sources */,
+				DDD5B45F2E2E0AD100664B3A /* ChatViewController.swift in Sources */,
+				DDD5B4672E2E0B9D00664B3A /* ChatListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DDD5B4542E2E0AD100664B3A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDD5B4532E2E0AD100664B3A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		DDD5B4572E2E0AD100664B3A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDD5B4562E2E0AD100664B3A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		DDD5B4392E2E08E600664B3A /* Debug */ = {
@@ -339,6 +532,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DDD5B4852E2E13B300664B3A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DDD5B4862E2E13B300664B3A /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDD5B4852E2E13B300664B3A /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		DDD5B4552E2E0AD100664B3A /* LiveTalks.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DDD5B45B2E2E0AD100664B3A /* LiveTalks.xcdatamodel */,
+			);
+			currentVersion = DDD5B45B2E2E0AD100664B3A /* LiveTalks.xcdatamodel */;
+			path = LiveTalks.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DDD5B41A2E2E08E400664B3A /* Project object */;
 }
