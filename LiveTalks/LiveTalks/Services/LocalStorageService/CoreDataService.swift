@@ -12,6 +12,10 @@ protocol LocalStorageProtocol: AnyObject {
     func fetchChats(completion: @escaping (Result<[Friend], Error>) -> Void)
     func fetchMessages(for friend: Friend,
                        completion: @escaping (Result<[Message], Error>) -> Void)
+    func createMessage(text: String,
+                          isIncoming: Bool,
+                          for friend: Friend,
+                          completion: ((Result<Message, Error>) -> Void)?) -> Message
     func saveChat(name: String, completion: ((Error?) -> Void)?)
     func saveMessage(text: String,
                      isIncoming: Bool,
@@ -57,6 +61,24 @@ final class CoreDataService: LocalStorageProtocol {
                 completion(.failure(error))
             }
         }
+    }
+    
+    func createMessage(text: String,
+                       isIncoming: Bool,
+                       for friend: Friend,
+                       completion: ((Result<Message, Error>) -> Void)?) -> Message {
+        let msg = Message(context: context)
+        msg.text = text
+        msg.date = Date()
+        msg.isIncoming = isIncoming
+        msg.friend = friend
+        do {
+            try context.save()
+            completion?(.success(msg))
+        } catch {
+            completion?(.failure(error))
+        }
+        return msg
     }
     
     func saveChat(name: String, completion: ((Error?) -> Void)?) {
@@ -117,4 +139,5 @@ final class CoreDataService: LocalStorageProtocol {
             }
         }
     }
+    
 }
