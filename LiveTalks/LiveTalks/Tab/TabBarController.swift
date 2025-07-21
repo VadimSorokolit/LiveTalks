@@ -15,8 +15,6 @@ class TabBarController: UITabBarController {
         case chatHistory
         case settings
         
-        // MARK: - Properties
-        
         var viewController: UIViewController {
             switch self {
                 case .chat:
@@ -43,7 +41,8 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        
+        self.setup()
     }
     
     // MARK: - Methods
