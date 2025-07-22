@@ -16,8 +16,7 @@ class FriendsSheetViewController: UIViewController {
     // MARK: - Properties
     
     weak var delegate: FriendsSheetDelegate?
-    
-    // MARK: - UI
+
     private let tableView = UITableView(frame: .zero, style: .plain)
     
     private let nameField: UITextField = {
@@ -38,12 +37,16 @@ class FriendsSheetViewController: UIViewController {
     private var friends = [Friend]()
     
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        
         setupViews()
         fetchFriends()
     }
+    
+    // MARK: - Methods
     
     private func setupViews() {
         // Table
@@ -108,6 +111,7 @@ class FriendsSheetViewController: UIViewController {
 // MARK: - UITableViewDataSource
 
 extension FriendsSheetViewController: UITableViewDataSource {
+    
     func tableView(_ tv: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friends.count
     }
@@ -116,13 +120,16 @@ extension FriendsSheetViewController: UITableViewDataSource {
         cell.textLabel?.text = friends[ip.row].name
         return cell
     }
+    
 }
 
 // MARK: - UITableViewDelegate
 
 extension FriendsSheetViewController: UITableViewDelegate {
+    
     func tableView(_ tv: UITableView, didSelectRowAt ip: IndexPath) {
         let f = friends[ip.row]
         delegate?.friendsSheet(self, didSelect: f)
     }
+    
 }

@@ -12,8 +12,9 @@
 		DD2BABBF2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABBC2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift */; };
 		DD2BABC02E2E5C26004DF3F4 /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABBB2E2E5C26004DF3F4 /* Message+CoreDataClass.swift */; };
 		DD2BABC22E2E6064004DF3F4 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABC12E2E6063004DF3F4 /* CoreDataService.swift */; };
-		DD2BABC52E2E8B19004DF3F4 /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABC42E2E8B19004DF3F4 /* Untitled.swift */; };
+		DD2BABC52E2E8B19004DF3F4 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABC42E2E8B19004DF3F4 /* MessageCell.swift */; };
 		DD2BABC72E2E990C004DF3F4 /* FriendsSheetViewControlle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABC62E2E990B004DF3F4 /* FriendsSheetViewControlle.swift */; };
+		DD2BABCA2E2ECA6F004DF3F4 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABC92E2ECA6D004DF3F4 /* UIColor+Hex.swift */; };
 		DDD5B45C2E2E0AD100664B3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4502E2E0AD100664B3A /* AppDelegate.swift */; };
 		DDD5B45D2E2E0AD100664B3A /* LiveTalks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4552E2E0AD100664B3A /* LiveTalks.xcdatamodeld */; };
 		DDD5B45E2E2E0AD100664B3A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4582E2E0AD100664B3A /* SceneDelegate.swift */; };
@@ -37,8 +38,9 @@
 		DD2BABBB2E2E5C26004DF3F4 /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DD2BABBC2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DD2BABC12E2E6063004DF3F4 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
-		DD2BABC42E2E8B19004DF3F4 /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
+		DD2BABC42E2E8B19004DF3F4 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		DD2BABC62E2E990B004DF3F4 /* FriendsSheetViewControlle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsSheetViewControlle.swift; sourceTree = "<group>"; };
+		DD2BABC92E2ECA6D004DF3F4 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		DDD5B4222E2E08E400664B3A /* LiveTalks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveTalks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDD5B4502E2E0AD100664B3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDD5B4512E2E0AD100664B3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -98,6 +100,22 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		DD2BABC82E2ECA59004DF3F4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DD2BABC92E2ECA6D004DF3F4 /* UIColor+Hex.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DD2BABCB2E2F6E0D004DF3F4 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DD2BABC42E2E8B19004DF3F4 /* MessageCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		DDD5B4192E2E08E400664B3A = {
 			isa = PBXGroup;
 			children = (
@@ -120,8 +138,9 @@
 				DDD5B4642E2E0AD600664B3A /* App */,
 				DDD5B46D2E2E0D5B00664B3A /* TabBar */,
 				DD2BABC32E2E70FF004DF3F4 /* Services */,
-				DDD5B4542E2E0AD100664B3A /* LaunchScreen.storyboard */,
+				DD2BABC82E2ECA59004DF3F4 /* Extensions */,
 				DDD5B4522E2E0AD100664B3A /* Info.plist */,
+				DDD5B4542E2E0AD100664B3A /* LaunchScreen.storyboard */,
 				DDD5B4512E2E0AD100664B3A /* Assets.xcassets */,
 			);
 			path = LiveTalks;
@@ -243,7 +262,6 @@
 		DDD5B47B2E2E110C00664B3A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				DD2BABC42E2E8B19004DF3F4 /* Untitled.swift */,
 				DDD5B4592E2E0AD100664B3A /* ChatViewController.swift */,
 				DD2BABC62E2E990B004DF3F4 /* FriendsSheetViewControlle.swift */,
 			);
@@ -253,6 +271,7 @@
 		DDD5B47C2E2E111900664B3A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DD2BABCB2E2F6E0D004DF3F4 /* Cell */,
 				DDD5B47D2E2E11E000664B3A /* ChatView.swift */,
 			);
 			path = Views;
@@ -341,13 +360,14 @@
 				DDD5B45D2E2E0AD100664B3A /* LiveTalks.xcdatamodeld in Sources */,
 				DDD5B47E2E2E11E100664B3A /* ChatView.swift in Sources */,
 				DDD5B46B2E2E0CA500664B3A /* SettingsViewController.swift in Sources */,
+				DD2BABCA2E2ECA6F004DF3F4 /* UIColor+Hex.swift in Sources */,
 				DDD5B45E2E2E0AD100664B3A /* SceneDelegate.swift in Sources */,
 				DDD5B4802E2E12AA00664B3A /* LocationView.swift in Sources */,
 				DDD5B4692E2E0C3A00664B3A /* LocationViewController.swift in Sources */,
 				DDD5B4842E2E136C00664B3A /* SettingsView.swift in Sources */,
 				DDD5B45F2E2E0AD100664B3A /* ChatViewController.swift in Sources */,
 				DD2BABC22E2E6064004DF3F4 /* CoreDataService.swift in Sources */,
-				DD2BABC52E2E8B19004DF3F4 /* Untitled.swift in Sources */,
+				DD2BABC52E2E8B19004DF3F4 /* MessageCell.swift in Sources */,
 				DD2BABBD2E2E5C26004DF3F4 /* Friend+CoreDataClass.swift in Sources */,
 				DD2BABC72E2E990C004DF3F4 /* FriendsSheetViewControlle.swift in Sources */,
 				DD2BABBE2E2E5C26004DF3F4 /* Friend+CoreDataProperties.swift in Sources */,

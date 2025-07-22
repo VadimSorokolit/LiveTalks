@@ -9,6 +9,12 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
+    // MARK: - Objects
+    
+    private struct Constants {
+        static let tabBarBackgroundColor: Int = 0xE6E7E8
+    }
+    
     enum Tab: CaseIterable {
         case chat
         case locations
@@ -18,44 +24,44 @@ class TabBarController: UITabBarController {
         var rootViewController: UIViewController {
             switch self {
                 case .chat:
-                    let vc = ChatViewController()
-                    vc.title = "Chat"
-                    vc.tabBarItem = UITabBarItem(
+                    let viewController = ChatViewController()
+                    viewController.title = "Chat"
+                    viewController.tabBarItem = UITabBarItem(
                         title: "Chat",
                         image: UIImage(systemName: "bubble.left.and.bubble.right"),
                         selectedImage: nil
                     )
-                    return vc
+                    return viewController
                     
                 case .locations:
-                    let vc = LocationViewController()
-                    vc.title = "Location"
-                    vc.tabBarItem = UITabBarItem(
+                    let viewController = LocationViewController()
+                    viewController.title = "Location"
+                    viewController.tabBarItem = UITabBarItem(
                         title: "Location",
                         image: UIImage(systemName: "map"),
                         selectedImage: nil
                     )
-                    return vc
+                    return viewController
                     
                 case .chatHistory:
-                    let vc = ChatListViewController()
-                    vc.title = "Chats"
-                    vc.tabBarItem = UITabBarItem(
+                    let viewController = ChatListViewController()
+                    viewController.title = "Chats"
+                    viewController.tabBarItem = UITabBarItem(
                         title: "History",
                         image: UIImage(systemName: "rectangle.on.rectangle"),
                         selectedImage: nil
                     )
-                    return vc
+                    return viewController
                     
                 case .settings:
-                    let vc = SettingsViewController()
-                    vc.title = "Settings"
-                    vc.tabBarItem = UITabBarItem(
+                    let viewController = SettingsViewController()
+                    viewController.title = "Settings"
+                    viewController.tabBarItem = UITabBarItem(
                         title: "Settings",
                         image: UIImage(systemName: "gearshape"),
                         selectedImage: nil
                     )
-                    return vc
+                    return viewController
             }
         }
     }
@@ -68,12 +74,22 @@ class TabBarController: UITabBarController {
         self.setup()
     }
     
-    // MARK: - Methods
+    // MARK: - Methods. Private
     
     private func setup() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(hex: Constants.tabBarBackgroundColor)
+        
+        self.tabBar.standardAppearance = appearance
+        
+        if #available(iOS 15.0, *) {
+            self.tabBar.scrollEdgeAppearance = appearance
+        }
+        
         viewControllers = Tab.allCases.map { tab in
-            let nav = UINavigationController(rootViewController: tab.rootViewController)
-            return nav
+            let navigationController = UINavigationController(rootViewController: tab.rootViewController)
+            return navigationController
         }
     }
     

@@ -42,13 +42,19 @@ class ChatListViewController: UIViewController {
 }
 
 extension ChatListViewController: FriendsSheetDelegate {
-    
     func friendsSheet(_ sheet: FriendsSheetViewController, didSelect friend: Friend) {
         sheet.dismiss(animated: true) {
-            let chatVC = ChatViewController()
-            chatVC.friend = friend
-            self.navigationController?.pushViewController(chatVC, animated: true)
+            guard let tabBar = self.tabBarController else { return }
+            
+            let chatNav = tabBar.viewControllers?[0] as? UINavigationController
+            
+            if let chatVC = chatNav?.viewControllers.first as? ChatViewController {
+                chatVC.friend = friend
+                
+                chatNav?.popToRootViewController(animated: true)
+                
+                tabBar.selectedIndex = 0
+            }
         }
     }
-    
 }
