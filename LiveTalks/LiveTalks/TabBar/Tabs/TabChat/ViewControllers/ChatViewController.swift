@@ -75,16 +75,64 @@ class ChatViewController: UIViewController {
         self.chatView.isHidden = (self.friend == nil)
     }
     
-    func getReplyMessages() -> [String] {
+    private func getReplyMessages() -> [String] {
         self.chatView.getReplyMessages()
     }
     
-    func extractMessageText() -> String? {
+    private func extractMessageText() -> String? {
         self.chatView.extractMessageText()
     }
     
-    func clearTextFieldInput() {
+    private func clearTextFieldInput() {
         self.chatView.clearTextFieldInput()
+    }
+    
+    private func insertNew(_ message: Message) {
+        self.chatView.append(message)
+        
+        DispatchQueue.main.async {
+            let idx = IndexPath(row: 0, section: 0)
+            
+            self.chatView.tableView.performBatchUpdates({
+                self.chatView.tableView.insertRows(at: [idx], with: .automatic)
+            }, completion: nil)
+        }
+    }
+    
+    private func simulateReply(to friend: Friend) {
+        let replies = self.getReplyMessages()
+        let reply = replies.randomElement()!
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            CoreDataService.shared.createMessage(text: reply, isIncoming: true, for: friend) { [weak self] result in
+                guard let self = self, case .success(let message) = result else {
+                    return
+                }
+                self.insertNew(message)
+            }
+        }
+    }
+    
+}
+
+// MARK: - ChatViewProtocol
+
+extension ChatViewController: ChatViewProtocol {
+    
+    func chatView(_ chatView: ChatView, didSelectedSendButton button: UIButton) {
+        guard let friend = self.friend, let text = self.extractMessageText(), !text.isEmpty else {
+            return
+        }
+        
+        self.clearTextFieldInput()
+        
+        CoreDataService.shared.createMessage(text: text, isIncoming: false, for: friend) { [weak self] result in
+            guard let self = self, case .success(let message) = result else {
+                return
+            }
+            self.insertNew(message)
+            self.simulateReply(to: friend)
+        }
     }
     
 }

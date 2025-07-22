@@ -69,7 +69,8 @@ class ChatView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.setup()
+        self.setupViews()
+        self.registerForKeyboardNotifications()
     }
     
     required init?(coder: NSCoder) {
@@ -78,12 +79,17 @@ class ChatView: UIView {
     
     // MARK: - Methods. Private
     
-    private func setup() {
+    private func setupViews() {
+//        let tap = UITapGestureRecognizer(target: self,action: #selector(dismissKeyboard))
+//        tap.cancelsTouchesInView = false
+//        self.addGestureRecognizer(tap)
+        
         self.addSubview(self.tableView)
         self.addSubview(self.inputContainer)
         
         self.inputContainer.addSubview(self.textView)
         self.inputContainer.addSubview(self.sendButton)
+        
         
         self.tableView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(self.safeAreaLayoutGuide)
@@ -107,6 +113,20 @@ class ChatView: UIView {
             $0.centerY.equalTo(self.textView)
             $0.width.height.equalTo(36.0)
         }
+    }
+    
+    private func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardWillShow(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardWillHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
     }
     
     // MARK: - Methods. Public
@@ -139,6 +159,46 @@ class ChatView: UIView {
     // MARK: - Events
     
     @objc
+    private func keyboardWillShow(_ note: Notification) {
+        guard let info = note.userInfo,
+              let frameValue = info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+              let duration   = info[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double
+        else {
+            return
+        }
+        
+        let keyboardFrame = frameValue.cgRectValue
+        let offset  = keyboardFrame.height - self.safeAreaInsets.bottom
+        
+        self.inputContainer.snp.updateConstraints {
+            $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-offset)
+        }
+        
+        UIView.animate(withDuration: duration) {
+            self.layoutIfNeeded()
+        }
+    }
+
+    @objc
+    private func keyboardWillHide(_ note: Notification) {
+        guard let info = note.userInfo, let duration = info[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+            return
+        }
+        
+        self.inputContainer.snp.updateConstraints {
+            $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
+        }
+        
+        UIView.animate(withDuration: duration) {
+            self.layoutIfNeeded()
+        }
+    }
+    
+    @objc private func dismissKeyboard() {
+        self.endEditing(true)
+    }
+    
+    @objc
     private func handleSend() {
         self.delegate?.chatView(self, didSelectedSendButton: self.sendButton)
     }
@@ -168,54 +228,6 @@ extension ChatView: UITableViewDataSource {
         cell?.configure(with: message, isStartOfSeries: isStart)
         
         return cell ?? MessageCell()
-    }
-    
-}
-
-// MARK: - ChatViewProtocol
-
-extension ChatViewController: ChatViewProtocol {
-    
-    func chatView(_ chatView: ChatView, didSelectedSendButton button: UIButton) {
-        guard
-            let friend = self.friend,
-            let text = self.extractMessageText(),
-            !text.isEmpty
-        else { return }
-        
-        self.clearTextFieldInput()
-        
-        CoreDataService.shared.createMessage(text: text, isIncoming: false, for: friend) { [weak self] result in
-            guard let self = self, case .success(let message) = result else {
-                return
-            }
-            
-            insertNew(message)
-            simulateReply(to: friend)
-        }
-        
-        func insertNew(_ message: Message) {
-            chatView.append(message)
-            
-            DispatchQueue.main.async {
-                let idx = IndexPath(row: 0, section: 0)
-                chatView.tableView.performBatchUpdates({chatView.tableView.insertRows(at: [idx], with: .automatic)}, completion: nil)
-            }
-        }
-        
-        func simulateReply(to friend: Friend) {
-            let replies = self.getReplyMessages()
-            let reply = replies.randomElement()!
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                CoreDataService.shared.createMessage(text: reply, isIncoming: true, for: friend) { [weak self] result in
-                    guard let self = self, case .success(let message) = result else {
-                        return
-                    }
-                    insertNew(message)
-                }
-            }
-        }
     }
     
 }

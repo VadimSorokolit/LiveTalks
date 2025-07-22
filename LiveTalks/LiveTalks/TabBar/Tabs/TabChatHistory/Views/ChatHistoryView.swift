@@ -6,18 +6,37 @@
 //
     
 import UIKit
+import SnapKit
 
-class ChatHistoryView: UIView  {
-    
-    
-    // MARK: - Initializer
-    
+/// A view containing a UITableView for displaying chat history.
+class ChatHistoryView: UIView {
+    // MARK: - Subviews
+    /// Table view to display list of chats
+    let tableView: UITableView = {
+        let tv = UITableView(frame: .zero, style: .plain)
+        tv.separatorStyle = .singleLine
+        tv.allowsSelection = true
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        return tv
+    }()
+
+    // MARK: - Initialization
     override init(frame: CGRect) {
-        super .init(frame: frame)
+        super.init(frame: frame)
+        setupViews()
     }
-    
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setupViews()
     }
-    
+
+    // MARK: - View Setup
+    private func setupViews() {
+        backgroundColor = .systemBackground
+        addSubview(tableView)
+        // Pin tableView to all edges
+        tableView.snp.makeConstraints { make in
+            make.edges.equalTo(safeAreaLayoutGuide)
+        }
+    }
 }
