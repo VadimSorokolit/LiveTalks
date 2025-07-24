@@ -8,7 +8,8 @@
 import Foundation
 
 struct GlobalConstants {
-    static let semiBoldFont: String = "AvenirNextCyr-Bold"
+    static let boldFont: String = "AvenirNextCyr-Bold"
+    static let demiFont: String = "AvenirNextCyr-Demi"
     static let mediumFont: String = "AvenirNextCyr-Medium"
     static let regularFont: String = "AvenirNextCyr-Regular"
 }

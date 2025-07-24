@@ -56,13 +56,14 @@ class ChatViewController: UIViewController {
     
     private func fetchMessages() {
         guard let friend = self.friend else { return }
-        
+    
         CoreDataService.shared.fetchMessages(for: friend) { [weak self] result in
             switch result {
                 case .success(let messages):
                     self?.chatView.save(messages)
                     
                     DispatchQueue.main.async {
+                        self?.updateNavigationTitle()
                         self?.chatView.reloadData()
                     }
                 case .failure(let error):
@@ -73,6 +74,12 @@ class ChatViewController: UIViewController {
     
     private func updateChatView() {
         self.chatView.isHidden = (self.friend == nil)
+    }
+    
+    private func updateNavigationTitle() {
+        if let name = self.friend?.name {
+            self.navigationItem.title = "Chat with \(name)"
+        }
     }
     
     private func getReplyMessages() -> [String] {
@@ -91,11 +98,7 @@ class ChatViewController: UIViewController {
         self.chatView.append(message)
         
         DispatchQueue.main.async {
-            let idx = IndexPath(row: 0, section: 0)
-            
-            self.chatView.tableView.performBatchUpdates({
-                self.chatView.tableView.insertRows(at: [idx], with: .automatic)
-            }, completion: nil)
+            self.chatView.scrollToLatestMessage()
         }
     }
     

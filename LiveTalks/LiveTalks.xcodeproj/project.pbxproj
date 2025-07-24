@@ -19,6 +19,9 @@
 		DD5333952E302135003E0CE5 /* AvenirNextCyr-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD5333942E302135003E0CE5 /* AvenirNextCyr-Regular.ttf */; };
 		DD5333992E302176003E0CE5 /* AvenirNextCyr-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD5333982E302176003E0CE5 /* AvenirNextCyr-Bold.ttf */; };
 		DD53339D2E302241003E0CE5 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53339C2E302240003E0CE5 /* GlobalConstants.swift */; };
+		DD5333A22E30C857003E0CE5 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5333A12E30C855003E0CE5 /* NetworkService.swift */; };
+		DD5333A52E30CA92003E0CE5 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5333A42E30CA8D003E0CE5 /* Location.swift */; };
+		DD5333A72E30E13A003E0CE5 /* AvenirNextCyr-Demi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD5333A62E30E13A003E0CE5 /* AvenirNextCyr-Demi.ttf */; };
 		DDD5B45C2E2E0AD100664B3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4502E2E0AD100664B3A /* AppDelegate.swift */; };
 		DDD5B45D2E2E0AD100664B3A /* LiveTalks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4552E2E0AD100664B3A /* LiveTalks.xcdatamodeld */; };
 		DDD5B45E2E2E0AD100664B3A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4582E2E0AD100664B3A /* SceneDelegate.swift */; };
@@ -34,6 +37,7 @@
 		DDD5B4822E2E135200664B3A /* ChatHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4812E2E134900664B3A /* ChatHistoryView.swift */; };
 		DDD5B4842E2E136C00664B3A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4832E2E136500664B3A /* SettingsView.swift */; };
 		DDD5B4872E2E13B300664B3A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DDD5B4862E2E13B300664B3A /* SnapKit */; };
+		DDFAD23A2E3189CC008E9ABE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDFAD2382E3189CC008E9ABE /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +53,9 @@
 		DD5333942E302135003E0CE5 /* AvenirNextCyr-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AvenirNextCyr-Regular.ttf"; sourceTree = "<group>"; };
 		DD5333982E302176003E0CE5 /* AvenirNextCyr-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AvenirNextCyr-Bold.ttf"; sourceTree = "<group>"; };
 		DD53339C2E302240003E0CE5 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
+		DD5333A12E30C855003E0CE5 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		DD5333A42E30CA8D003E0CE5 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		DD5333A62E30E13A003E0CE5 /* AvenirNextCyr-Demi.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AvenirNextCyr-Demi.ttf"; sourceTree = "<group>"; };
 		DDD5B4222E2E08E400664B3A /* LiveTalks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveTalks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDD5B4502E2E0AD100664B3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDD5B4512E2E0AD100664B3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -65,6 +72,9 @@
 		DDD5B47F2E2E12A900664B3A /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		DDD5B4812E2E134900664B3A /* ChatHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryView.swift; sourceTree = "<group>"; };
 		DDD5B4832E2E136500664B3A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		DDFAD2352E318716008E9ABE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		DDFAD2392E3189CC008E9ABE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DDFAD23B2E318AA6008E9ABE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +113,7 @@
 		DD2BABC32E2E70FF004DF3F4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				DD53339E2E30C824003E0CE5 /* NetworkService */,
 				DD10E8D32E2E54A8008F5FB6 /* LocalStorageService */,
 			);
 			path = Services;
@@ -129,6 +140,7 @@
 			children = (
 				DD53339C2E302240003E0CE5 /* GlobalConstants.swift */,
 				DD53338F2E3020DD003E0CE5 /* Fonts */,
+				DDFAD2382E3189CC008E9ABE /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -137,10 +149,27 @@
 			isa = PBXGroup;
 			children = (
 				DD5333982E302176003E0CE5 /* AvenirNextCyr-Bold.ttf */,
+				DD5333A62E30E13A003E0CE5 /* AvenirNextCyr-Demi.ttf */,
 				DD5333902E30210D003E0CE5 /* AvenirNextCyr-Medium.ttf */,
 				DD5333942E302135003E0CE5 /* AvenirNextCyr-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		DD53339E2E30C824003E0CE5 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				DD5333A12E30C855003E0CE5 /* NetworkService.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		DD5333A32E30CA6B003E0CE5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DD5333A42E30CA8D003E0CE5 /* Location.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		DDD5B4192E2E08E400664B3A = {
@@ -167,8 +196,9 @@
 				DD2BABC32E2E70FF004DF3F4 /* Services */,
 				DD2BABC82E2ECA59004DF3F4 /* Extensions */,
 				DD53338E2E3020D8003E0CE5 /* Resources */,
-				DDD5B4542E2E0AD100664B3A /* LaunchScreen.storyboard */,
+				DD5333A32E30CA6B003E0CE5 /* Model */,
 				DDD5B4522E2E0AD100664B3A /* Info.plist */,
+				DDD5B4542E2E0AD100664B3A /* LaunchScreen.storyboard */,
 				DDD5B4512E2E0AD100664B3A /* Assets.xcassets */,
 			);
 			path = LiveTalks;
@@ -349,6 +379,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = DDD5B4192E2E08E400664B3A;
 			minimizedProjectReferenceProxies = 1;
@@ -372,6 +403,8 @@
 			files = (
 				DD5333992E302176003E0CE5 /* AvenirNextCyr-Bold.ttf in Resources */,
 				DD5333912E30210D003E0CE5 /* AvenirNextCyr-Medium.ttf in Resources */,
+				DD5333A72E30E13A003E0CE5 /* AvenirNextCyr-Demi.ttf in Resources */,
+				DDFAD23A2E3189CC008E9ABE /* Localizable.strings in Resources */,
 				DDD5B4602E2E0AD100664B3A /* Assets.xcassets in Resources */,
 				DD5333952E302135003E0CE5 /* AvenirNextCyr-Regular.ttf in Resources */,
 				DDD5B4622E2E0AD100664B3A /* LaunchScreen.storyboard in Resources */,
@@ -399,10 +432,12 @@
 				DDD5B4842E2E136C00664B3A /* SettingsView.swift in Sources */,
 				DDD5B45F2E2E0AD100664B3A /* ChatViewController.swift in Sources */,
 				DD2BABC22E2E6064004DF3F4 /* CoreDataService.swift in Sources */,
+				DD5333A52E30CA92003E0CE5 /* Location.swift in Sources */,
 				DD2BABC52E2E8B19004DF3F4 /* MessageCell.swift in Sources */,
 				DD2BABBD2E2E5C26004DF3F4 /* Friend+CoreDataClass.swift in Sources */,
 				DD2BABC72E2E990C004DF3F4 /* FriendsSheetViewControlle.swift in Sources */,
 				DD2BABBE2E2E5C26004DF3F4 /* Friend+CoreDataProperties.swift in Sources */,
+				DD5333A22E30C857003E0CE5 /* NetworkService.swift in Sources */,
 				DD2BABBF2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift in Sources */,
 				DD2BABC02E2E5C26004DF3F4 /* Message+CoreDataClass.swift in Sources */,
 				DDD5B4672E2E0B9D00664B3A /* ChatListViewController.swift in Sources */,
@@ -416,8 +451,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				DDD5B4532E2E0AD100664B3A /* Base */,
+				DDFAD2352E318716008E9ABE /* de */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		DDFAD2382E3189CC008E9ABE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDFAD2392E3189CC008E9ABE /* en */,
+				DDFAD23B2E318AA6008E9ABE /* de */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -433,6 +478,7 @@
 				DEVELOPMENT_TEAM = D28SS25G7Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveTalks/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "“We need your location to center the map with your coordinats”";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -461,6 +507,7 @@
 				DEVELOPMENT_TEAM = D28SS25G7Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveTalks/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "“We need your location to center the map with your coordinats”";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -484,6 +531,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -548,6 +596,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

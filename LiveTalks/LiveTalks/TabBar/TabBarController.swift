@@ -25,7 +25,7 @@ class TabBarController: UITabBarController {
             switch self {
                 case .chat:
                     let viewController = ChatViewController()
-                    viewController.title = "Chat"
+                    viewController.title = NSLocalizedString("chatTitle", comment: "Chat screen title")
                     viewController.tabBarItem = UITabBarItem(
                         title: "Chat",
                         image: UIImage(systemName: "bubble.left.and.bubble.right"),
@@ -45,10 +45,10 @@ class TabBarController: UITabBarController {
                     
                 case .chatHistory:
                     let viewController = ChatListViewController()
-                    viewController.title = "Chats"
+                    viewController.title = "History"
                     viewController.tabBarItem = UITabBarItem(
                         title: "History",
-                        image: UIImage(systemName: "rectangle.on.rectangle"),
+                        image: UIImage(systemName: "clock"),
                         selectedImage: nil
                     )
                     return viewController
@@ -81,6 +81,19 @@ class TabBarController: UITabBarController {
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor(hex: Constants.tabBarBackgroundColor)
         
+        let normalAttrs: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: GlobalConstants.regularFont, size: 12.0) ?? UIFont.systemFont(ofSize: 12.0, weight: .semibold),
+            .foregroundColor: UIColor.gray
+        ]
+    
+        let selectedAttrs: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: GlobalConstants.mediumFont, size: 12.0) ?? UIFont.systemFont(ofSize: 12.0, weight: .semibold),
+            .foregroundColor: UIColor(hex: 0x007AFF)
+        ]
+        
+        
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes   = normalAttrs
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = selectedAttrs
         self.tabBar.standardAppearance = appearance
         
         if #available(iOS 15.0, *) {

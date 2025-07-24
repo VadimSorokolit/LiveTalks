@@ -14,6 +14,15 @@ protocol ChatViewProtocol: AnyObject {
 
 class ChatView: UIView {
     
+    // MARK: Objects
+    
+    private struct Constants {
+        static let textViewBolderWidth: CGFloat = 1.0
+        static let textViewBolderColor: Int = 0xD3D3D3
+        static let sendButtonIconName: String = "paperplane.fill"
+        static let placeholderText: String = "Message..."
+    }
+    
     // MARK: - Propeties. Public
     
     weak var delegate: ChatViewProtocol?
@@ -44,15 +53,25 @@ class ChatView: UIView {
     private lazy var textView: UITextView = {
         let textView = UITextView()
         textView.isScrollEnabled = false
-        textView.font = .systemFont(ofSize: 16.0)
+        textView.font = UIFont(name: GlobalConstants.regularFont, size: 16.0)
         textView.layer.cornerRadius = 16.0
-        textView.textContainerInset = UIEdgeInsets(top: 8.0, left: 12.0, bottom: 8.0, right: 12.0)
+        textView.layer.borderWidth = Constants.textViewBolderWidth
+        textView.layer.borderColor = UIColor(hex: Constants.textViewBolderColor).cgColor
+        textView.textContainerInset = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 12.0)
+        textView.delegate = self
         return textView
+    }()
+    
+    private lazy var placeholderLabel: UILabel = {
+        let label = UILabel()
+        label.text = Constants.placeholderText
+        label.textColor = .lightGray
+        return label
     }()
     
     private lazy var sendButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
+        button.setImage(UIImage(systemName: Constants.sendButtonIconName), for: .normal)
         button.transform = CGAffineTransform(rotationAngle: .pi / 4.0)
         button.addTarget(self, action: #selector(self.handleSend), for: .touchUpInside)
         return button
@@ -71,6 +90,7 @@ class ChatView: UIView {
         
         self.setupViews()
         self.registerForKeyboardNotifications()
+        self.inputViewController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -80,14 +100,15 @@ class ChatView: UIView {
     // MARK: - Methods. Private
     
     private func setupViews() {
-//        let tap = UITapGestureRecognizer(target: self,action: #selector(dismissKeyboard))
-//        tap.cancelsTouchesInView = false
-//        self.addGestureRecognizer(tap)
+        let tap = UITapGestureRecognizer(target: self,action: #selector(self.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        self.addGestureRecognizer(tap)
         
         self.addSubview(self.tableView)
         self.addSubview(self.inputContainer)
         
         self.inputContainer.addSubview(self.textView)
+        self.textView.addSubview(self.placeholderLabel)
         self.inputContainer.addSubview(self.sendButton)
         
         
@@ -108,6 +129,11 @@ class ChatView: UIView {
             $0.trailing.equalTo(sendButton.snp.leading).offset(-8.0)
         }
         
+        self.placeholderLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(8.0)
+            $0.leading.equalToSuperview().offset(16.0)
+        }
+        
         self.sendButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(8.0)
             $0.centerY.equalTo(self.textView)
@@ -121,7 +147,7 @@ class ChatView: UIView {
             selector: #selector(self.keyboardWillShow(_:)),
             name: UIResponder.keyboardWillShowNotification,
             object: nil)
-
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.keyboardWillHide(_:)),
@@ -152,8 +178,16 @@ class ChatView: UIView {
         self.tableView.reloadData()
     }
     
+    func scrollToLatestMessage() {
+        let idx = IndexPath(row: 0, section: 0)
+        
+        self.tableView.performBatchUpdates({ self.tableView.insertRows(at: [idx], with: .automatic )}, completion: { _ in
+            self.tableView.scrollToRow(at: idx, at: .top, animated: true)
+        })
+    }
+    
     func clearTextFieldInput() {
-        self.textView.text = ""
+        self.textView.text.removeAll()
     }
     
     // MARK: - Events
@@ -228,6 +262,16 @@ extension ChatView: UITableViewDataSource {
         cell?.configure(with: message, isStartOfSeries: isStart)
         
         return cell ?? MessageCell()
+    }
+    
+}
+
+// MARK: UITextViewDelegate
+
+extension ChatView: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        self.placeholderLabel.isHidden = !textView.text.isEmpty
     }
     
 }

@@ -18,6 +18,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        let navAppearance = UINavigationBarAppearance()
+        navAppearance.configureWithOpaqueBackground()
+        navAppearance.backgroundColor = .white
+        navAppearance.titleTextAttributes = [.font: UIFont(name: GlobalConstants.demiFont, size: 20.0) ?? UIFont.systemFont(ofSize: 20.0) as Any,
+                                             .foregroundColor: UIColor.darkGray
+        ]
+
+        UINavigationBar.appearance().standardAppearance = navAppearance
+        if #available(iOS 15.0, *) {
+            UINavigationBar.appearance().scrollEdgeAppearance = navAppearance
+        }
         self.window = UIWindow(windowScene: windowScene)
  
         let startViewController = TabBarController()
