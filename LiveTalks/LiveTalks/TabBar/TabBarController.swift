@@ -25,7 +25,7 @@ class TabBarController: UITabBarController {
             switch self {
                 case .chat:
                     let viewController = ChatViewController()
-                    viewController.title = NSLocalizedString("chatTitle", comment: "Chat screen title")
+                    viewController.title = Localizable.chatScreenTitle
                     viewController.tabBarItem = UITabBarItem(
                         title: "Chat",
                         image: UIImage(systemName: "bubble.left.and.bubble.right"),
@@ -35,7 +35,7 @@ class TabBarController: UITabBarController {
                     
                 case .locations:
                     let viewController = LocationViewController()
-                    viewController.title = "Location"
+                    viewController.title = Localizable.locationScreenTitle
                     viewController.tabBarItem = UITabBarItem(
                         title: "Location",
                         image: UIImage(systemName: "map"),
@@ -45,7 +45,7 @@ class TabBarController: UITabBarController {
                     
                 case .chatHistory:
                     let viewController = ChatListViewController()
-                    viewController.title = "History"
+                    viewController.title = Localizable.historyScreenTitle
                     viewController.tabBarItem = UITabBarItem(
                         title: "History",
                         image: UIImage(systemName: "clock"),
@@ -55,7 +55,7 @@ class TabBarController: UITabBarController {
                     
                 case .settings:
                     let viewController = SettingsViewController()
-                    viewController.title = "Settings"
+                    viewController.title = Localizable.settingsScreenTitle
                     viewController.tabBarItem = UITabBarItem(
                         title: "Settings",
                         image: UIImage(systemName: "gearshape"),

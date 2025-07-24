@@ -6,5 +6,7 @@
 */
 
 "chatTitle" = "Chat";
-
+"locationTitle" = "Location";
+"historyTitle" = "History";
+"settingsTitle" = "Settings";
 

@@ -38,6 +38,7 @@
 		DDD5B4872E2E13B300664B3A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DDD5B4862E2E13B300664B3A /* SnapKit */; };
 		DDFAD23A2E3189CC008E9ABE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDFAD2382E3189CC008E9ABE /* Localizable.strings */; };
 		DDFAD23E2E32203F008E9ABE /* ChatHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAD23D2E322037008E9ABE /* ChatHistoryCell.swift */; };
+		DDFAD2412E3235E8008E9ABE /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAD2402E3235D4008E9ABE /* Localizable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		DDFAD2392E3189CC008E9ABE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DDFAD23B2E318AA6008E9ABE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DDFAD23D2E322037008E9ABE /* ChatHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryCell.swift; sourceTree = "<group>"; };
+		DDFAD2402E3235D4008E9ABE /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,9 +140,9 @@
 		DD53338E2E3020D8003E0CE5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DDFAD23F2E3235BF008E9ABE /* Localizable */,
 				DD53339C2E302240003E0CE5 /* GlobalConstants.swift */,
 				DD53338F2E3020DD003E0CE5 /* Fonts */,
-				DDFAD2382E3189CC008E9ABE /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -343,6 +345,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		DDFAD23F2E3235BF008E9ABE /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+				DDFAD2402E3235D4008E9ABE /* Localizable.swift */,
+				DDFAD2382E3189CC008E9ABE /* Localizable.strings */,
+			);
+			path = Localizable;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -448,6 +459,7 @@
 				DD5333A22E30C857003E0CE5 /* NetworkService.swift in Sources */,
 				DD2BABBF2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift in Sources */,
 				DD2BABC02E2E5C26004DF3F4 /* Message+CoreDataClass.swift in Sources */,
+				DDFAD2412E3235E8008E9ABE /* Localizable.swift in Sources */,
 				DDD5B4672E2E0B9D00664B3A /* ChatListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,3 +6,6 @@
 */
 
 "chatTitle" = "Сhatten";
+"locationTitle" = "Standort";
+"historyTitle" = "Geschichte";
+"settingsTitle" = "Einstellungen";
