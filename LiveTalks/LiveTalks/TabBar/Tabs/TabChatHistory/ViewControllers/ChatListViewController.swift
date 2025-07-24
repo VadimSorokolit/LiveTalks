@@ -27,6 +27,12 @@ class ChatListViewController: UIViewController {
         self.setupViewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.setupWillAppear()
+    }
+    
     // MARK: - Methods. Private
     
     private func setupLoadView() {
@@ -35,6 +41,9 @@ class ChatListViewController: UIViewController {
     
     private func setupViewDidLoad() {
         self.chatHistoryView.deleage = self
+    }
+    
+    private func setupWillAppear() {
         self.fetchChats()
     }
     
@@ -45,8 +54,14 @@ class ChatListViewController: UIViewController {
             }
             switch result {
                 case .success(let friends):
-                    DispatchQueue.main.async {
+                    if friends.isEmpty {
+                        self.chatHistoryView.updateBackgroundView()
+                    } else {
                         self.chatHistoryView.makeChatList(friends)
+                    }
+                    
+                    DispatchQueue.main.async  {
+                        self.chatHistoryView.reloadData()
                     }
                 case .failure(let err):
                     print("fetch chats error:", err)
@@ -68,7 +83,7 @@ extension ChatListViewController: ChatHistoryViewProtocol {
         else {
             return
         }
-        chatViewController.friend = chat.friend
+        chatViewController.save(chat.friend)
         UserDefaults.standard.set(chat.friend.name, forKey: GlobalConstants.selecteFriendKey)
         tabBar.selectedIndex = 0
         navigationController.popToRootViewController(animated: true)

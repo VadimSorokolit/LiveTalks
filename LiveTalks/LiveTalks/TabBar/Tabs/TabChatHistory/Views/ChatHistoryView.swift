@@ -71,7 +71,13 @@ class ChatHistoryView: UIView {
         }
     }
     
-    private func updateBackgroundView() {
+    // MARK: - Methods. Public
+    
+    func reloadData() {
+        self.tableView.reloadData()
+    }
+    
+    func updateBackgroundView() {
         if self.chats.isEmpty {
             let label = UILabel()
             label.text = "You have not chats"
@@ -79,39 +85,29 @@ class ChatHistoryView: UIView {
             label.font = UIFont(name: GlobalConstants.mediumFont, size: Constants.tableViewFontSize)
             label.textColor = Constants.tableViewTextColor
             
-            
             self.tableView.backgroundView = label
+            
+            UserDefaults.standard.set(nil, forKey: GlobalConstants.selecteFriendKey)
         } else {
             self.tableView.backgroundView = nil
         }
     }
     
-    // MARK: - Methods. Public
-    
-    func reloadData() {
-        self.tableView.reloadData()
-    }
-    
     func makeChatList(_ friends: [Friend]) {
-        if friends.isEmpty {
-            self.updateBackgroundView()
-        } else {
-            self.chats = friends.map { friend in
-                
-                let sortedDesc = (friend.messages as? Set<Message>)?
-                    .sorted {
-                        guard let d1 = $0.date, let d2 = $1.date else { return false }
-                        return d1 > d2
-                    } ?? []
-                let lastMessage = sortedDesc.first
-                
-                return ChatList(friend: friend, title:  friend.name ?? "", subtitle: lastMessage?.text ?? "", date: lastMessage?.date)
-            }
+        self.chats = friends.map { friend in
+            
+            let sortedDesc = (friend.messages as? Set<Message>)?
+                .sorted {
+                    guard let d1 = $0.date, let d2 = $1.date else { return false }
+                    return d1 > d2
+                } ?? []
+            let lastMessage = sortedDesc.first
+            
+            return ChatList(friend: friend, title:  friend.name ?? "", subtitle: lastMessage?.text ?? "", date: lastMessage?.date)
         }
         
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        self.updateBackgroundView()
+        self.tableView.reloadData()
     }
     
 }
@@ -120,8 +116,8 @@ class ChatHistoryView: UIView {
 
 extension ChatHistoryView: UITableViewDataSource {
     
-    func tableView(_ tv: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.chats.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.chats.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -134,7 +130,7 @@ extension ChatHistoryView: UITableViewDataSource {
         return cell ?? ChatHistoryCell()
     }
     
-    func tableView(_ tv: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else {
             return
         }
@@ -142,12 +138,17 @@ extension ChatHistoryView: UITableViewDataSource {
         
         CoreDataService.shared.deleteChat(toDelete.friend) { [weak self] error in
             if let err = error {
-                print("delete chat error:", err)
+                print("Delete chat error:", err)
                 return
             }
-            DispatchQueue.main.async {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                 self?.chats.remove(at: indexPath.row)
-                tv.deleteRows(at: [indexPath], with: .left)
+                tableView.deleteRows(at: [indexPath], with: .left)
+                
+                if ((self?.chats.isEmpty) != nil)  {
+                    UserDefaults.standard.set(nil, forKey: GlobalConstants.selecteFriendKey)
+                }
             }
         }
     }

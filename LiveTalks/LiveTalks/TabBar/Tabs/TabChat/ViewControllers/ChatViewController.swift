@@ -15,6 +15,10 @@ enum FriendName: String, CaseIterable {
     case nikita
 }
 
+protocol ChatViewControllerProtocol: AnyObject {
+    func save(_ friend: Friend)
+}
+
 import UIKit
 
 class ChatViewController: UIViewController {
@@ -29,10 +33,7 @@ class ChatViewController: UIViewController {
     // MARK: - Properites. Private
     
     private let chatView = ChatView()
-    
-    // MARK: - Properites. Public
-    
-    var friend: Friend? {
+    private var friend: Friend? {
         didSet {
             guard isViewLoaded else {
                 return
@@ -44,7 +45,7 @@ class ChatViewController: UIViewController {
             }
         }
     }
-    
+
     // MARK: - Lifecycle
     
     override func loadView() {
@@ -59,6 +60,18 @@ class ChatViewController: UIViewController {
         self.setupViewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.setupWillAppear()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.chatView.isHidden = self.friend == nil
+    }
+    
     // MARK: - Methods. Private
     
     private func setupLoadView() {
@@ -67,10 +80,12 @@ class ChatViewController: UIViewController {
     
     private func setupViewDidLoad() {
         self.chatView.delegate = self
-        self.fetchLastFriend()
         self.configureAddButtonMenu()
+    }
+    
+    private func setupWillAppear() {
         self.updateChatView()
-        self.fetchMessages()
+        self.fetchLastFriend()
     }
     
     private func fetchMessages() {
@@ -94,6 +109,7 @@ class ChatViewController: UIViewController {
     
     private func fetchLastFriend() {
         guard let friendName = UserDefaults.standard.string(forKey: GlobalConstants.selecteFriendKey) else {
+            self.friend = nil
             return
         }
         
@@ -103,10 +119,13 @@ class ChatViewController: UIViewController {
                     guard let friend = friend else {
                         return
                     }
+                    
                     CoreDataService.shared.fetchMessages(for: friend) { fetchMessageResult in
                         switch fetchMessageResult {
                             case .success(let messages):
                                 guard !messages.isEmpty else {
+                                    UserDefaults.standard.removeObject(forKey: GlobalConstants.selecteFriendKey)
+                                    self.friend = nil
                                     return
                                 }
                                 self.friend = friend
@@ -121,7 +140,15 @@ class ChatViewController: UIViewController {
     }
     
     private func updateChatView() {
-        self.chatView.isHidden = (self.friend == nil)
+        self.chatView.isHidden = self.friend == nil
+        
+        if self.friend != nil {
+            DispatchQueue.main.async {
+                self.chatView.save([Message]())
+                self.chatView.reloadData()
+                self.navigationItem.title = Localizable.chatScreenTitle
+            }
+        }
     }
     
     private func updateNavigationTitle() {
@@ -154,7 +181,6 @@ class ChatViewController: UIViewController {
             switch result {
                 case .success(let existingFriend):
                     if let friend = existingFriend {
-                        
                         DispatchQueue.main.async {
                             self?.friend = friend
                             UserDefaults.standard.set(self?.friend?.name, forKey: GlobalConstants.selecteFriendKey)
@@ -235,6 +261,14 @@ extension ChatViewController: ChatViewProtocol {
             self.insertNew(message)
             self.simulateReply(to: friend)
         }
+    }
+    
+}
+
+extension ChatViewController: ChatViewControllerProtocol {
+    
+    func save(_ friend: Friend) {
+        self.friend = friend
     }
     
 }
