@@ -13,7 +13,6 @@
 		DD2BABC02E2E5C26004DF3F4 /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABBB2E2E5C26004DF3F4 /* Message+CoreDataClass.swift */; };
 		DD2BABC22E2E6064004DF3F4 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABC12E2E6063004DF3F4 /* CoreDataService.swift */; };
 		DD2BABC52E2E8B19004DF3F4 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABC42E2E8B19004DF3F4 /* MessageCell.swift */; };
-		DD2BABC72E2E990C004DF3F4 /* FriendsSheetViewControlle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABC62E2E990B004DF3F4 /* FriendsSheetViewControlle.swift */; };
 		DD2BABCA2E2ECA6F004DF3F4 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABC92E2ECA6D004DF3F4 /* UIColor+Hex.swift */; };
 		DD5333912E30210D003E0CE5 /* AvenirNextCyr-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD5333902E30210D003E0CE5 /* AvenirNextCyr-Medium.ttf */; };
 		DD5333952E302135003E0CE5 /* AvenirNextCyr-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD5333942E302135003E0CE5 /* AvenirNextCyr-Regular.ttf */; };
@@ -38,6 +37,7 @@
 		DDD5B4842E2E136C00664B3A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4832E2E136500664B3A /* SettingsView.swift */; };
 		DDD5B4872E2E13B300664B3A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DDD5B4862E2E13B300664B3A /* SnapKit */; };
 		DDFAD23A2E3189CC008E9ABE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDFAD2382E3189CC008E9ABE /* Localizable.strings */; };
+		DDFAD23E2E32203F008E9ABE /* ChatHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAD23D2E322037008E9ABE /* ChatHistoryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +47,6 @@
 		DD2BABBC2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DD2BABC12E2E6063004DF3F4 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		DD2BABC42E2E8B19004DF3F4 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
-		DD2BABC62E2E990B004DF3F4 /* FriendsSheetViewControlle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsSheetViewControlle.swift; sourceTree = "<group>"; };
 		DD2BABC92E2ECA6D004DF3F4 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		DD5333902E30210D003E0CE5 /* AvenirNextCyr-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AvenirNextCyr-Medium.ttf"; sourceTree = "<group>"; };
 		DD5333942E302135003E0CE5 /* AvenirNextCyr-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AvenirNextCyr-Regular.ttf"; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		DDFAD2352E318716008E9ABE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		DDFAD2392E3189CC008E9ABE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DDFAD23B2E318AA6008E9ABE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DDFAD23D2E322037008E9ABE /* ChatHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,7 +288,6 @@
 		DDD5B4772E2E10F400664B3A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				DD2BABC62E2E990B004DF3F4 /* FriendsSheetViewControlle.swift */,
 				DDD5B4662E2E0B9B00664B3A /* ChatListViewController.swift */,
 			);
 			path = ViewControllers;
@@ -297,6 +296,7 @@
 		DDD5B4782E2E10F900664B3A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DDFAD23C2E321F65008E9ABE /* Cell */,
 				DDD5B4812E2E134900664B3A /* ChatHistoryView.swift */,
 			);
 			path = Views;
@@ -333,6 +333,14 @@
 				DDD5B47D2E2E11E000664B3A /* ChatView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		DDFAD23C2E321F65008E9ABE /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DDFAD23D2E322037008E9ABE /* ChatHistoryCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,6 +434,7 @@
 				DDD5B46B2E2E0CA500664B3A /* SettingsViewController.swift in Sources */,
 				DD2BABCA2E2ECA6F004DF3F4 /* UIColor+Hex.swift in Sources */,
 				DDD5B45E2E2E0AD100664B3A /* SceneDelegate.swift in Sources */,
+				DDFAD23E2E32203F008E9ABE /* ChatHistoryCell.swift in Sources */,
 				DDD5B4802E2E12AA00664B3A /* LocationView.swift in Sources */,
 				DD53339D2E302241003E0CE5 /* GlobalConstants.swift in Sources */,
 				DDD5B4692E2E0C3A00664B3A /* LocationViewController.swift in Sources */,
@@ -435,7 +444,6 @@
 				DD5333A52E30CA92003E0CE5 /* Location.swift in Sources */,
 				DD2BABC52E2E8B19004DF3F4 /* MessageCell.swift in Sources */,
 				DD2BABBD2E2E5C26004DF3F4 /* Friend+CoreDataClass.swift in Sources */,
-				DD2BABC72E2E990C004DF3F4 /* FriendsSheetViewControlle.swift in Sources */,
 				DD2BABBE2E2E5C26004DF3F4 /* Friend+CoreDataProperties.swift in Sources */,
 				DD5333A22E30C857003E0CE5 /* NetworkService.swift in Sources */,
 				DD2BABBF2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift in Sources */,
