@@ -20,7 +20,7 @@ class MessageCell: UITableViewCell {
         static let incomingMessageBackgroundColor: Int = 0xFFEA77
         static let outgoingMessageBackgroundColor: Int = 0x0099FF
         static let incomingMessageTimeLabelColor: Int = 0x808080
-        static let outgoingMessageTimeLabelColor: Int = 0x555555
+        static let outgoingMessageTimeLabelColor: Int = 0x393939
         static let incomingMessageBorderColor: Int = 0xC08E00
         static let outgoingMessageBorderColor: Int = 0x2927C2927c00
         static let dateFormatter: String = "h:mm a"
@@ -44,7 +44,7 @@ class MessageCell: UITableViewCell {
     
     private lazy var timeLabel: UILabel = {
         let timeLabel = UILabel()
-        timeLabel.font = UIFont(name: GlobalConstants.regularFont, size: 12.0)
+        timeLabel.font = UIFont(name: GlobalConstants.mediumFont, size: 12.0)
         return timeLabel
     }()
     

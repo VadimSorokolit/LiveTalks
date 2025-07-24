@@ -12,17 +12,18 @@ protocol LocalStorageProtocol: AnyObject {
     func fetchChats(completion: @escaping (Result<[Friend], Error>) -> Void)
     func fetchMessages(for friend: Friend,
                        completion: @escaping (Result<[Message], Error>) -> Void)
+    func fetchFriend(named name: String, completion: @escaping (Result<Friend?, Error>) -> Void)
+    func createChat(_ name: String,
+                    completion: @escaping (Result<Friend, Error>) -> Void)
     func createMessage(text: String,
-                          isIncoming: Bool,
-                          for friend: Friend,
-                          completion: ((Result<Message, Error>) -> Void)?) -> Message
-    func saveChat(name: String, completion: ((Error?) -> Void)?)
+                       isIncoming: Bool,
+                       for friend: Friend,
+                       completion: ((Result<Message, Error>) -> Void)?) -> Message
     func saveMessage(text: String,
                      isIncoming: Bool,
                      for friend: Friend,
                      completion: ((Error?) -> Void)?)
     func deleteChat(_ friend: Friend, completion: ((Error?) -> Void)?)
-    
 }
 
 final class CoreDataService: LocalStorageProtocol {
@@ -52,11 +53,43 @@ final class CoreDataService: LocalStorageProtocol {
     
     func fetchChats(completion: @escaping (Result<[Friend], Error>) -> Void) {
         context.perform {
-            let req: NSFetchRequest<Friend> = Friend.fetchRequest()
-            req.sortDescriptors = [ NSSortDescriptor(key: "name", ascending: true) ]
+            let request: NSFetchRequest<Friend> = Friend.fetchRequest()
+            request.sortDescriptors = [ NSSortDescriptor(key: "name", ascending: true) ]
+            request.predicate = NSPredicate(format: "messages.@count > 0")
+            
             do {
-                let friends = try self.context.fetch(req)
-                completion(.success(friends))
+                let nonEmptyChats = try self.context.fetch(request)
+                completion(.success(nonEmptyChats))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchMessages(for friend: Friend, completion: @escaping (Result<[Message], Error>) -> Void) {
+        self.context.perform {
+            let request: NSFetchRequest<Message> = Message.fetchRequest()
+            request.predicate = NSPredicate(format: "friend == %@", friend)
+            request.sortDescriptors = [ NSSortDescriptor(key: "date", ascending: true) ]
+            
+            do {
+                let messages = try self.context.fetch(request)
+                completion(.success(messages))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchFriend(named name: String, completion: @escaping (Result<Friend?, Error>) -> Void) {
+        self.context.perform {
+            let req: NSFetchRequest<Friend> = Friend.fetchRequest()
+            req.predicate = NSPredicate(format: "name ==[c] %@", name)
+            req.fetchLimit = 1
+            
+            do {
+                let results = try self.context.fetch(req)
+                completion(.success(results.first))
             } catch {
                 completion(.failure(error))
             }
@@ -64,59 +97,50 @@ final class CoreDataService: LocalStorageProtocol {
     }
     
     func createMessage(text: String,
+     
                        isIncoming: Bool,
                        for friend: Friend,
                        completion: ((Result<Message, Error>) -> Void)?) -> Message {
-        let msg = Message(context: context)
-        msg.text = text
-        msg.date = Date()
-        msg.isIncoming = isIncoming
-        msg.friend = friend
+        let message = Message(context: self.context)
+        message.text = text
+        message.date = Date()
+        message.isIncoming = isIncoming
+        message.friend = friend
+        
         do {
-            try context.save()
-            completion?(.success(msg))
+            try self.context.save()
+            completion?(.success(message))
         } catch {
             completion?(.failure(error))
         }
-        return msg
+        
+        return message
     }
     
-    func saveChat(name: String, completion: ((Error?) -> Void)?) {
-        context.perform {
+    func createChat(_ name: String, completion: @escaping (Result<Friend, Error>) -> Void) {
+        self.context.perform {
             let friend = Friend(context: self.context)
             friend.name = name
+            
             do {
                 try self.context.save()
-                completion?(nil)
+                
+                completion(.success(friend))
             } catch {
-                completion?(error)
+                completion(.failure(error))
             }
         }
     }
     
     func deleteChat(_ friend: Friend, completion: ((Error?) -> Void)?) {
-        context.perform {
+        self.context.perform {
             self.context.delete(friend)
+            
             do {
                 try self.context.save()
                 completion?(nil)
             } catch {
                 completion?(error)
-            }
-        }
-    }
-    
-    func fetchMessages(for friend: Friend,
-                       completion: @escaping (Result<[Message], Error>) -> Void) {
-        context.perform {
-            let req: NSFetchRequest<Message> = Message.fetchRequest()
-            req.predicate = NSPredicate(format: "friend == %@", friend)
-            req.sortDescriptors = [ NSSortDescriptor(key: "date", ascending: true) ]
-            do {
-                let messages = try self.context.fetch(req)
-                completion(.success(messages))
-            } catch {
-                completion(.failure(error))
             }
         }
     }
@@ -125,12 +149,13 @@ final class CoreDataService: LocalStorageProtocol {
                      isIncoming: Bool,
                      for friend: Friend,
                      completion: ((Error?) -> Void)?) {
-        context.perform {
-            let msg = Message(context: self.context)
-            msg.text = text
-            msg.date = Date()
-            msg.isIncoming = isIncoming
-            msg.friend = friend
+        self.context.perform {
+            let message = Message(context: self.context)
+            message.text = text
+            message.date = Date()
+            message.isIncoming = isIncoming
+            message.friend = friend
+            
             do {
                 try self.context.save()
                 completion?(nil)

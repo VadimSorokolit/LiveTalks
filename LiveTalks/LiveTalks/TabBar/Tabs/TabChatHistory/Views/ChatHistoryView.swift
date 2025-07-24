@@ -21,6 +21,13 @@ protocol ChatHistoryViewProtocol: AnyObject {
 
 class ChatHistoryView: UIView {
     
+    // MARK: - Objects
+    
+    private struct Constants {
+        static let tableViewTextColor: UIColor = .secondaryLabel
+        static let tableViewFontSize: CGFloat = 26.0
+    }
+    
     // MARK: - Properties. Public
     
     weak var deleage: ChatHistoryViewProtocol?
@@ -64,6 +71,21 @@ class ChatHistoryView: UIView {
         }
     }
     
+    private func updateBackgroundView() {
+        if self.chats.isEmpty {
+            let label = UILabel()
+            label.text = "You have not chats"
+            label.textAlignment = .center
+            label.font = UIFont(name: GlobalConstants.mediumFont, size: Constants.tableViewFontSize)
+            label.textColor = Constants.tableViewTextColor
+            
+            
+            self.tableView.backgroundView = label
+        } else {
+            self.tableView.backgroundView = nil
+        }
+    }
+    
     // MARK: - Methods. Public
     
     func reloadData() {
@@ -71,16 +93,24 @@ class ChatHistoryView: UIView {
     }
     
     func makeChatList(_ friends: [Friend]) {
-        self.chats = friends.map { friend in
-            
-            let sortedDesc = (friend.messages as? Set<Message>)?
-                .sorted {
-                    guard let d1 = $0.date, let d2 = $1.date else { return false }
-                    return d1 > d2
-                } ?? []
-            let lastMessage = sortedDesc.first
-            
-            return ChatList(friend: friend, title:  friend.name ?? "", subtitle: lastMessage?.text ?? "", date: lastMessage?.date)
+        if friends.isEmpty {
+            self.updateBackgroundView()
+        } else {
+            self.chats = friends.map { friend in
+                
+                let sortedDesc = (friend.messages as? Set<Message>)?
+                    .sorted {
+                        guard let d1 = $0.date, let d2 = $1.date else { return false }
+                        return d1 > d2
+                    } ?? []
+                let lastMessage = sortedDesc.first
+                
+                return ChatList(friend: friend, title:  friend.name ?? "", subtitle: lastMessage?.text ?? "", date: lastMessage?.date)
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
     

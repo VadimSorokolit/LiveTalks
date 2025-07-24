@@ -13,6 +13,10 @@ class TabBarController: UITabBarController {
     
     private struct Constants {
         static let tabBarBackgroundColor: Int = 0xE6E7E8
+        static let tabBarChatScreenIcon: String = "bubble.left.and.bubble.right"
+        static let tabBarLocationScreenIcon: String = "map"
+        static let tabBarChatHistoryScreenIcon: String = "clock"
+        static let tabBarSettingsScreenIcon: String = "gearshape"
     }
     
     enum Tab: CaseIterable {
@@ -28,7 +32,7 @@ class TabBarController: UITabBarController {
                     viewController.title = Localizable.chatScreenTitle
                     viewController.tabBarItem = UITabBarItem(
                         title: "Chat",
-                        image: UIImage(systemName: "bubble.left.and.bubble.right"),
+                        image: UIImage(systemName: Constants.tabBarChatScreenIcon),
                         selectedImage: nil
                     )
                     return viewController
@@ -38,7 +42,7 @@ class TabBarController: UITabBarController {
                     viewController.title = Localizable.locationScreenTitle
                     viewController.tabBarItem = UITabBarItem(
                         title: "Location",
-                        image: UIImage(systemName: "map"),
+                        image: UIImage(systemName: Constants.tabBarLocationScreenIcon),
                         selectedImage: nil
                     )
                     return viewController
@@ -48,7 +52,7 @@ class TabBarController: UITabBarController {
                     viewController.title = Localizable.historyScreenTitle
                     viewController.tabBarItem = UITabBarItem(
                         title: "History",
-                        image: UIImage(systemName: "clock"),
+                        image: UIImage(systemName: Constants.tabBarChatHistoryScreenIcon),
                         selectedImage: nil
                     )
                     return viewController
@@ -58,7 +62,7 @@ class TabBarController: UITabBarController {
                     viewController.title = Localizable.settingsScreenTitle
                     viewController.tabBarItem = UITabBarItem(
                         title: "Settings",
-                        image: UIImage(systemName: "gearshape"),
+                        image: UIImage(systemName: Constants.tabBarChatScreenIcon),
                         selectedImage: nil
                     )
                     return viewController

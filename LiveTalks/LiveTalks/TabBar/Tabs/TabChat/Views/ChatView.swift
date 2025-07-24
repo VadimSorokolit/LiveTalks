@@ -46,6 +46,7 @@ class ChatView: UIView {
         tableView.transform = CGAffineTransform(scaleX: 1.0, y: -1.0)
         tableView.register(MessageCell.self, forCellReuseIdentifier: MessageCell.reuseID)
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
@@ -177,13 +178,14 @@ class ChatView: UIView {
     func reloadData() {
         self.tableView.reloadData()
     }
-    
-    func scrollToLatestMessage() {
-        let idx = IndexPath(row: 0, section: 0)
         
-        self.tableView.performBatchUpdates({ self.tableView.insertRows(at: [idx], with: .automatic )}, completion: { _ in
-            self.tableView.scrollToRow(at: idx, at: .top, animated: true)
-        })
+    func scrollToBottom(animated: Bool) {
+        guard self.tableView.numberOfRows(inSection: 0) > 0 else {
+            return
+        }
+
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
     }
     
     func clearTextFieldInput() {
@@ -258,10 +260,23 @@ extension ChatView: UITableViewDataSource {
         
         let isStart = next == nil || next!.isIncoming != message.isIncoming
         
-        cell?.transform = CGAffineTransform(scaleX: 1.0, y: -1.0)
+        cell?.transform = CGAffineTransform(scaleX: 1, y: -1)
         cell?.configure(with: message, isStartOfSeries: isStart)
         
         return cell ?? MessageCell()
+    }
+    
+}
+
+// MARK: - UITableViewDelegate
+
+extension ChatView: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0.0
+        UIView.animate(withDuration: 0.3) {
+            cell.alpha = 1.0
+        }
     }
     
 }

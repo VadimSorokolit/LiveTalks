@@ -45,10 +45,8 @@ class ChatListViewController: UIViewController {
             }
             switch result {
                 case .success(let friends):
-                    self.chatHistoryView.makeChatList(friends)
-                    
                     DispatchQueue.main.async {
-                        self.chatHistoryView.reloadData()
+                        self.chatHistoryView.makeChatList(friends)
                     }
                 case .failure(let err):
                     print("fetch chats error:", err)
@@ -71,6 +69,7 @@ extension ChatListViewController: ChatHistoryViewProtocol {
             return
         }
         chatViewController.friend = chat.friend
+        UserDefaults.standard.set(chat.friend.name, forKey: GlobalConstants.selecteFriendKey)
         tabBar.selectedIndex = 0
         navigationController.popToRootViewController(animated: true)
     }

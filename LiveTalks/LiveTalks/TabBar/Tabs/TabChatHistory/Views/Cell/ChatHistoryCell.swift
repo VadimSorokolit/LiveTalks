@@ -19,8 +19,8 @@ class ChatHistoryCell: UITableViewCell {
         static let timeLabelFontSize: CGFloat = 11.0
         static let titleLabelTextColor: UIColor = .black
         static let subtitleLabelTextColor: UIColor = .darkGray
-        static let dateLabelTextColor: Int = 0x7B7B7B
-        static let timeLabelTextColor: UIColor = .lightGray
+        static let dateLabelTextColor: UIColor = .darkGray
+        static let timeLabelTextColor: Int = 0x7B7B7B
     }
     
     // MARK: - Properties. Private
@@ -43,14 +43,14 @@ class ChatHistoryCell: UITableViewCell {
     private lazy var dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.font = UIFont(name: GlobalConstants.regularFont, size: Constants.dateLabelFontSize)
-        dateLabel.textColor = UIColor(hex: Constants.dateLabelTextColor)
+        dateLabel.textColor = Constants.dateLabelTextColor
         return dateLabel
     }()
     
     private lazy var timeLabel: UILabel = {
         let timeLabel = UILabel()
         timeLabel.font = UIFont(name: GlobalConstants.regularFont, size: Constants.timeLabelFontSize)
-        timeLabel.textColor = Constants.timeLabelTextColor
+        timeLabel.textColor = UIColor(hex:Constants.timeLabelTextColor)
         return timeLabel
     }()
     
@@ -81,23 +81,26 @@ class ChatHistoryCell: UITableViewCell {
         self.addSubview(self.timeLabel)
         
         self.titleLabel.snp.makeConstraints {
-            $0.top.leading.equalToSuperview().inset(12.0)
+            $0.top.equalToSuperview().inset(12.0)
+            $0.leading.equalToSuperview().inset(16.0)
             $0.trailing.lessThanOrEqualTo(self.dateLabel.snp.leading).offset(-8.0)
         }
         
         self.subtitleLabel.snp.makeConstraints {
-            $0.top.equalTo(self.titleLabel.snp.bottom).offset(8.0)
-            $0.leading.trailing.equalToSuperview().inset(12.0)
+            $0.top.equalTo(self.titleLabel.snp.bottom).offset(6.0)
+            $0.leading.equalToSuperview().inset(16.0)
+            $0.trailing.equalToSuperview().inset(12.0)
             $0.bottom.equalToSuperview().inset(12.0)
         }
         
         self.dateLabel.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview().inset(12.0)
+            $0.top.equalToSuperview().inset(12.0)
+            $0.trailing.equalToSuperview().inset(16.0)
         }
         
         self.timeLabel.snp.makeConstraints {
-            $0.top.equalTo(self.dateLabel.snp.bottom).offset(8.0)
-            $0.trailing.equalToSuperview().inset(12.0)
+            $0.top.equalTo(self.dateLabel.snp.bottom).offset(6.0)
+            $0.trailing.equalToSuperview().inset(16.0)
         }
     }
     
