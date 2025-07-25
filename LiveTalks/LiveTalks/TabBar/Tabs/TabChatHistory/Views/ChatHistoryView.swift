@@ -87,7 +87,7 @@ class ChatHistoryView: UIView {
             
             self.tableView.backgroundView = label
             
-            UserDefaults.standard.set(nil, forKey: GlobalConstants.selecteFriendKey)
+            UserDefaults.standard.set(nil, forKey: GlobalConstants.selectedFriendKey)
         } else {
             self.tableView.backgroundView = nil
         }
@@ -147,7 +147,7 @@ extension ChatHistoryView: UITableViewDataSource {
                 tableView.deleteRows(at: [indexPath], with: .left)
                 
                 if ((self?.chats.isEmpty) != nil)  {
-                    UserDefaults.standard.set(nil, forKey: GlobalConstants.selecteFriendKey)
+                    UserDefaults.standard.set(nil, forKey: GlobalConstants.selectedFriendKey)
                 }
             }
         }

@@ -18,7 +18,12 @@ class ChatView: UIView {
     
     private struct Constants {
         static let textViewBolderWidth: CGFloat = 1.0
+        static let textViewFontSize: CGFloat = 16.0
+        static let textViewCornerRadius: CGFloat = 16.0
         static let textViewBolderColor: Int = 0xD3D3D3
+        static let tableViewEstimatedRowHeight: CGFloat = 60.0
+        static let textViewInsets: UIEdgeInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 12.0)
+        static let invertedTableViewTransform: CGAffineTransform = CGAffineTransform(scaleX: 1.0, y: -1.0)
         static let sendButtonIconName: String = "paperplane.fill"
         static let placeholderText: String = "Message..."
     }
@@ -33,17 +38,17 @@ class ChatView: UIView {
         self.messages.reversed()
     }
     private var messages = [Message]()
-    private let repliesMessages: [String] = [ "Hello!", "Hi there 👋", "How are you doing today?","What’s up?", "I’m here if you want to talk.",
-                                              "Tell me more about that.", "That sounds interesting!", "Wow, really?", "Can you explain further?",
-                                              "I’d love to hear more.", "👍", "😂", "😍", "Sure thing!", "Absolutely.", "No problem at all.",
-                                              "Great!","Sounds good to me.", "Thanks for sharing.", "Let’s discuss it!", "Have a great day!"]
+    private let repliesMessages: [String] = ["Hello!", "Hi there 👋", "How are you doing today?","What’s up?", "I’m here if you want to talk.",
+                                             "Tell me more about that.", "That sounds interesting!", "Wow, really?", "Can you explain further?",
+                                             "I’d love to hear more.", "👍", "😂", "😍", "Sure thing!", "Absolutely.", "No problem at all.",
+                                             "Great!","Sounds good to me.", "Thanks for sharing.", "Let’s discuss it!", "Have a great day!"]
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
-        tableView.estimatedRowHeight = 60.0
-        tableView.transform = CGAffineTransform(scaleX: 1.0, y: -1.0)
+        tableView.estimatedRowHeight = Constants.tableViewEstimatedRowHeight
+        tableView.transform = Constants.invertedTableViewTransform
         tableView.register(MessageCell.self, forCellReuseIdentifier: MessageCell.reuseID)
         tableView.dataSource = self
         tableView.delegate = self
@@ -54,11 +59,11 @@ class ChatView: UIView {
     private lazy var textView: UITextView = {
         let textView = UITextView()
         textView.isScrollEnabled = false
-        textView.font = UIFont(name: GlobalConstants.regularFont, size: 16.0)
-        textView.layer.cornerRadius = 16.0
+        textView.font = UIFont(name: GlobalConstants.regularFont, size: Constants.textViewFontSize)
+        textView.layer.cornerRadius = Constants.textViewCornerRadius
         textView.layer.borderWidth = Constants.textViewBolderWidth
         textView.layer.borderColor = UIColor(hex: Constants.textViewBolderColor).cgColor
-        textView.textContainerInset = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 12.0)
+        textView.textContainerInset = Constants.textViewInsets
         textView.delegate = self
         return textView
     }()
@@ -245,8 +250,8 @@ class ChatView: UIView {
 
 extension ChatView: UITableViewDataSource {
     
-    func tableView(_ tv: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.displayMessages.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.displayMessages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -254,11 +259,11 @@ extension ChatView: UITableViewDataSource {
         
         let message = self.displayMessages[indexPath.row]
         
-        let next = indexPath.row + 1 < self.displayMessages.count
+        let nextMessage = indexPath.row + 1 < self.displayMessages.count
         ? self.displayMessages[indexPath.row + 1]
         : nil
         
-        let isStart = next == nil || next!.isIncoming != message.isIncoming
+        let isStart = nextMessage == nil || nextMessage!.isIncoming != message.isIncoming
         
         cell?.transform = CGAffineTransform(scaleX: 1, y: -1)
         cell?.configure(with: message, isStartOfSeries: isStart)
@@ -274,6 +279,7 @@ extension ChatView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.alpha = 0.0
+        
         UIView.animate(withDuration: 0.3) {
             cell.alpha = 1.0
         }

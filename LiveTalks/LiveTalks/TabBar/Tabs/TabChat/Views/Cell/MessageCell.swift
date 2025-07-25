@@ -20,9 +20,12 @@ class MessageCell: UITableViewCell {
         static let incomingMessageBackgroundColor: Int = 0xFFEA77
         static let outgoingMessageBackgroundColor: Int = 0x0099FF
         static let incomingMessageTimeLabelColor: Int = 0x808080
-        static let outgoingMessageTimeLabelColor: Int = 0x393939
+        static let outgoingMessageTimeLabelColor: Int = 0x00FF00
         static let incomingMessageBorderColor: Int = 0xC08E00
         static let outgoingMessageBorderColor: Int = 0x2927C2927c00
+        static let messageLabelNumberOfLines: Int = 0
+        static let timeLabelFontSize: CGFloat = 12.0
+        static let messageLabelFontSize: CGFloat = 16.0
         static let dateFormatter: String = "h:mm a"
     }
     
@@ -37,14 +40,14 @@ class MessageCell: UITableViewCell {
     
     private lazy var messageLabel: UILabel = {
         let messageLabel = UILabel()
-        messageLabel.numberOfLines = 0
+        messageLabel.numberOfLines = Constants.messageLabelNumberOfLines
         messageLabel.lineBreakStrategy = .hangulWordPriority
         return messageLabel
     }()
     
     private lazy var timeLabel: UILabel = {
         let timeLabel = UILabel()
-        timeLabel.font = UIFont(name: GlobalConstants.mediumFont, size: 12.0)
+        timeLabel.font = UIFont(name: GlobalConstants.mediumFont, size: Constants.timeLabelFontSize)
         return timeLabel
     }()
     
@@ -93,7 +96,7 @@ class MessageCell: UITableViewCell {
     
     func configure(with message: Message, isStartOfSeries: Bool) {
         self.messageLabel.text = message.text
-        self.messageLabel.font = UIFont(name: GlobalConstants.mediumFont, size: 16.0)
+        self.messageLabel.font = UIFont(name: GlobalConstants.mediumFont, size: Constants.messageLabelFontSize)
         self.messageLabel.textColor = message.isIncoming ? UIColor(hex: Constants.incomingMessageTextColor) : UIColor(hex: Constants.outgoingMessageTextColor)
         
         if let date = message.date {
@@ -107,12 +110,12 @@ class MessageCell: UITableViewCell {
         self.bubbleView.backgroundColor = message.isIncoming ? UIColor(hex: Constants.incomingMessageBackgroundColor) : UIColor(hex: Constants.outgoingMessageBackgroundColor)
         self.bubbleView.layer.borderColor = message.isIncoming ? UIColor(hex: Constants.incomingMessageBorderColor).cgColor : UIColor(hex: Constants.outgoingMessageBorderColor).cgColor
         
-        let baseTop: CGFloat = message.isIncoming ? 4.0 : 16.0
-        let seriesOffset: CGFloat = isStartOfSeries ? -10.0 : 0.0
-        let newTop = max(baseTop + seriesOffset, baseTop)
+        let defaultBubbleTopInset: CGFloat = message.isIncoming ? 4.0 : 16.0
+        let seriesTopAdjustment: CGFloat = isStartOfSeries ? -10.0 : 0.0
+        let finalBubbleTopInset = max(defaultBubbleTopInset + seriesTopAdjustment, defaultBubbleTopInset)
         
         self.bubbleView.snp.remakeConstraints {
-            $0.top.equalToSuperview().offset(newTop)
+            $0.top.equalToSuperview().offset(finalBubbleTopInset)
             $0.width.lessThanOrEqualTo(200.0)
             $0.bottom.equalToSuperview().inset(8.0)
             

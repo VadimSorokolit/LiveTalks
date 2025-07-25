@@ -5,6 +5,8 @@
 //  Created by Vadim Sorokolit on 21.07.2025.
 //
 
+import UIKit
+
 enum FriendName: String, CaseIterable {
     case vasil
     case stepan
@@ -19,11 +21,9 @@ protocol ChatViewControllerProtocol: AnyObject {
     func save(_ friend: Friend)
 }
 
-import UIKit
-
 class ChatViewController: UIViewController {
     
-    // MARK: - Object
+    // MARK: - Objects
     
     private struct Constants {
         static let chooseFriendButtonIconName = "person.fill.badge.plus"
@@ -108,7 +108,7 @@ class ChatViewController: UIViewController {
     }
     
     private func fetchLastFriend() {
-        guard let friendName = UserDefaults.standard.string(forKey: GlobalConstants.selecteFriendKey) else {
+        guard let friendName = UserDefaults.standard.string(forKey: GlobalConstants.selectedFriendKey) else {
             self.friend = nil
             return
         }
@@ -124,7 +124,7 @@ class ChatViewController: UIViewController {
                         switch fetchMessageResult {
                             case .success(let messages):
                                 guard !messages.isEmpty else {
-                                    UserDefaults.standard.removeObject(forKey: GlobalConstants.selecteFriendKey)
+                                    UserDefaults.standard.removeObject(forKey: GlobalConstants.selectedFriendKey)
                                     self.friend = nil
                                     return
                                 }
@@ -183,7 +183,7 @@ class ChatViewController: UIViewController {
                     if let friend = existingFriend {
                         DispatchQueue.main.async {
                             self?.friend = friend
-                            UserDefaults.standard.set(self?.friend?.name, forKey: GlobalConstants.selecteFriendKey)
+                            UserDefaults.standard.set(self?.friend?.name, forKey: GlobalConstants.selectedFriendKey)
                         }
                     } else {
                         CoreDataService.shared.createChat(friendName) { [weak self] createdResult in
@@ -191,7 +191,7 @@ class ChatViewController: UIViewController {
                                 case .success(let newFriend):
                                     DispatchQueue.main.async {
                                         self?.friend = newFriend
-                                        UserDefaults.standard.set(self?.friend?.name, forKey: GlobalConstants.selecteFriendKey)
+                                        UserDefaults.standard.set(self?.friend?.name, forKey: GlobalConstants.selectedFriendKey)
                                     }
                                 case .failure(let error):
                                     print("Error:", error)

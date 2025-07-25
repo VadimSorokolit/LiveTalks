@@ -96,6 +96,7 @@ final class CoreDataService: LocalStorageProtocol {
         }
     }
     
+    @discardableResult 
     func createMessage(text: String,
      
                        isIncoming: Bool,

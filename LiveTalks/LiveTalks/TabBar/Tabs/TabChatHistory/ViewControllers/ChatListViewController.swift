@@ -84,7 +84,7 @@ extension ChatListViewController: ChatHistoryViewProtocol {
             return
         }
         chatViewController.save(chat.friend)
-        UserDefaults.standard.set(chat.friend.name, forKey: GlobalConstants.selecteFriendKey)
+        UserDefaults.standard.set(chat.friend.name, forKey: GlobalConstants.selectedFriendKey)
         tabBar.selectedIndex = 0
         navigationController.popToRootViewController(animated: true)
     }
