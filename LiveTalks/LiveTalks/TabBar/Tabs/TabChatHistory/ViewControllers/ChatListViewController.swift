@@ -7,12 +7,12 @@
 
 import UIKit
 
-class ChatListViewController: UIViewController {
+class ChatListViewController: BaseViewController {
     
     // MARK: - Properites. Private
     
     private let chatHistoryView = ChatHistoryView()
-
+    
     // MARK: - Lifecycle
     
     override func loadView() {
@@ -24,7 +24,7 @@ class ChatListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.chatHistoryView.deleage = self
+        self.chatHistoryView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +52,7 @@ class ChatListViewController: UIViewController {
                         self.chatHistoryView.reloadData()
                     }
                 case .failure(let error):
-                    print("Fetch chats error:", error)
+                    self.notify(name: .errorNotification, errorMessage: error.localizedDescription)
             }
         }
     }
@@ -75,6 +75,10 @@ extension ChatListViewController: ChatHistoryViewProtocol {
         UserDefaults.standard.set(chat.friend.name, forKey: GlobalConstants.lastChattedFriendKey)
         tabBar.selectedIndex = 0
         navigationController.popToRootViewController(animated: true)
+    }
+    
+    func showAlert(_ error: Error) {
+        self.notify(name: .errorNotification, errorMessage: error.localizedDescription)
     }
     
 }

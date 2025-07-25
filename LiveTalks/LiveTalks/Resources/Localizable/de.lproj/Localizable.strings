@@ -6,6 +6,33 @@
 */
 
 "chatTitle" = "Сhatten";
+"customChatTitle" = "Chatten mit";
 "locationTitle" = "Standort";
 "historyTitle" = "Geschichte";
 "settingsTitle" = "Einstellungen";
+"alertTitle" = "Fehler";
+"alertActionButtonTitle" = "OKAY";
+"contextMenuTitle" = "Freund auswählen";
+"chatHistoryTableViewTitle" = "Du hast keine сhats";
+"textViewPlaceholderTitle" = "Nachricht";
+"Hello" = "Hallo!";
+"Hi there 👋" = "Hallo 👋";
+"How are you doing today?" = "Wie geht es dir heute?";
+"What’s up" = "Was ist los?";
+"I’m here if you want to talk" = "Ich bin hier, wenn du reden willst";
+"Tell me more about that" = "Erzähl mir mehr darüber";
+"That sounds interesting!" = "Das klingt interessant!";
+"Wow, really?" = "Wow, wirklich?";
+"Can you explain further?" = "Können sie das näher erläutern?";
+"I’d love to hear more" = "Ich würde gerne mehr hören";
+"Good 👍" = "Gut 👍";
+"Funny joke😂" = "Lustiger Witz 😂";
+"Sure thing!" = "Klar!";
+"Absolutely" = "Absolut";
+"No problem at all" = "Überhaupt kein problem";
+"Great!" = "Großartig!";
+"Sounds good to me" = "Klingt gut für mich";
+"Thanks for sharing" = "Vielen dank fürs teilen";
+"Let’s discuss it!" = "Lass es uns besprechen!";
+"Have a great day!" = "Ich wünsche ihnen einen wunderbaren tag!";
+

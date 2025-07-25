@@ -4,7 +4,7 @@
 //
 //  Created by Vadim Sorokolit on 21.07.2025.
 //
-    
+
 import UIKit
 
 class TabBarController: UITabBarController {
@@ -17,6 +17,8 @@ class TabBarController: UITabBarController {
         static let tabBarLocationScreenIcon: String = "map"
         static let tabBarChatHistoryScreenIcon: String = "clock"
         static let tabBarSettingsScreenIcon: String = "gearshape"
+        static let fontSize: CGFloat = 12.0
+        static let foregroundColor: Int = 0x007AFF
     }
     
     enum Tab: CaseIterable {
@@ -31,7 +33,7 @@ class TabBarController: UITabBarController {
                     let viewController = ChatViewController()
                     viewController.title = Localizable.chatScreenTitle
                     viewController.tabBarItem = UITabBarItem(
-                        title: "Chat",
+                        title: Localizable.chatScreenTitle,
                         image: UIImage(systemName: Constants.tabBarChatScreenIcon),
                         selectedImage: nil
                     )
@@ -41,7 +43,7 @@ class TabBarController: UITabBarController {
                     let viewController = LocationViewController()
                     viewController.title = Localizable.locationScreenTitle
                     viewController.tabBarItem = UITabBarItem(
-                        title: "Location",
+                        title: Localizable.locationScreenTitle,
                         image: UIImage(systemName: Constants.tabBarLocationScreenIcon),
                         selectedImage: nil
                     )
@@ -51,7 +53,7 @@ class TabBarController: UITabBarController {
                     let viewController = ChatListViewController()
                     viewController.title = Localizable.historyScreenTitle
                     viewController.tabBarItem = UITabBarItem(
-                        title: "History",
+                        title: Localizable.historyScreenTitle,
                         image: UIImage(systemName: Constants.tabBarChatHistoryScreenIcon),
                         selectedImage: nil
                     )
@@ -61,7 +63,7 @@ class TabBarController: UITabBarController {
                     let viewController = SettingsViewController()
                     viewController.title = Localizable.settingsScreenTitle
                     viewController.tabBarItem = UITabBarItem(
-                        title: "Settings",
+                        title: Localizable.settingsScreenTitle,
                         image: UIImage(systemName: Constants.tabBarChatScreenIcon),
                         selectedImage: nil
                     )
@@ -86,15 +88,14 @@ class TabBarController: UITabBarController {
         appearance.backgroundColor = UIColor(hex: Constants.tabBarBackgroundColor)
         
         let normalAttrs: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: GlobalConstants.regularFont, size: 12.0) ?? UIFont.systemFont(ofSize: 12.0, weight: .semibold),
+            .font: UIFont(name: GlobalConstants.regularFont, size: Constants.fontSize) ?? UIFont.systemFont(ofSize: Constants.fontSize, weight: .semibold),
             .foregroundColor: UIColor.gray
         ]
     
         let selectedAttrs: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: GlobalConstants.mediumFont, size: 12.0) ?? UIFont.systemFont(ofSize: 12.0, weight: .semibold),
-            .foregroundColor: UIColor(hex: 0x007AFF)
+            .font: UIFont(name: GlobalConstants.mediumFont, size: Constants.fontSize) ?? UIFont.systemFont(ofSize: Constants.fontSize, weight: .semibold),
+            .foregroundColor: UIColor(hex: Constants.foregroundColor)
         ]
-        
         
         appearance.stackedLayoutAppearance.normal.titleTextAttributes   = normalAttrs
         appearance.stackedLayoutAppearance.selected.titleTextAttributes = selectedAttrs
@@ -104,7 +105,7 @@ class TabBarController: UITabBarController {
             self.tabBar.scrollEdgeAppearance = appearance
         }
         
-        viewControllers = Tab.allCases.map { tab in
+        self.viewControllers = Tab.allCases.map { tab in
             let navigationController = UINavigationController(rootViewController: tab.rootViewController)
             return navigationController
         }

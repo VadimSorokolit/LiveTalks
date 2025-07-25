@@ -21,13 +21,13 @@ protocol ChatViewControllerProtocol: AnyObject {
     func save(_ friend: Friend)
 }
 
-class ChatViewController: UIViewController {
+class ChatViewController: BaseViewController {
     
     // MARK: - Objects
     
     private struct Constants {
         static let chooseFriendButtonIconName = "person.fill.badge.plus"
-        static let contexMenuTitle: String = "Select Friend"
+        static let contexMenuTitle: String = Localizable.contextMenuTitle
     }
     
     // MARK: - Properites. Private
@@ -98,7 +98,7 @@ class ChatViewController: UIViewController {
                         self.chatView.scrollToBottom(animated: false)
                     }
                 case .failure(let error):
-                    print("Fetch error:", error)
+                    self.notify(name: .errorNotification, errorMessage: error.localizedDescription)
             }
         }
     }
@@ -124,12 +124,12 @@ class ChatViewController: UIViewController {
                                 }
                                 self.friend = friend
                                 
-                            case .failure:
-                                print("Error fetching messages")
+                            case .failure(let error):
+                                self.notify(name: .errorNotification, errorMessage: error.localizedDescription)
                         }
                     }
-                case .failure:
-                    print("Error fetching friend")
+                case .failure(let error):
+                    self.notify(name: .errorNotification, errorMessage: error.localizedDescription)
             }
         }
     }
@@ -148,7 +148,7 @@ class ChatViewController: UIViewController {
     
     private func updateNavigationTitle() {
         if let name = self.friend?.name {
-            self.navigationItem.title = "Chat with \(name)"
+            self.navigationItem.title = "\(Localizable.customChatScreenTitle) \(name)"
         } else {
             self.navigationItem.title = Localizable.chatScreenTitle
         }
@@ -201,13 +201,13 @@ class ChatViewController: UIViewController {
                                         }
                                     }
                                 case .failure(let error):
-                                    print("Error:", error)
+                                    self.notify(name: .errorNotification, errorMessage: error.localizedDescription)
                             }
                         }
                     }
                     
                 case .failure(let error):
-                    print("Error:", error)
+                    self.notify(name: .errorNotification, errorMessage: error.localizedDescription)
             }
         }
     }
@@ -221,7 +221,7 @@ class ChatViewController: UIViewController {
     }
     
     private func clearTextFieldInput() {
-        self.chatView.clearTextFieldInput()
+        self.chatView.resetTextFieldInput()
     }
     
     private func insertNew(_ message: Message) {
@@ -250,7 +250,7 @@ class ChatViewController: UIViewController {
                         self.insertNew(message)
                         
                     case .failure(let error):
-                        print("Error creating message: \(error)")
+                        self.showErrorAlert(message: error.localizedDescription)
                 }
             }
         }
@@ -278,7 +278,7 @@ extension ChatViewController: ChatViewProtocol {
                     self.simulateReply(to: friend)
                     
                 case .failure(let error):
-                    print("Error creating message: \(error)")
+                    self.showErrorAlert(message: error.localizedDescription)
             }
         }
     }

@@ -6,7 +6,32 @@
 */
 
 "chatTitle" = "Chat";
+"customChatTitle" = "Chat with";
 "locationTitle" = "Location";
 "historyTitle" = "History";
 "settingsTitle" = "Settings";
-
+"alertTitle" = "Error";
+"alertActionButtonTitle" = "OK";
+"contextMenuTitle" = "Select Friend";
+"chatHistoryTableViewTitle" = "You have no chats";
+"textViewPlaceholderTitle" = "Message";
+"Hello" = "Hello!";
+"Hi there 👋" = "Hi there 👋";
+"How are you doing today?" = "How are you doing today?";
+"What’s up" = "What’s up?";
+"I’m here if you want to talk" = "I’m here if you want to talk";
+"Tell me more about that" = "Tell me more about that";
+"That sounds interesting!" = "That sounds interesting!";
+"Wow, really?" = "Wow, really?";
+"Can you explain further?" = "Can you explain further?";
+"I’d love to hear more" = "I’d love to hear more";
+"Good 👍" = "Good 👍";
+"Funny joke 😂" = "Funny joke 😂";
+"Sure thing!" = "Sure thing!";
+"Absolutely" = "Absolutely";
+"No problem at all" = "No problem at all";
+"Great!" = "Great!";
+"Sounds good to me" = "Sounds good to me";
+"Thanks for sharing" = "Thanks for sharing";
+"Let’s discuss it!" = "Let’s discuss it!";
+"Have a great day!" = "Have a great day!";

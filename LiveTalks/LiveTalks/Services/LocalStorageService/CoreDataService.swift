@@ -117,14 +117,14 @@ final class CoreDataService: LocalStorageProtocol {
         return message
     }
     
-    func createChat(_ name: String, completion: @escaping (Result<Friend, Error>) -> Void) {
-        self.context.perform {
+    func createChat(_ name: String,
+                    completion: @escaping (Result<Friend, Error>) -> Void) {
+        context.perform {
             let friend = Friend(context: self.context)
             friend.name = name
-            
+
             do {
                 try self.context.save()
-                
                 completion(.success(friend))
             } catch {
                 completion(.failure(error))

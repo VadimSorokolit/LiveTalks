@@ -13,5 +13,6 @@ struct GlobalConstants {
     static let mediumFont: String = "AvenirNextCyr-Medium"
     static let regularFont: String = "AvenirNextCyr-Regular"
     static let lastChattedFriendKey: String = "lastChattedFriend"
+    static let userInfoKey: String = "error"
 }
 

@@ -17,6 +17,7 @@ struct ChatList {
 
 protocol ChatHistoryViewProtocol: AnyObject {
     func present(_ chat: ChatList)
+    func showAlert(_ error: Error)
 }
 
 class ChatHistoryView: UIView {
@@ -30,7 +31,7 @@ class ChatHistoryView: UIView {
     
     // MARK: - Properties. Public
     
-    weak var deleage: ChatHistoryViewProtocol?
+    weak var delegate: ChatHistoryViewProtocol?
     
     // MARK: - Properties. Private
     
@@ -67,7 +68,7 @@ class ChatHistoryView: UIView {
         self.addSubview(self.tableView)
         
         self.tableView.snp.makeConstraints {
-            $0.edges.equalTo(self.safeAreaLayoutGuide)
+            $0.edges.equalTo(self.safeAreaLayoutGuide.snp.edges)
         }
     }
     
@@ -80,7 +81,7 @@ class ChatHistoryView: UIView {
     func updateBackgroundView() {
         if self.chats.isEmpty {
             let label = UILabel()
-            label.text = "You have no chats"
+            label.text = Localizable.chatHistoryTableViewTitle
             label.textAlignment = .center
             label.font = UIFont(name: GlobalConstants.mediumFont, size: Constants.tableViewFontSize)
             label.textColor = Constants.tableViewTextColor
@@ -101,7 +102,7 @@ class ChatHistoryView: UIView {
                 } ?? []
             let lastMessage = sortedDesc.first
             
-            return ChatList(friend: friend, title:  friend.name ?? "", subtitle: lastMessage?.text ?? "", date: lastMessage?.date)
+            return ChatList(friend: friend, title:  friend.name?.localizedCapitalized ?? "", subtitle: lastMessage?.text ?? "", date: lastMessage?.date)
         }
         self.updateBackgroundView()
         self.reloadData()
@@ -134,16 +135,19 @@ extension ChatHistoryView: UITableViewDataSource {
         let chatToDelete = self.chats[indexPath.row]
         
         CoreDataService.shared.deleteChatWith(chatToDelete.friend) { [weak self] error in
+            guard let self = self else {
+                return
+            }
             if let error = error {
-                print("Delete chat error:", error)
+                self.delegate?.showAlert(error)
                 return
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                self?.chats.remove(at: indexPath.row)
+                self.chats.remove(at: indexPath.row)
                 
                 tableView.deleteRows(at: [indexPath], with: .left)
                 
-                if self?.chats.isEmpty == true {
+                if self.chats.isEmpty == true {
                     UserDefaults.standard.set(nil, forKey: GlobalConstants.lastChattedFriendKey)
                 }
             }
@@ -161,7 +165,7 @@ extension ChatHistoryView: UITableViewDelegate {
         
         let chat = chats[indexPath.row]
         
-        self.deleage?.present(chat)
+        self.delegate?.present(chat)
     }
     
 }

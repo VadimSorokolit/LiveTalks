@@ -25,7 +25,7 @@ class ChatView: UIView {
         static let textViewInsets: UIEdgeInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 12.0)
         static let invertedTableViewTransform: CGAffineTransform = CGAffineTransform(scaleX: 1.0, y: -1.0)
         static let sendButtonIconName: String = "paperplane.fill"
-        static let placeholderText: String = "Message..."
+        static let placeholderText: String = "\(Localizable.textViewPlaceholderTitle)..."
     }
     
     // MARK: - Propeties. Public
@@ -38,10 +38,14 @@ class ChatView: UIView {
         self.messages.reversed()
     }
     private var messages = [Message]()
-    private let repliesMessages: [String] = ["Hello!", "Hi there 👋", "How are you doing today?","What’s up?", "I’m here if you want to talk.",
-                                             "Tell me more about that.", "That sounds interesting!", "Wow, really?", "Can you explain further?",
-                                             "I’d love to hear more.", "👍", "😂", "😍", "Sure thing!", "Absolutely.", "No problem at all.",
-                                             "Great!","Sounds good to me.", "Thanks for sharing.", "Let’s discuss it!", "Have a great day!"]
+    private let defaultReplies: [String] = ["Hello!", "Hi there 👋", "How are you doing today?","What’s up?", "I’m here if you want to talk",
+                                             "Tell me more about that", "That sounds interesting!", "Wow, really?", "Can you explain further?",
+                                             "I’d love to hear more", "Gut 👍", "Funny joke 😂", "Sure thing!", "Absolutely", "No problem at all",
+                                             "Great!","Sounds good to me", "Thanks for sharing", "Let’s discuss it!", "Have a great day!"]
+    
+    private lazy var repliesMessages: [String] = {
+         defaultReplies.map { NSLocalizedString($0, comment: "") }
+     }()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -145,7 +149,7 @@ class ChatView: UIView {
             $0.width.height.equalTo(36.0)
         }
     }
-    
+        
     private func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(
             self,
@@ -196,8 +200,9 @@ class ChatView: UIView {
         self.reloadData()
     }
     
-    func clearTextFieldInput() {
+    func resetTextFieldInput() {
         self.textView.text.removeAll()
+        self.placeholderLabel.isHidden = false
     }
     
     // MARK: - Events
