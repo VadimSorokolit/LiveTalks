@@ -39,6 +39,8 @@ class ChatViewController: UIViewController {
                 return
             }
             self.updateChatView()
+            self.removeAllMessagesIfNeeded()
+            self.updateNavigationTitle()
             
             if self.friend != nil {
                 self.fetchMessages()
@@ -51,19 +53,23 @@ class ChatViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        self.setupLoadView()
+        self.view = self.chatView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupViewDidLoad()
+        self.chatView.delegate = self
+        self.configureContexMenuButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.setupWillAppear()
+        self.updateChatView()
+        self.removeAllMessagesIfNeeded()
+        self.updateNavigationTitle()
+        self.fetchLastChattedFriend()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -74,32 +80,22 @@ class ChatViewController: UIViewController {
     
     // MARK: - Methods. Private
     
-    private func setupLoadView() {
-        self.view = self.chatView
-    }
-    
-    private func setupViewDidLoad() {
-        self.chatView.delegate = self
-        self.configureAddButtonMenu()
-    }
-    
-    private func setupWillAppear() {
-        self.updateChatView()
-        self.fetchLastFriend()
-    }
-    
     private func fetchMessages() {
-        guard let friend = self.friend else { return }
-        
-        CoreDataService.shared.fetchMessages(for: friend) { [weak self] result in
-            switch result {
+        guard let friend = self.friend else {
+            return
+        }
+        CoreDataService.shared.fetchMessages(for: friend) { [weak self] fetchedResult in
+            guard let self else {
+                return
+            }
+            switch fetchedResult {
                 case .success(let messages):
-                    self?.chatView.save(messages)
+                    self.chatView.save(messages)
                     
                     DispatchQueue.main.async {
-                        self?.chatView.reloadData()
-                        self?.updateNavigationTitle()
-                        self?.chatView.scrollToBottom(animated: false)
+                        self.chatView.reloadData()
+                        self.updateNavigationTitle()
+                        self.chatView.scrollToBottom(animated: false)
                     }
                 case .failure(let error):
                     print("Fetch error:", error)
@@ -107,28 +103,27 @@ class ChatViewController: UIViewController {
         }
     }
     
-    private func fetchLastFriend() {
-        guard let friendName = UserDefaults.standard.string(forKey: GlobalConstants.selectedFriendKey) else {
+    private func fetchLastChattedFriend() {
+        guard let lastChattedFriendName = UserDefaults.standard.string(forKey: GlobalConstants.lastChattedFriendKey) else {
             self.friend = nil
             return
         }
-        
-        CoreDataService.shared.fetchFriend(named: friendName) { fetchFriendResult in
-            switch fetchFriendResult {
+        CoreDataService.shared.fetchFriend(named: lastChattedFriendName) { fetchedFriend in
+            switch fetchedFriend {
                 case .success(let friend):
                     guard let friend = friend else {
                         return
                     }
-                    
-                    CoreDataService.shared.fetchMessages(for: friend) { fetchMessageResult in
-                        switch fetchMessageResult {
+                    CoreDataService.shared.fetchMessages(for: friend) { fetchedMessages in
+                        switch fetchedMessages {
                             case .success(let messages):
                                 guard !messages.isEmpty else {
-                                    UserDefaults.standard.removeObject(forKey: GlobalConstants.selectedFriendKey)
+                                    UserDefaults.standard.removeObject(forKey: GlobalConstants.lastChattedFriendKey)
                                     self.friend = nil
                                     return
                                 }
                                 self.friend = friend
+                                
                             case .failure:
                                 print("Error fetching messages")
                         }
@@ -141,12 +136,12 @@ class ChatViewController: UIViewController {
     
     private func updateChatView() {
         self.chatView.isHidden = self.friend == nil
-        
+    }
+    
+    func removeAllMessagesIfNeeded() {
         if self.friend != nil {
             DispatchQueue.main.async {
-                self.chatView.save([Message]())
-                self.chatView.reloadData()
-                self.navigationItem.title = Localizable.chatScreenTitle
+                self.chatView.removeAllMessages()
             }
         }
     }
@@ -154,18 +149,18 @@ class ChatViewController: UIViewController {
     private func updateNavigationTitle() {
         if let name = self.friend?.name {
             self.navigationItem.title = "Chat with \(name)"
+        } else {
+            self.navigationItem.title = Localizable.chatScreenTitle
         }
     }
     
-    private func configureAddButtonMenu() {
+    private func configureContexMenuButton() {
         let actions = FriendName.allCases.map { name in
             UIAction(title: name.rawValue.capitalized) { [weak self] _ in
                 self?.didSelectFriendName(name)
             }
         }
-        
         let contexMenu = UIMenu(title: Constants.contexMenuTitle, children: actions)
-        
         let chooseFriendButton = UIBarButtonItem(
             image: UIImage(systemName: Constants.chooseFriendButtonIconName),
             primaryAction: nil,
@@ -178,20 +173,32 @@ class ChatViewController: UIViewController {
         let friendName = name.rawValue.capitalized
         
         CoreDataService.shared.fetchFriend(named: friendName) { [weak self] result in
+            guard let self else {
+                return
+            }
             switch result {
                 case .success(let existingFriend):
                     if let friend = existingFriend {
                         DispatchQueue.main.async {
-                            self?.friend = friend
-                            UserDefaults.standard.set(self?.friend?.name, forKey: GlobalConstants.selectedFriendKey)
+                            self.friend = friend
+                            
+                            if let friendName = friend.name {
+                                UserDefaults.standard.set(friendName, forKey: GlobalConstants.lastChattedFriendKey)
+                            }
                         }
                     } else {
                         CoreDataService.shared.createChat(friendName) { [weak self] createdResult in
+                            guard let self else {
+                                return
+                            }
                             switch createdResult {
                                 case .success(let newFriend):
                                     DispatchQueue.main.async {
-                                        self?.friend = newFriend
-                                        UserDefaults.standard.set(self?.friend?.name, forKey: GlobalConstants.selectedFriendKey)
+                                        self.friend = newFriend
+                                        
+                                        if let friendName = newFriend.name {
+                                            UserDefaults.standard.set(friendName, forKey: GlobalConstants.lastChattedFriendKey)
+                                        }
                                     }
                                 case .failure(let error):
                                     print("Error:", error)
@@ -228,15 +235,23 @@ class ChatViewController: UIViewController {
     
     private func simulateReply(to friend: Friend) {
         let replies = self.getReplyMessages()
-        let reply = replies.randomElement()!
+        guard let reply = replies.randomElement() else {
+            return
+        }
         let delay = Double.random(in: 0.6...1.4)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             CoreDataService.shared.createMessage(text: reply, isIncoming: true, for: friend) { [weak self] result in
-                guard let self = self, case .success(let message) = result else {
+                guard let self = self else {
                     return
                 }
-                self.insertNew(message)
+                switch result {
+                    case .success(let message):
+                        self.insertNew(message)
+                        
+                    case .failure(let error):
+                        print("Error creating message: \(error)")
+                }
             }
         }
     }
@@ -252,14 +267,19 @@ extension ChatViewController: ChatViewProtocol {
             return
         }
         
-        self.clearTextFieldInput()
-        
         CoreDataService.shared.createMessage(text: text, isIncoming: false, for: friend) { [weak self] result in
-            guard let self = self, case .success(let message) = result else {
+            guard let self = self else {
                 return
             }
-            self.insertNew(message)
-            self.simulateReply(to: friend)
+            switch result {
+                case .success(let message):
+                    self.clearTextFieldInput()
+                    self.insertNew(message)
+                    self.simulateReply(to: friend)
+                    
+                case .failure(let error):
+                    print("Error creating message: \(error)")
+            }
         }
     }
     

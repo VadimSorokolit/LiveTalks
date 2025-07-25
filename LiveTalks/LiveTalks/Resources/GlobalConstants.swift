@@ -12,6 +12,6 @@ struct GlobalConstants {
     static let demiFont: String = "AvenirNextCyr-Demi"
     static let mediumFont: String = "AvenirNextCyr-Medium"
     static let regularFont: String = "AvenirNextCyr-Regular"
-    static let selectedFriendKey: String = "selectedFriend"
+    static let lastChattedFriendKey: String = "lastChattedFriend"
 }
 

@@ -104,7 +104,7 @@ class ChatHistoryCell: UITableViewCell {
         }
     }
     
-    // MARK: - Public
+    // MARK: - Methods. Public
     
     func configure(with chat: ChatList) {
         self.titleLabel.text = chat.title

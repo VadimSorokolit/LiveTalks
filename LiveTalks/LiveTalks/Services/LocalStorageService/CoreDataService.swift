@@ -23,7 +23,7 @@ protocol LocalStorageProtocol: AnyObject {
                      isIncoming: Bool,
                      for friend: Friend,
                      completion: ((Error?) -> Void)?)
-    func deleteChat(_ friend: Friend, completion: ((Error?) -> Void)?)
+    func deleteChatWith(_ friend: Friend, completion: ((Error?) -> Void)?)
 }
 
 final class CoreDataService: LocalStorageProtocol {
@@ -98,7 +98,6 @@ final class CoreDataService: LocalStorageProtocol {
     
     @discardableResult 
     func createMessage(text: String,
-     
                        isIncoming: Bool,
                        for friend: Friend,
                        completion: ((Result<Message, Error>) -> Void)?) -> Message {
@@ -133,7 +132,7 @@ final class CoreDataService: LocalStorageProtocol {
         }
     }
     
-    func deleteChat(_ friend: Friend, completion: ((Error?) -> Void)?) {
+    func deleteChatWith(_ friend: Friend, completion: ((Error?) -> Void)?) {
         self.context.perform {
             self.context.delete(friend)
             

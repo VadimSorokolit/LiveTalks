@@ -94,7 +94,7 @@ class MessageCell: UITableViewCell {
     
     // MARK: - Methods. Public
     
-    func configure(with message: Message, isStartOfSeries: Bool) {
+    func configure(with message: Message, isGroupHeaderMessage: Bool) {
         self.messageLabel.text = message.text
         self.messageLabel.font = UIFont(name: GlobalConstants.mediumFont, size: Constants.messageLabelFontSize)
         self.messageLabel.textColor = message.isIncoming ? UIColor(hex: Constants.incomingMessageTextColor) : UIColor(hex: Constants.outgoingMessageTextColor)
@@ -111,7 +111,7 @@ class MessageCell: UITableViewCell {
         self.bubbleView.layer.borderColor = message.isIncoming ? UIColor(hex: Constants.incomingMessageBorderColor).cgColor : UIColor(hex: Constants.outgoingMessageBorderColor).cgColor
         
         let defaultBubbleTopInset: CGFloat = message.isIncoming ? 4.0 : 16.0
-        let seriesTopAdjustment: CGFloat = isStartOfSeries ? -10.0 : 0.0
+        let seriesTopAdjustment: CGFloat = isGroupHeaderMessage ? -10.0 : 0.0
         let finalBubbleTopInset = max(defaultBubbleTopInset + seriesTopAdjustment, defaultBubbleTopInset)
         
         self.bubbleView.snp.remakeConstraints {

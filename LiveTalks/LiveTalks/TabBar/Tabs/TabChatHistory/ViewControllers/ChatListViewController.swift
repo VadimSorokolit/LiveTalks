@@ -18,34 +18,22 @@ class ChatListViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        self.setupLoadView()
+        self.view = chatHistoryView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupViewDidLoad()
+        self.chatHistoryView.deleage = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.setupWillAppear()
+        self.fetchChats()
     }
     
     // MARK: - Methods. Private
-    
-    private func setupLoadView() {
-        self.view = chatHistoryView
-    }
-    
-    private func setupViewDidLoad() {
-        self.chatHistoryView.deleage = self
-    }
-    
-    private func setupWillAppear() {
-        self.fetchChats()
-    }
     
     private func fetchChats() {
         CoreDataService.shared.fetchChats { [weak self] result in
@@ -55,16 +43,16 @@ class ChatListViewController: UIViewController {
             switch result {
                 case .success(let friends):
                     if friends.isEmpty {
+                        UserDefaults.standard.removeObject(forKey: GlobalConstants.lastChattedFriendKey)
                         self.chatHistoryView.updateBackgroundView()
                     } else {
                         self.chatHistoryView.makeChatList(friends)
                     }
-                    
                     DispatchQueue.main.async  {
                         self.chatHistoryView.reloadData()
                     }
-                case .failure(let err):
-                    print("fetch chats error:", err)
+                case .failure(let error):
+                    print("Fetch chats error:", error)
             }
         }
     }
@@ -84,7 +72,7 @@ extension ChatListViewController: ChatHistoryViewProtocol {
             return
         }
         chatViewController.save(chat.friend)
-        UserDefaults.standard.set(chat.friend.name, forKey: GlobalConstants.selectedFriendKey)
+        UserDefaults.standard.set(chat.friend.name, forKey: GlobalConstants.lastChattedFriendKey)
         tabBar.selectedIndex = 0
         navigationController.popToRootViewController(animated: true)
     }

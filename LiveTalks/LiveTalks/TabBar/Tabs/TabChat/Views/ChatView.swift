@@ -17,7 +17,7 @@ class ChatView: UIView {
     // MARK: Objects
     
     private struct Constants {
-        static let textViewBolderWidth: CGFloat = 1.0
+        static let textViewBorderWidth: CGFloat = 1.0
         static let textViewFontSize: CGFloat = 16.0
         static let textViewCornerRadius: CGFloat = 16.0
         static let textViewBolderColor: Int = 0xD3D3D3
@@ -61,7 +61,7 @@ class ChatView: UIView {
         textView.isScrollEnabled = false
         textView.font = UIFont(name: GlobalConstants.regularFont, size: Constants.textViewFontSize)
         textView.layer.cornerRadius = Constants.textViewCornerRadius
-        textView.layer.borderWidth = Constants.textViewBolderWidth
+        textView.layer.borderWidth = Constants.textViewBorderWidth
         textView.layer.borderColor = UIColor(hex: Constants.textViewBolderColor).cgColor
         textView.textContainerInset = Constants.textViewInsets
         textView.delegate = self
@@ -117,7 +117,6 @@ class ChatView: UIView {
         self.textView.addSubview(self.placeholderLabel)
         self.inputContainer.addSubview(self.sendButton)
         
-        
         self.tableView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(self.safeAreaLayoutGuide)
             $0.bottom.equalTo(self.inputContainer.snp.top)
@@ -142,7 +141,7 @@ class ChatView: UIView {
         
         self.sendButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(8.0)
-            $0.centerY.equalTo(self.textView)
+            $0.centerY.equalTo(self.textView.snp.centerY)
             $0.width.height.equalTo(36.0)
         }
     }
@@ -183,14 +182,18 @@ class ChatView: UIView {
     func reloadData() {
         self.tableView.reloadData()
     }
-        
+    
     func scrollToBottom(animated: Bool) {
         guard self.tableView.numberOfRows(inSection: 0) > 0 else {
             return
         }
-
         let indexPath = IndexPath(row: 0, section: 0)
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
+    }
+    
+    func removeAllMessages() {
+        self.messages.removeAll()
+        self.reloadData()
     }
     
     func clearTextFieldInput() {
@@ -203,13 +206,11 @@ class ChatView: UIView {
     private func keyboardWillShow(_ note: Notification) {
         guard let info = note.userInfo,
               let frameValue = info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
-              let duration   = info[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double
-        else {
+              let duration = info[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
             return
         }
-        
         let keyboardFrame = frameValue.cgRectValue
-        let offset  = keyboardFrame.height - self.safeAreaInsets.bottom
+        let offset = keyboardFrame.height - self.safeAreaInsets.bottom
         
         self.inputContainer.snp.updateConstraints {
             $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-offset)
@@ -219,13 +220,13 @@ class ChatView: UIView {
             self.layoutIfNeeded()
         }
     }
-
+    
     @objc
     private func keyboardWillHide(_ note: Notification) {
-        guard let info = note.userInfo, let duration = info[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+        guard let info = note.userInfo,
+              let duration = info[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
             return
         }
-        
         self.inputContainer.snp.updateConstraints {
             $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
         }
@@ -259,14 +260,24 @@ extension ChatView: UITableViewDataSource {
         
         let message = self.displayMessages[indexPath.row]
         
-        let nextMessage = indexPath.row + 1 < self.displayMessages.count
-        ? self.displayMessages[indexPath.row + 1]
-        : nil
+        let nextIndex = indexPath.row + 1
+        let upcomingMessage: Message? = {
+            guard nextIndex < self.displayMessages.count else {
+                return nil
+            }
+            return self.displayMessages[nextIndex]
+        }()
+
+        let isGroupHeaderMessage: Bool
         
-        let isStart = nextMessage == nil || nextMessage!.isIncoming != message.isIncoming
-        
+        if let nextMessage = upcomingMessage {
+            isGroupHeaderMessage = nextMessage.isIncoming != message.isIncoming
+        } else {
+            isGroupHeaderMessage = true
+        }
+
         cell?.transform = CGAffineTransform(scaleX: 1, y: -1)
-        cell?.configure(with: message, isStartOfSeries: isStart)
+        cell?.configure(with: message, isGroupHeaderMessage: isGroupHeaderMessage)
         
         return cell ?? MessageCell()
     }

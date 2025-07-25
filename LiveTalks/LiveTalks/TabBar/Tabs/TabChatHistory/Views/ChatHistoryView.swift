@@ -80,14 +80,12 @@ class ChatHistoryView: UIView {
     func updateBackgroundView() {
         if self.chats.isEmpty {
             let label = UILabel()
-            label.text = "You have not chats"
+            label.text = "You have no chats"
             label.textAlignment = .center
             label.font = UIFont(name: GlobalConstants.mediumFont, size: Constants.tableViewFontSize)
             label.textColor = Constants.tableViewTextColor
             
             self.tableView.backgroundView = label
-            
-            UserDefaults.standard.set(nil, forKey: GlobalConstants.selectedFriendKey)
         } else {
             self.tableView.backgroundView = nil
         }
@@ -105,9 +103,8 @@ class ChatHistoryView: UIView {
             
             return ChatList(friend: friend, title:  friend.name ?? "", subtitle: lastMessage?.text ?? "", date: lastMessage?.date)
         }
-        
         self.updateBackgroundView()
-        self.tableView.reloadData()
+        self.reloadData()
     }
     
 }
@@ -134,20 +131,20 @@ extension ChatHistoryView: UITableViewDataSource {
         guard editingStyle == .delete else {
             return
         }
-        let toDelete = self.chats[indexPath.row]
+        let chatToDelete = self.chats[indexPath.row]
         
-        CoreDataService.shared.deleteChat(toDelete.friend) { [weak self] error in
-            if let err = error {
-                print("Delete chat error:", err)
+        CoreDataService.shared.deleteChatWith(chatToDelete.friend) { [weak self] error in
+            if let error = error {
+                print("Delete chat error:", error)
                 return
             }
-            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                 self?.chats.remove(at: indexPath.row)
+                
                 tableView.deleteRows(at: [indexPath], with: .left)
                 
-                if ((self?.chats.isEmpty) != nil)  {
-                    UserDefaults.standard.set(nil, forKey: GlobalConstants.selectedFriendKey)
+                if self?.chats.isEmpty == true {
+                    UserDefaults.standard.set(nil, forKey: GlobalConstants.lastChattedFriendKey)
                 }
             }
         }
