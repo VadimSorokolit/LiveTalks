@@ -9,6 +9,10 @@ import UIKit
 import MapKit
 import SnapKit
 
+protocol LocationViewDelegate: AnyObject {
+  func getData()
+}
+
 class LocationView: UIView {
     
     // MARK: - Objests
@@ -21,6 +25,7 @@ class LocationView: UIView {
     
     // MARK: - Properites. Private
     
+    private let overlayView = OverlayView()
     private var latitude: Double = 50.4501
     private var longitude: Double = 30.5234
     private var location: Location? = nil
@@ -31,6 +36,10 @@ class LocationView: UIView {
         mapView.delegate = self
         return mapView
     }()
+    
+    // MARK: - Properties. Public
+    
+    weak var delegate: LocationViewDelegate?
     
     // MARK: — Initializer
     
@@ -49,9 +58,15 @@ class LocationView: UIView {
     // MARK: — Methods. Private
     
     private func setup() {
+        self.overlayView.delegate = self
         self.addSubview(self.mapView)
+        self.mapView.addSubview(self.overlayView)
         
         self.mapView.snp.makeConstraints {
+            $0.edges.equalTo(self.safeAreaLayoutGuide)
+        }
+        
+        self.overlayView.snp.makeConstraints {
             $0.edges.equalTo(self.safeAreaLayoutGuide)
         }
     }
@@ -73,9 +88,15 @@ class LocationView: UIView {
         self.mapView.addAnnotation(annotation)
     }
     
-    func saveLocation(_ location: Location) {
+    func resetAllSettings() {
+        self.location = nil
+        self.overlayView.clearOverlay()
+    }
+    
+    func update(_ location: Location) {
         self.location = location
         self.setRegion()
+        self.overlayView.update(with: location)
     }
     
 }
@@ -101,6 +122,16 @@ extension LocationView: MKMapViewDelegate {
             annotationView?.annotation = annotation
         }
         return annotationView
+    }
+    
+}
+
+// MARK: - OverlayViewDelegate
+
+extension LocationView: OverlayViewDelegate {
+    
+    func getData() {
+        self.delegate?.getData()
     }
     
 }

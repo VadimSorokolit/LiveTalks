@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navAppearance = UINavigationBarAppearance()
         navAppearance.configureWithOpaqueBackground()
-        navAppearance.backgroundColor = .white
+        navAppearance.backgroundColor = UIColor(hex: 0xF8F8F8)
         navAppearance.titleTextAttributes = [.font: UIFont(name: GlobalConstants.demiFont, size: 20.0) ?? UIFont.systemFont(ofSize: 20.0) as Any,
                                              .foregroundColor: UIColor.darkGray
         ]

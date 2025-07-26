@@ -39,5 +39,31 @@ enum Localizable {
     static var textViewPlaceholderTitle: String {
         NSLocalizedString("textViewPlaceholderTitle", comment: "Placeholder for the text view")
     }
-
+    static var overlayViewButtonTitle: String {
+        NSLocalizedString("overlayViewButtonTitle", comment: "Title of the overlay view button")
+    }
+    static var ipAddressTitle: String {
+        NSLocalizedString("ipAddressTitle", comment: "Title of the ip address")
+    }
+    static var countryTitle: String {
+        NSLocalizedString("countryTitle", comment: "Title of the country")
+    }
+    static var cityTitle: String {
+        NSLocalizedString("cityTitle", comment: "Title of the city")
+    }
+    static var zipTitle: String {
+        NSLocalizedString("zipTitle", comment: "Title of the zip")
+    }
+    static var timeZoneTitle: String {
+        NSLocalizedString("timeZoneTitle", comment: "Title of the time zone")
+    }
+    static var orgTitle: String {
+        NSLocalizedString("orgTitle", comment: "Title of the organization")
+    }
+    static var latitudeTitle: String {
+        NSLocalizedString("latitudeTitle", comment: "Title of the latitude")
+    }
+    static var longitudeTitle: String {
+         NSLocalizedString("longitudeTitle", comment: "Title of the longitude")
+    }
 }

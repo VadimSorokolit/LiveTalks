@@ -49,9 +49,16 @@ final class NetworkService: NetworkServiceProtocol {
     private func makeLocationURL() -> URL? {
         var components = URLComponents()
         components.scheme = Constants.scheme
-        components.host = Constants.host
-        components.path = Constants.path
+        components.host   = Constants.host
+        components.path   = Constants.path
+        
+        let fieldsItem = URLQueryItem(name: "fields", value: "61439")
+        let languageCode  = Locale.current.language.languageCode?.identifier ?? "en"
+        let languageItem  = URLQueryItem(name: "lang", value: languageCode)
+        components.queryItems = [fieldsItem, languageItem]
         return components.url
     }
     
 }
+
+

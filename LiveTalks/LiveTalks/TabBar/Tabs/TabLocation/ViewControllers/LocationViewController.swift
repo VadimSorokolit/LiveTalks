@@ -8,47 +8,72 @@
 import UIKit
 import MapKit
 
-class LocationViewController: UIViewController {
+class LocationViewController: BaseViewController {
     
     // MARK: - Properties. Private
     
     private let locationView = LocationView()
     private let locationManager = CLLocationManager()
+    private var isLoading = false
+    
+    private lazy var spinnerView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .medium)
+        view.hidesWhenStopped = true
+        return view
+    }()
     
     // MARK: — Lifecycle
     
     override func loadView() {
         super.loadView()
         
-        self.setupLoadView()
+        self.view = self.locationView
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.locationView.setRegion()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupViewDidLoad()
+        self.locationView.delegate = self
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.spinnerView)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.locationView.resetAllSettings()
     }
     
     // MARK: - Methods. Private
     
-    private func setupLoadView() {
-        self.view = self.locationView
-    }
-    
-    private func setupViewDidLoad() {
-        self.locationView.setRegion()
-        self.fetchLocation()
-    }
-    
     private func fetchLocation() {
         Task {
+            self.spinnerView.startAnimating()
+            defer {
+                self.spinnerView.stopAnimating()
+            }
             do {
                 let location = try await NetworkService.shared.fetchLocation()
-                self.locationView.saveLocation(location)
+                self.locationView.update(location)
             } catch {
-                print("Error: \(error.localizedDescription)")
+                self.notify(name: .errorNotification, errorMessage: error.localizedDescription)
             }
         }
+    }
+
+}
+
+// MARK: -  LocationViewDelegate
+
+extension LocationViewController: LocationViewDelegate {
+    
+    func getData() {
+        self.fetchLocation()
     }
     
 }

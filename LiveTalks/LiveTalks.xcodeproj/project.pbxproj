@@ -25,6 +25,8 @@
 		DD93F22D2E33C9BE0074BD49 /* NotificationName+customNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93F22C2E33C9BD0074BD49 /* NotificationName+customNames.swift */; };
 		DD93F22F2E33D6B80074BD49 /* UIViewController+errorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93F22E2E33D6B70074BD49 /* UIViewController+errorHandling.swift */; };
 		DD93F2312E33DB910074BD49 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93F2302E33DB900074BD49 /* BaseViewController.swift */; };
+		DD93F2332E340B9C0074BD49 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93F2322E340B920074BD49 /* OverlayView.swift */; };
+		DD93F2352E34D1780074BD49 /* UIButton+animateTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93F2342E34D1770074BD49 /* UIButton+animateTap.swift */; };
 		DDD5B45C2E2E0AD100664B3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4502E2E0AD100664B3A /* AppDelegate.swift */; };
 		DDD5B45D2E2E0AD100664B3A /* LiveTalks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4552E2E0AD100664B3A /* LiveTalks.xcdatamodeld */; };
 		DDD5B45E2E2E0AD100664B3A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5B4582E2E0AD100664B3A /* SceneDelegate.swift */; };
@@ -64,6 +66,8 @@
 		DD93F22C2E33C9BD0074BD49 /* NotificationName+customNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+customNames.swift"; sourceTree = "<group>"; };
 		DD93F22E2E33D6B70074BD49 /* UIViewController+errorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+errorHandling.swift"; sourceTree = "<group>"; };
 		DD93F2302E33DB900074BD49 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		DD93F2322E340B920074BD49 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		DD93F2342E34D1770074BD49 /* UIButton+animateTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+animateTap.swift"; sourceTree = "<group>"; };
 		DDD5B4222E2E08E400664B3A /* LiveTalks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveTalks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDD5B4502E2E0AD100664B3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDD5B4512E2E0AD100664B3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 		DD2BABC82E2ECA59004DF3F4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DD93F2342E34D1770074BD49 /* UIButton+animateTap.swift */,
 				DD93F22E2E33D6B70074BD49 /* UIViewController+errorHandling.swift */,
 				DD93F22C2E33C9BD0074BD49 /* NotificationName+customNames.swift */,
 				DD2BABC92E2ECA6D004DF3F4 /* UIColor+Hex.swift */,
@@ -335,6 +340,7 @@
 		DDD5B47A2E2E110300664B3A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DD93F2322E340B920074BD49 /* OverlayView.swift */,
 				DDD5B47F2E2E12A900664B3A /* LocationView.swift */,
 			);
 			path = Views;
@@ -462,6 +468,8 @@
 				DD93F2312E33DB910074BD49 /* BaseViewController.swift in Sources */,
 				DDD5B46F2E2E0D9F00664B3A /* TabBarController.swift in Sources */,
 				DD93F22F2E33D6B80074BD49 /* UIViewController+errorHandling.swift in Sources */,
+				DD93F2332E340B9C0074BD49 /* OverlayView.swift in Sources */,
+				DD93F2352E34D1780074BD49 /* UIButton+animateTap.swift in Sources */,
 				DDD5B45D2E2E0AD100664B3A /* LiveTalks.xcdatamodeld in Sources */,
 				DDD5B47E2E2E11E100664B3A /* ChatView.swift in Sources */,
 				DDD5B46B2E2E0CA500664B3A /* SettingsViewController.swift in Sources */,

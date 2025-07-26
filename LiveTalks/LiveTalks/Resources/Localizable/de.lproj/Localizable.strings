@@ -15,6 +15,15 @@
 "contextMenuTitle" = "Freund auswählen";
 "chatHistoryTableViewTitle" = "Du hast keine сhats";
 "textViewPlaceholderTitle" = "Nachricht";
+"overlayViewButtonTitle" = "Daten neu laden";
+"ipAddressTitle" = "IP:";
+"countryTitle" = "Land:";
+"cityTitle" = "Stadt:";
+"zipTitle" = "Plz";
+"timeZoneTitle" = "Zeitzone:";
+"orgTitle" = "Org:";
+"latitudeTitle" = "Breite:";
+"longitudeTitle" = "Länge:";
 "Hello" = "Hallo!";
 "Hi there 👋" = "Hallo 👋";
 "How are you doing today?" = "Wie geht es dir heute?";
