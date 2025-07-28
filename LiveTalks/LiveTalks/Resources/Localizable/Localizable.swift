@@ -66,4 +66,16 @@ enum Localizable {
     static var longitudeTitle: String {
          NSLocalizedString("longitudeTitle", comment: "Title of the longitude")
     }
+    static var rateAppTitle: String {
+        NSLocalizedString("rateAppButtonTitle", comment: "Title of the rate app")
+    }
+    static var contactUsTitle: String {
+        NSLocalizedString("contactUsButtonTitle", comment: "Title of the contact us")
+    }
+    static var rateAppTitleHeader: String {
+        NSLocalizedString("rateAppTitleHeader", comment: "Title of the rate app")
+    }
+    static var contactUsTitleHeader: String {
+        NSLocalizedString("contactUsTitleHeader", comment: "Title of the contact us")
+    }
 }

@@ -24,6 +24,8 @@
 "orgTitle" = "Org:";
 "latitudeTitle" = "Breite:";
 "longitudeTitle" = "Länge:";
+"rateAppButtonTitle" = "Anmerkungen";
+"contactUsButtonTitle" = "Kontaktieren Sie uns";
 "Hello" = "Hallo!";
 "Hi there 👋" = "Hallo 👋";
 "How are you doing today?" = "Wie geht es dir heute?";
@@ -44,4 +46,6 @@
 "Thanks for sharing" = "Vielen dank fürs teilen";
 "Let’s discuss it!" = "Lass es uns besprechen!";
 "Have a great day!" = "Ich wünsche ihnen einen wunderbaren tag!";
+"rateAppTitleHeader" = "Bitte bewerten sie die app mit sternen";
+"contactUsTitleHeader" = "Wenn sie fragen haben oder hilfe benötigen, kontaktieren sie uns bitte";
 

@@ -145,7 +145,13 @@ extension ChatHistoryView: UITableViewDataSource {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                 self.chats.remove(at: indexPath.row)
                 
-                tableView.deleteRows(at: [indexPath], with: .left)
+                tableView.performBatchUpdates({
+                    tableView.deleteRows(at: [indexPath], with: .left)
+                }, completion: { finished in
+                    if finished {
+                        self.updateBackgroundView()
+                    }
+                })
                 
                 if self.chats.isEmpty == true {
                     UserDefaults.standard.set(nil, forKey: GlobalConstants.lastChattedFriendKey)

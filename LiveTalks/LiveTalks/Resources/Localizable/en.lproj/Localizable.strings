@@ -24,6 +24,8 @@
 "orgTitle" = "Org:";
 "latitudeTitle" = "Latitude:";
 "longitudeTitle" = "Longitude:";
+"rateAppButtonTitle" = "Rate App";
+"contactUsButtonTitle" = "Contact US";
 "Hello" = "Hello!";
 "Hi there 👋" = "Hi there 👋";
 "How are you doing today?" = "How are you doing today?";
@@ -44,3 +46,5 @@
 "Thanks for sharing" = "Thanks for sharing";
 "Let’s discuss it!" = "Let’s discuss it!";
 "Have a great day!" = "Have a great day!";
+"Please rate the app with stars" = "Please rate the app with stars";
+"If you have any questions or need assistance, please contact us" = "If you have any questions or need assistance, please contact us";

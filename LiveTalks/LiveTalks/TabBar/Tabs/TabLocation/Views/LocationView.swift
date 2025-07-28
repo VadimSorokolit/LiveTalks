@@ -18,21 +18,22 @@ class LocationView: UIView {
     // MARK: - Objests
     
     private struct Constants {
-        static let anotationViewWidth: CGFloat = 30.0
-        static let anotationViewId: String = "CustomImagePin"
+        static let annotationViewWidth: CGFloat = 30.0
+        static let annotationViewId: String = "CustomImagePin"
         static let pinIconName: String = "pinIcon"
     }
     
     // MARK: - Properites. Private
     
-    private let overlayView = OverlayView()
+    private let mapOverlayView = MapOverlayView()
     private var latitude: Double = 50.4501
     private var longitude: Double = 30.5234
     private var location: Location? = nil
+    private lazy var locationManager = CLLocationManager()
     
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
-        mapView.showsUserLocation = false
+        mapView.showsUserLocation = true
         mapView.delegate = self
         return mapView
     }()
@@ -58,24 +59,24 @@ class LocationView: UIView {
     // MARK: — Methods. Private
     
     private func setup() {
-        self.overlayView.delegate = self
+        self.mapOverlayView.delegate = self
+        self.mapView.addSubview(self.mapOverlayView)
         self.addSubview(self.mapView)
-        self.mapView.addSubview(self.overlayView)
         
         self.mapView.snp.makeConstraints {
-            $0.edges.equalTo(self.safeAreaLayoutGuide)
+            $0.edges.equalTo(self.safeAreaLayoutGuide.snp.edges)
         }
         
-        self.overlayView.snp.makeConstraints {
-            $0.edges.equalTo(self.safeAreaLayoutGuide)
+        self.mapOverlayView.snp.makeConstraints {
+            $0.edges.equalTo(self.safeAreaLayoutGuide.snp.edges)
         }
     }
     
     // MARK - Methods. Public
     
     func setRegion() {
-        let old = mapView.annotations.filter { !($0 is MKUserLocation) }
-        self.mapView.removeAnnotations(old)
+        let oldAnnotation = mapView.annotations.filter { !($0 is MKUserLocation) }
+        self.mapView.removeAnnotations(oldAnnotation)
         
         let coordinate = CLLocationCoordinate2D(latitude: self.location?.lat ?? latitude, longitude: self.location?.lon ?? longitude)
         let region = MKCoordinateRegion(center: coordinate,
@@ -88,15 +89,15 @@ class LocationView: UIView {
         self.mapView.addAnnotation(annotation)
     }
     
-    func resetAllSettings() {
+    func resetAllData() {
         self.location = nil
-        self.overlayView.clearOverlay()
+        self.mapOverlayView.clearOverlay()
     }
     
     func update(_ location: Location) {
         self.location = location
         self.setRegion()
-        self.overlayView.update(with: location)
+        self.mapOverlayView.update(with: location)
     }
     
 }
@@ -108,13 +109,13 @@ extension LocationView: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard annotation is MKPointAnnotation else { return nil }
         
-        let id = Constants.anotationViewId
+        let id = Constants.annotationViewId
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: id)
         
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: id)
             annotationView?.image = UIImage(named: Constants.pinIconName)
-            annotationView?.bounds = CGRect(x: 0.0, y: 0.0, width: Constants.anotationViewWidth, height: Constants.anotationViewWidth)
+            annotationView?.bounds = CGRect(x: 0.0, y: 0.0, width: Constants.annotationViewWidth, height: Constants.annotationViewWidth)
             annotationView?.contentMode = .scaleAspectFit
             annotationView?.centerOffset = CGPoint(x: 0.0, y: -15.0)
             annotationView?.canShowCallout = true
@@ -128,7 +129,7 @@ extension LocationView: MKMapViewDelegate {
 
 // MARK: - OverlayViewDelegate
 
-extension LocationView: OverlayViewDelegate {
+extension LocationView: MapOverlayViewDelegate {
     
     func getData() {
         self.delegate?.getData()

@@ -16,9 +16,38 @@ class LocationViewController: BaseViewController {
     private let locationManager = CLLocationManager()
     private var isLoading = false
     
+    private lazy var reloadDataButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
+        button.addTarget(self, action: #selector(reloadDataButtonDidTap), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var spinnerView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .medium)
         view.hidesWhenStopped = true
+        return view
+    }()
+    
+    private lazy var containerView: UIView = {
+        let view = UIView()
+        view.addSubview(self.reloadDataButton)
+        view.addSubview(self.spinnerView)
+
+        self.reloadDataButton.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
+        self.spinnerView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+
+        self.reloadDataButton.layoutIfNeeded()
+        
+        view.snp.makeConstraints {
+            $0.size.equalTo(self.reloadDataButton.snp.size)
+        }
+
         return view
     }()
     
@@ -30,23 +59,23 @@ class LocationViewController: BaseViewController {
         self.view = self.locationView
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.locationView.delegate = self
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.containerView)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.locationView.setRegion()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.locationView.delegate = self
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.spinnerView)
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.locationView.resetAllSettings()
+        self.locationView.resetAllData()
     }
     
     // MARK: - Methods. Private
@@ -56,6 +85,7 @@ class LocationViewController: BaseViewController {
             self.spinnerView.startAnimating()
             defer {
                 self.spinnerView.stopAnimating()
+                self.reloadDataButton.isHidden = false
             }
             do {
                 let location = try await NetworkService.shared.fetchLocation()
@@ -65,8 +95,16 @@ class LocationViewController: BaseViewController {
             }
         }
     }
+    
+    // MARK: - Events
+    
+    @objc private func reloadDataButtonDidTap() {
+        self.reloadDataButton.isHidden = true
+        self.fetchLocation()
+    }
 
 }
+
 
 // MARK: -  LocationViewDelegate
 

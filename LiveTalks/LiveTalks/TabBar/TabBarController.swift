@@ -16,7 +16,7 @@ class TabBarController: UITabBarController {
         static let tabBarChatScreenIcon: String = "bubble.left.and.bubble.right"
         static let tabBarLocationScreenIcon: String = "map"
         static let tabBarChatHistoryScreenIcon: String = "clock"
-        static let tabBarSettingsScreenIcon: String = "gearshape"
+        static let tabBarSettingsScreenIcon: String = "gear"
         static let fontSize: CGFloat = 12.0
         static let foregroundColor: Int = 0x007AFF
     }
@@ -64,7 +64,7 @@ class TabBarController: UITabBarController {
                     viewController.title = Localizable.settingsScreenTitle
                     viewController.tabBarItem = UITabBarItem(
                         title: Localizable.settingsScreenTitle,
-                        image: UIImage(systemName: Constants.tabBarChatScreenIcon),
+                        image: UIImage(systemName: Constants.tabBarSettingsScreenIcon),
                         selectedImage: nil
                     )
                     return viewController
@@ -99,6 +99,8 @@ class TabBarController: UITabBarController {
         
         appearance.stackedLayoutAppearance.normal.titleTextAttributes   = normalAttrs
         appearance.stackedLayoutAppearance.selected.titleTextAttributes = selectedAttrs
+        appearance.stackedLayoutAppearance.normal.titlePositionAdjustment   = UIOffset(horizontal: 0.0, vertical: -3.0)
+        appearance.stackedLayoutAppearance.selected.titlePositionAdjustment = UIOffset(horizontal: 0.0, vertical: -3.0)
         self.tabBar.standardAppearance = appearance
         
         if #available(iOS 15.0, *) {
@@ -107,6 +109,7 @@ class TabBarController: UITabBarController {
         
         self.viewControllers = Tab.allCases.map { tab in
             let navigationController = UINavigationController(rootViewController: tab.rootViewController)
+            navigationController.tabBarItem.imageInsets = UIEdgeInsets(top: -6.0, left: 0.0, bottom: 6.0, right: 0.0)
             return navigationController
         }
     }

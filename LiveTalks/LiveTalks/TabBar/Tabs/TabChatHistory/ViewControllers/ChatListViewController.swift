@@ -18,7 +18,7 @@ class ChatListViewController: BaseViewController {
     override func loadView() {
         super.loadView()
         
-        self.view = chatHistoryView
+        self.view = self.chatHistoryView
     }
     
     override func viewDidLoad() {
