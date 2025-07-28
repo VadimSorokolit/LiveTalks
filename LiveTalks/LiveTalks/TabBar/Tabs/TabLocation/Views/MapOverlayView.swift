@@ -80,7 +80,7 @@ extension LocationView {
             self.addSubview(self.overlayView)
             self.overlayView.addSubview(self.visualEffectView)
             self.visualEffectView.contentView.addSubview(self.infoStackView)
-            self.isUserInteractionEnabled = true
+            self.isUserInteractionEnabled = false
             
             self.overlayView.snp.makeConstraints {
                 $0.edges.equalTo(self.safeAreaLayoutGuide.snp.edges)

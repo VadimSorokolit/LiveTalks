@@ -10,6 +10,12 @@ import MapKit
 
 class LocationViewController: BaseViewController {
     
+    // MARK: - Objects
+    
+    private struct Constants {
+        static let spinnerViewColor: Int = 0x007AFF
+    }
+   
     // MARK: - Properties. Private
     
     private let locationView = LocationView()
@@ -25,6 +31,7 @@ class LocationViewController: BaseViewController {
     
     private lazy var spinnerView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .medium)
+        view.color = UIColor(hex: Constants.spinnerViewColor)
         view.hidesWhenStopped = true
         return view
     }()
@@ -69,7 +76,7 @@ class LocationViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.locationView.setRegion()
+        self.locationView.showCurrentLocation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

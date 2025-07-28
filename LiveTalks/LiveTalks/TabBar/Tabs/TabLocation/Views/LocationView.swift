@@ -10,7 +10,7 @@ import MapKit
 import SnapKit
 
 protocol LocationViewDelegate: AnyObject {
-  func getData()
+    func getData()
 }
 
 class LocationView: UIView {
@@ -26,14 +26,12 @@ class LocationView: UIView {
     // MARK: - Properites. Private
     
     private let mapOverlayView = MapOverlayView()
-    private var latitude: Double = 50.4501
-    private var longitude: Double = 30.5234
     private var location: Location? = nil
     private lazy var locationManager = CLLocationManager()
     
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
-        mapView.showsUserLocation = true
+        mapView.showsUserLocation = false
         mapView.delegate = self
         return mapView
     }()
@@ -47,19 +45,22 @@ class LocationView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.setup()
+        self.setupViws()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        self.setup()
+        self.setupViws()
     }
     
     // MARK: — Methods. Private
     
-    private func setup() {
+    private func setupViws() {
         self.mapOverlayView.delegate = self
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
         self.mapView.addSubview(self.mapOverlayView)
         self.addSubview(self.mapView)
         
@@ -72,21 +73,28 @@ class LocationView: UIView {
         }
     }
     
+    // MARK - Methods. Private
+    
+    private func centerMap(on coordinate: CLLocationCoordinate2D, animated: Bool = true) {
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        self.mapView.setRegion(region, animated: animated)
+        self.mapView.removeAnnotations(mapView.annotations.filter { !($0 is MKUserLocation) })
+        let pin = MKPointAnnotation()
+        pin.coordinate = coordinate
+        self.mapView.addAnnotation(pin)
+    }
+    
     // MARK - Methods. Public
     
-    func setRegion() {
-        let oldAnnotation = mapView.annotations.filter { !($0 is MKUserLocation) }
-        self.mapView.removeAnnotations(oldAnnotation)
-        
-        let coordinate = CLLocationCoordinate2D(latitude: self.location?.lat ?? latitude, longitude: self.location?.lon ?? longitude)
-        let region = MKCoordinateRegion(center: coordinate,
-                                        latitudinalMeters: 10000,
-                                        longitudinalMeters: 10000)
-        self.mapView.setRegion(region, animated: true)
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        self.mapView.addAnnotation(annotation)
+    func showCurrentLocation() {
+        switch self.locationManager.authorizationStatus {
+            case .notDetermined:
+                self.locationManager.requestWhenInUseAuthorization()
+            case .authorizedWhenInUse, .authorizedAlways:
+                self.locationManager.startUpdatingLocation()
+            default:
+                break
+        }
     }
     
     func resetAllData() {
@@ -96,7 +104,8 @@ class LocationView: UIView {
     
     func update(_ location: Location) {
         self.location = location
-        self.setRegion()
+        let coordinate = CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon)
+        self.centerMap(on: coordinate)
         self.mapOverlayView.update(with: location)
     }
     
@@ -122,7 +131,36 @@ extension LocationView: MKMapViewDelegate {
         } else {
             annotationView?.annotation = annotation
         }
+        
         return annotationView
+    }
+    
+}
+
+// MARK: - CLLocationManagerDelegate
+
+extension LocationView: CLLocationManagerDelegate {
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+            case .authorizedWhenInUse, .authorizedAlways:
+                manager.startUpdatingLocation()
+            case .denied, .restricted:
+                // handle no permission
+                break
+            case .notDetermined:
+                manager.requestWhenInUseAuthorization()
+            @unknown default:
+                break
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let loc = locations.last else {
+            return
+        }
+        self.centerMap(on: loc.coordinate)
+        manager.stopUpdatingLocation()
     }
     
 }
