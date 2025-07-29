@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol MapOverlayViewDelegate: AnyObject {
-  func getData()
+    func getData()
 }
 
 extension LocationView {
@@ -20,14 +20,26 @@ extension LocationView {
         
         private struct Constants {
             static let visualEffectViewCornerRadius: CGFloat = 12.0
+            static let visualEffectViewBorderWidth: CGFloat = 1.0
+            static let visualEffectViewBorderColor: UIColor = .darkGray
             static let overlayViewBackgroundColor: UIColor = .clear
-            static let textFontSize: CGFloat = 14.0
+            static let titleFontSize: CGFloat = 14.0
+            static let valueFontSize: CGFloat = 14.0
             static let visualEffectViewAlpha: CGFloat = 0.6
+            static let columnSpacing: CGFloat = 16.0
+            static let rowSpacing: CGFloat = 8.0
+            static let visualEffectViewHorizontalInset: CGFloat = 20.0
+            static let visualEffectViewBottomOInset: CGFloat = 50.0
+            static let stackViewInset: CGFloat = 12.0
         }
         
-        // MARK: - Properties. Private
+        // MARK: - Properties. Public
         
-        private var location: Location? = nil
+        weak var delegate: MapOverlayViewDelegate?
+        
+        // MARK: - Methods. Private
+        
+        private var location: Location?
         
         private lazy var overlayView: UIView = {
             let view = UIView()
@@ -35,30 +47,41 @@ extension LocationView {
             return view
         }()
         
-        private lazy var infoStackView: UIStackView = {
-            let stack = UIStackView()
-            stack.axis = .vertical
-            stack.spacing = 4.0
-            stack.alignment = .leading
-            stack.distribution = .fillProportionally
-            return stack
-        }()
-        
         private lazy var visualEffectView: UIVisualEffectView = {
-            let blurEffect = UIBlurEffect(style: .systemMaterialLight)
-            
-            let view = UIVisualEffectView(effect: blurEffect)
-            view.layer.cornerRadius = Constants.visualEffectViewCornerRadius
-            view.clipsToBounds = true
-            view.alpha = Constants.visualEffectViewAlpha
-            view.setContentHuggingPriority(.required, for: .horizontal)
-            view.setContentCompressionResistancePriority(.required, for: .horizontal)
-            return view
+            let blurEffect = UIBlurEffect(style: .systemThickMaterial)
+            let visualEffectView = UIVisualEffectView(effect: blurEffect)
+            visualEffectView.layer.cornerRadius = Constants.visualEffectViewCornerRadius
+            visualEffectView.layer.borderWidth = Constants.visualEffectViewBorderWidth
+            visualEffectView.layer.borderColor = Constants.visualEffectViewBorderColor.cgColor
+            visualEffectView.clipsToBounds = true
+            visualEffectView.alpha = Constants.visualEffectViewAlpha
+            visualEffectView.isHidden = true
+            return visualEffectView
         }()
         
-        // MARK: - Properties. Public
+        private lazy var leftStackView: UIStackView = {
+            let stackView = UIStackView()
+            stackView.axis = .vertical
+            stackView.spacing = Constants.rowSpacing
+            stackView.alignment = .leading
+            return stackView
+        }()
         
-        weak var delegate: MapOverlayViewDelegate?
+        private lazy var rightStackView: UIStackView = {
+            let stackView = UIStackView()
+            stackView.axis = .vertical
+            stackView.spacing = Constants.rowSpacing
+            stackView.alignment = .leading
+            return stackView
+        }()
+        
+        private lazy var stackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [leftStackView, rightStackView])
+            stackView.axis = .horizontal
+            stackView.spacing = Constants.columnSpacing
+            stackView.alignment = .top
+            return stackView
+        }()
         
         // MARK: - Initializer
         
@@ -77,10 +100,10 @@ extension LocationView {
         // MARK: - Methods. Private
         
         private func setupViews() {
-            self.addSubview(self.overlayView)
-            self.overlayView.addSubview(self.visualEffectView)
-            self.visualEffectView.contentView.addSubview(self.infoStackView)
             self.isUserInteractionEnabled = false
+            self.addSubview(overlayView)
+            self.overlayView.addSubview(self.visualEffectView)
+            self.visualEffectView.contentView.addSubview(self.stackView)
             
             self.overlayView.snp.makeConstraints {
                 $0.edges.equalTo(self.safeAreaLayoutGuide.snp.edges)
@@ -88,56 +111,73 @@ extension LocationView {
             
             self.visualEffectView.snp.makeConstraints {
                 $0.centerX.equalToSuperview()
-                $0.width.lessThanOrEqualToSuperview().inset(60)
-                $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-34.0)
+                $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).inset(Constants.visualEffectViewBottomOInset)
+                $0.width.lessThanOrEqualToSuperview().inset(Constants.visualEffectViewHorizontalInset)
             }
             
-            self.infoStackView.snp.makeConstraints {
-                $0.edges.equalToSuperview().inset(12.0)
+            self.stackView.snp.makeConstraints {
+                $0.edges.equalToSuperview().inset(Constants.stackViewInset)
             }
         }
         
-        private func setInfoLines(_ lines: [String]) {
-            self.infoStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        private func makeLabel(title: String, value: String) -> UILabel {
+            let label = UILabel()
+            let fullText = title + " " + value
+            let attributed = NSMutableAttributedString(string: fullText)
             
-            for line in lines {
-                let label = UILabel()
-                label.font = UIFont(name: GlobalConstants.mediumFont, size: Constants.textFontSize)
-                label.text = line
-                label.numberOfLines = 1
-                self.infoStackView.addArrangedSubview(label)
-            }
+            let titleFont = UIFont(name: GlobalConstants.mediumFont, size: Constants.titleFontSize)!
+            attributed.addAttribute(.font, value: titleFont, range: NSRange(location: 0, length: title.count + 1))
             
-            self.layoutIfNeeded()
+            let valueFont = UIFont(name: GlobalConstants.demiFont, size: Constants.titleFontSize)
+            let valueRange = NSRange(location: title.count + 1, length: value.count)
+            attributed.addAttribute(.font, value: valueFont!, range: valueRange)
+            
+            label.attributedText = attributed
+            label.numberOfLines = 1
+            return label
         }
         
         // MARK: - Methods. Public
         
-        func clearOverlay() {
-            self.infoStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        func clearData() {
+            self.leftStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            self.rightStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
             self.visualEffectView.isHidden = true
         }
         
         func update(with location: Location) {
-            self.setInfoLines([
-                "\(Localizable.ipAddressTitle) \(location.query)",
-                "\(Localizable.countryTitle)  \(location.country)",
-                "\(Localizable.cityTitle) \(location.city)",
-                "\(Localizable.zipTitle)  \(location.zip)",
-                "\(Localizable.timeZoneTitle)  \(location.timezone)",
-                "\(Localizable.orgTitle)  \(location.org)",
-                "\(Localizable.latitudeTitle)  \(location.lat)",
-                "\(Localizable.longitudeTitle)  \(location.lon)"
-            ])
+            self.location = location
             
-            UIView.transition(
-                with: self.visualEffectView,
-                duration: 0.4,
-                options: .transitionCrossDissolve,
-                animations: { self.visualEffectView.isHidden = false }
-            )
+            let items: [(title: String, value: String)] = [
+                (Localizable.statusTitle, location.status),
+                (Localizable.countryTitle, location.country),
+                (Localizable.countryCodeTitle, location.countryCode),
+                (Localizable.regionTitle, location.region),
+                (Localizable.regionNameTitle, location.regionName),
+                (Localizable.cityTitle, location.city),
+                (Localizable.zipTitle, location.zip),
+                (Localizable.timeZoneTitle, location.timezone),
+                (Localizable.ipAddressTitle, location.query),
+                (Localizable.ispTitle, location.isp),
+                (Localizable.orgTitle, location.org),
+                (Localizable.asTitle, location.asInfo),
+                (Localizable.latitudeTitle, "\(location.lat)"),
+                (Localizable.longitudeTitle, "\(location.lon)")
+            ]
+            
+            let columnSplitIndex = (items.count + 1) / 2
+            let leftColumnItems  = Array(items[0..<columnSplitIndex])
+            let rightColumnItems = Array(items[columnSplitIndex..<items.count])
+            
+            self.clearData()
+            
+            leftColumnItems.forEach  { self.leftStackView.addArrangedSubview(self.makeLabel(title: $0.title, value: $0.value)) }
+            rightColumnItems.forEach { self.rightStackView.addArrangedSubview(self.makeLabel(title: $0.title, value: $0.value)) }
+            
+            UIView.transition(with: self.visualEffectView, duration: 0.4, options: .transitionCrossDissolve) {
+                self.visualEffectView.isHidden = false
+            }
         }
-        
     }
     
 }

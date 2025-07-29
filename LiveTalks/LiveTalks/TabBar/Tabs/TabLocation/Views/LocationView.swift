@@ -73,12 +73,10 @@ class LocationView: UIView {
         }
     }
     
-    // MARK - Methods. Private
-    
     private func centerMap(on coordinate: CLLocationCoordinate2D, animated: Bool = true) {
-        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000.0, longitudinalMeters: 1000.0)
         self.mapView.setRegion(region, animated: animated)
-        self.mapView.removeAnnotations(mapView.annotations.filter { !($0 is MKUserLocation) })
+        self.mapView.removeAnnotations(self.mapView.annotations.filter { !($0 is MKUserLocation) })
         let pin = MKPointAnnotation()
         pin.coordinate = coordinate
         self.mapView.addAnnotation(pin)
@@ -99,7 +97,7 @@ class LocationView: UIView {
     
     func resetAllData() {
         self.location = nil
-        self.mapOverlayView.clearOverlay()
+        self.mapOverlayView.clearData()
     }
     
     func update(_ location: Location) {
@@ -145,12 +143,9 @@ extension LocationView: CLLocationManagerDelegate {
         switch manager.authorizationStatus {
             case .authorizedWhenInUse, .authorizedAlways:
                 manager.startUpdatingLocation()
-            case .denied, .restricted:
-                // handle no permission
-                break
             case .notDetermined:
                 manager.requestWhenInUseAuthorization()
-            @unknown default:
+            default:
                 break
         }
     }

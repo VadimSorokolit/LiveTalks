@@ -14,5 +14,8 @@ struct GlobalConstants {
     static let regularFont: String = "AvenirNextCyr-Regular"
     static let lastChattedFriendKey: String = "lastChattedFriend"
     static let userInfoKey: String = "error"
+    static let userDefaultsAppRatingKey: String = "appRating"
+    static let fillStarImageName: String = "star.fill"
+    static let emptyStarImageName: String = "star"
 }
 

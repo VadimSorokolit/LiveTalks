@@ -160,6 +160,7 @@
 				DDFAD23F2E3235BF008E9ABE /* Localizable */,
 				DD53339C2E302240003E0CE5 /* GlobalConstants.swift */,
 				DD53338F2E3020DD003E0CE5 /* Fonts */,
+				DDD5B4512E2E0AD100664B3A /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -212,7 +213,6 @@
 			children = (
 				DD93F2B62E36BACF0074BD49 /* Info.plist */,
 				DDD5B4542E2E0AD100664B3A /* LaunchScreen.storyboard */,
-				DDD5B4512E2E0AD100664B3A /* Assets.xcassets */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";

@@ -14,6 +14,7 @@ class LocationViewController: BaseViewController {
     
     private struct Constants {
         static let spinnerViewColor: Int = 0x007AFF
+        static let reloadDataButtonImageName: String = "arrow.clockwise"
     }
    
     // MARK: - Properties. Private
@@ -24,7 +25,7 @@ class LocationViewController: BaseViewController {
     
     private lazy var reloadDataButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
+        button.setImage(UIImage(systemName: Constants.reloadDataButtonImageName), for: .normal)
         button.addTarget(self, action: #selector(reloadDataButtonDidTap), for: .touchUpInside)
         return button
     }()
@@ -105,13 +106,13 @@ class LocationViewController: BaseViewController {
     
     // MARK: - Events
     
-    @objc private func reloadDataButtonDidTap() {
+    @objc
+    private func reloadDataButtonDidTap() {
         self.reloadDataButton.isHidden = true
         self.fetchLocation()
     }
 
 }
-
 
 // MARK: -  LocationViewDelegate
 

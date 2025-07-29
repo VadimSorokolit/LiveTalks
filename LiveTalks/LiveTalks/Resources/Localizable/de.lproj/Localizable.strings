@@ -16,16 +16,26 @@
 "chatHistoryTableViewTitle" = "Du hast keine сhats";
 "textViewPlaceholderTitle" = "Nachricht";
 "overlayViewButtonTitle" = "Daten neu laden";
+"statusTitle" = "Status:";
 "ipAddressTitle" = "IP:";
 "countryTitle" = "Land:";
+"countryCodeTitle" = "Landesvorwahl:";
+"regionTitle" = "Region:";
+"regionNameTitle" = "Regions name:";
 "cityTitle" = "Stadt:";
-"zipTitle" = "Plz";
+"zipTitle" = "Plz:";
 "timeZoneTitle" = "Zeitzone:";
+"ispTitle" = "ISP:";
 "orgTitle" = "Org:";
 "latitudeTitle" = "Breite:";
 "longitudeTitle" = "Länge:";
+"asTitle" = "Als:";
 "rateAppButtonTitle" = "Anmerkungen";
 "contactUsButtonTitle" = "Kontaktieren Sie uns";
+"rateAppTitleHeader" = "Die sternebewertung spiegelt die allgemeine zufriedenheit mit der app wider";
+"contactUsTitleHeader" = "Kontaktinformationen für fragen oder hilfe werden bereitgestellt";
+"submitButtonTitle" = "Einreichen";
+"cancelButtonTitle" = "Stornieren";
 "Hello" = "Hallo!";
 "Hi there 👋" = "Hallo 👋";
 "How are you doing today?" = "Wie geht es dir heute?";
@@ -46,6 +56,5 @@
 "Thanks for sharing" = "Vielen dank fürs teilen";
 "Let’s discuss it!" = "Lass es uns besprechen!";
 "Have a great day!" = "Ich wünsche ihnen einen wunderbaren tag!";
-"rateAppTitleHeader" = "Bitte bewerten sie die app mit sternen";
-"contactUsTitleHeader" = "Wenn sie fragen haben oder hilfe benötigen, kontaktieren sie uns bitte";
+
 

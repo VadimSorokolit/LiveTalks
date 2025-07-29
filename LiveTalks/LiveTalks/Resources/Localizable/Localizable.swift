@@ -64,7 +64,7 @@ enum Localizable {
         NSLocalizedString("latitudeTitle", comment: "Title of the latitude")
     }
     static var longitudeTitle: String {
-         NSLocalizedString("longitudeTitle", comment: "Title of the longitude")
+        NSLocalizedString("longitudeTitle", comment: "Title of the longitude")
     }
     static var rateAppTitle: String {
         NSLocalizedString("rateAppButtonTitle", comment: "Title of the rate app")
@@ -78,4 +78,29 @@ enum Localizable {
     static var contactUsTitleHeader: String {
         NSLocalizedString("contactUsTitleHeader", comment: "Title of the contact us")
     }
+    static var statusTitle: String {
+        NSLocalizedString("statusTitle", comment: "Title of the status")
+    }
+    static var countryCodeTitle: String {
+        NSLocalizedString("countryCodeTitle", comment: "Title of the country code")
+    }
+    static var regionTitle: String {
+        NSLocalizedString("regionTitle", comment: "Title of the region")
+    }
+    static var regionNameTitle: String {
+        NSLocalizedString("regionNameTitle", comment: "Title of the region name")
+    }
+    static var ispTitle: String {
+        NSLocalizedString("ispTitle", comment: "Title of the isp")
+    }
+    static var asTitle: String {
+        NSLocalizedString("asTitle", comment: "Title of the as")
+    }
+    static var submitButtonTitle: String {
+        NSLocalizedString("submitButtonTitle", comment: "Title of the submit")
+    }
+    static var cancelButtonTitle: String {
+        NSLocalizedString("cancelButtonTitle", comment: "Title of the cancel")
+    }
+    
 }

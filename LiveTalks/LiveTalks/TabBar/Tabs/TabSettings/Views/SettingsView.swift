@@ -34,8 +34,7 @@ class SettingsView: UIView {
     
     private let contactUsURL: String = "https://healthy-metal-aa6.notion.site/iOS-Developer-12831b2ac19680068ac3fcd91252b819"
     private var appRating: Int {
-        get { UserDefaults.standard.integer(forKey: "appRating") }
-        set { UserDefaults.standard.set(newValue, forKey: "appRating") }
+        get { UserDefaults.standard.integer(forKey: GlobalConstants.userDefaultsAppRatingKey) }
     }
     
     private lazy var tableView: UITableView = {
@@ -50,6 +49,10 @@ class SettingsView: UIView {
         tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
+    
+    // MARK: - Properties. Public
+    
+    weak var delegate: SettingsViewProtocol?
     
     // MARK: — Initializer
     
@@ -69,7 +72,6 @@ class SettingsView: UIView {
     
     private func setupViews() {
         self.backgroundColor = .systemBackground
-        
         self.addSubview(self.tableView)
         
         self.tableView.snp.makeConstraints {
@@ -83,7 +85,7 @@ class SettingsView: UIView {
     func reloadData() {
         self.tableView.reloadData()
     }
-    
+        
 }
 
 // MARK: UITableViewDataSource
@@ -128,8 +130,7 @@ extension SettingsView: UITableViewDelegate {
         let section = Section(rawValue: indexPath.section)!
         switch section {
             case .rate:
-                // Rate App action
-                break
+                self.delegate?.showRatingAlert()
             case .contact:
                 if let url = URL(string: contactUsURL) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
