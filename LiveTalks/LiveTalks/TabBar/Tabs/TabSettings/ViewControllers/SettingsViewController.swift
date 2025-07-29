@@ -63,67 +63,14 @@ class SettingsViewController: UIViewController {
 extension SettingsViewController: SettingsViewProtocol {
     
     func showRatingAlert() {
-        self.starButtons.removeAll()
-        self.selectedRating = 0
-        
-        let alert = UIAlertController(title: Localizable.rateAppTitle, message: "\n\n\n\n", preferredStyle: .alert)
-        
-        lazy var starStackView: UIStackView = {
-            let starStack = UIStackView()
-            starStack.axis = .horizontal
-            starStack.distribution = .fillEqually
-            starStack.spacing = 8.0
-            return starStack
-        }()
-        
-        for _ in 1...5 {
-            let button = UIButton(type: .system)
-            button.setImage(UIImage(systemName: GlobalConstants.emptyStarImageName), for: .normal)
-            button.addTarget(self, action: #selector(self.starButtonTapped(_:)), for: .touchUpInside)
-            starStackView.addArrangedSubview(button)
-            self.starButtons.append(button)
-        }
-        
-        alert.view.addSubview(starStackView)
-        
-        starStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(60.0)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(30.0)
-            $0.leading.trailing.equalToSuperview().inset(16.0)
-        }
-        
-        let submitAction = UIAlertAction(title: Localizable.submitButtonTitle, style: .default) { _ in
-            UserDefaults.standard.set(self.selectedRating, forKey: GlobalConstants.userDefaultsAppRatingKey)
+        let viewController = RatingModalViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.modalTransitionStyle = .crossDissolve
+        viewController.onSubmit = { rating in
+            UserDefaults.standard.set(rating, forKey: GlobalConstants.userDefaultsAppRatingKey)
             self.settingsView.reloadData()
         }
-        
-        submitAction.isEnabled = false
-        
-        alert.addAction(submitAction)
-        alert.addAction(UIAlertAction(title: Localizable.cancelButtonTitle, style: .cancel))
-        
-        self.submitRatingAction = submitAction
-        
-        present(alert, animated: true)
-    }
-    
-    @objc
-    private func starButtonTapped(_ sender: UIButton) {
-        guard let index = starButtons.firstIndex(of: sender) else {
-            return
-        }
-        
-        self.selectedRating = index + 1
-        
-        for (index, button) in self.starButtons.enumerated() {
-            let imageName = index < selectedRating ? GlobalConstants.fillStarImageName : GlobalConstants.emptyStarImageName
-            button.setImage(UIImage(systemName: imageName), for: .normal)
-            button.tintColor = index < selectedRating ? UIColor(hex: 0xffcc00): UIColor(hex: 0x007aff)
-            
-        }
-        
-        self.submitRatingAction?.isEnabled = (self.selectedRating > 0)
+        present(viewController, animated: true)
     }
     
 }

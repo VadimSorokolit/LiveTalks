@@ -31,9 +31,9 @@
 "longitudeTitle" = "Longitude:";
 "asTitle" = "As info:";
 "rateAppButtonTitle" = "Rate App";
-"contactUsButtonTitle" = "Contact US";
-"rateAppTitleHeader" = "Star rating reflects overall enjoyment of the app";
-"contactUsTitleHeader" = "Contact information provided for questions or assistance";
+"contactUsButtonTitle" = "Contact Us";
+"rateAppTitleHeader" = "Rating";
+"contactUsTitleHeader" = "Info";
 "submitButtonTitle" = "Submit";
 "cancelButtonTitle" = "Cancel";
 "Hello" = "Hello!";

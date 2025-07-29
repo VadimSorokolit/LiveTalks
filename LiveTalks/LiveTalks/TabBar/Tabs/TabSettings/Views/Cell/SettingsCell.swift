@@ -14,11 +14,9 @@ final class SettingsCell: UITableViewCell {
     
     private struct Constants {
         static let starSize = CGSize(width: 16.0, height: 16.0)
-        static let starSpacing: CGFloat = 4.0
+        static let starSpacing: CGFloat = 1.0
         static let titleLabelFontSize: CGFloat = 17.0
         static let titleLabelTextColor: UIColor = .label
-        static let fillStarImageColor: UIColor = .systemYellow
-        static let defaultStarImageColor: UIColor = .label
         static let fillStarImageName: String = "star.fill"
         static let defaultStarImageName: String = "star"
     }
@@ -71,8 +69,8 @@ final class SettingsCell: UITableViewCell {
             let imageView = UIImageView()
             imageView.contentMode = .scaleAspectFit
             
-            imageView.snp.makeConstraints { make in
-                make.size.equalTo(Constants.starSize)
+            imageView.snp.makeConstraints {
+                $0.size.equalTo(Constants.starSize)
             }
             
             self.starImageViews.append(imageView)
@@ -101,10 +99,15 @@ final class SettingsCell: UITableViewCell {
         if let rating = rating {
             self.starStackView.isHidden = false
             
-            for (idx, imageView) in starImageViews.enumerated() {
-                let starName = idx < rating ? Constants.fillStarImageName : Constants.defaultStarImageName
-                imageView.image = UIImage(systemName: starName)
-                imageView.tintColor = idx < rating ? Constants.fillStarImageColor : Constants.defaultStarImageColor
+            guard let baseImage = UIImage(named: GlobalConstants.ratingStarImageName) else {
+                return
+            }
+
+            let templateImage = baseImage.withRenderingMode(.alwaysTemplate)
+            
+            for (index, imageView) in self.starImageViews.enumerated() {
+                imageView.image = templateImage
+                imageView.tintColor = index < rating ? UIColor(hex: GlobalConstants.fillStarImageColor) : UIColor(hex: GlobalConstants.emptyStarImageColor)
             }
         } else {
             self.starStackView.isHidden = true

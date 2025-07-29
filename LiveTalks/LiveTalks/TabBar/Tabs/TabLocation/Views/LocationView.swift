@@ -23,11 +23,10 @@ class LocationView: UIView {
         static let pinIconName: String = "pinIcon"
     }
     
-    // MARK: - Properites. Private
+    // MARK: - Properties. Private
     
     private let mapOverlayView = MapOverlayView()
     private var location: Location? = nil
-    private lazy var locationManager = CLLocationManager()
     
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
@@ -58,9 +57,6 @@ class LocationView: UIView {
     
     private func setupViws() {
         self.mapOverlayView.delegate = self
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestWhenInUseAuthorization()
         self.mapView.addSubview(self.mapOverlayView)
         self.addSubview(self.mapView)
         
@@ -84,20 +80,14 @@ class LocationView: UIView {
     
     // MARK - Methods. Public
     
-    func showCurrentLocation() {
-        switch self.locationManager.authorizationStatus {
-            case .notDetermined:
-                self.locationManager.requestWhenInUseAuthorization()
-            case .authorizedWhenInUse, .authorizedAlways:
-                self.locationManager.startUpdatingLocation()
-            default:
-                break
-        }
-    }
-    
     func resetAllData() {
         self.location = nil
         self.mapOverlayView.clearData()
+    }
+    
+    func fetchLocationData() {
+        guard self.location == nil else { return }
+        self.delegate?.getData()
     }
     
     func update(_ location: Location) {
@@ -131,31 +121,6 @@ extension LocationView: MKMapViewDelegate {
         }
         
         return annotationView
-    }
-    
-}
-
-// MARK: - CLLocationManagerDelegate
-
-extension LocationView: CLLocationManagerDelegate {
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-            case .authorizedWhenInUse, .authorizedAlways:
-                manager.startUpdatingLocation()
-            case .notDetermined:
-                manager.requestWhenInUseAuthorization()
-            default:
-                break
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let loc = locations.last else {
-            return
-        }
-        self.centerMap(on: loc.coordinate)
-        manager.stopUpdatingLocation()
     }
     
 }

@@ -124,17 +124,16 @@ extension SettingsView: UITableViewDataSource {
 extension SettingsView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
-        
         let section = Section(rawValue: indexPath.section)!
-        switch section {
-            case .rate:
-                self.delegate?.showRatingAlert()
-            case .contact:
-                if let url = URL(string: contactUsURL) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
+        
+        if section == .rate {
+            delegate?.showRatingAlert()
+        }
+        if section == .contact {
+            if let url = URL(string: contactUsURL) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
         }
     }
     

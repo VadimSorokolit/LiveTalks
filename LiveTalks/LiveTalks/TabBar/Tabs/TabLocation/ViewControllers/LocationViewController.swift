@@ -27,6 +27,7 @@ class LocationViewController: BaseViewController {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: Constants.reloadDataButtonImageName), for: .normal)
         button.addTarget(self, action: #selector(reloadDataButtonDidTap), for: .touchUpInside)
+        button.isHidden = true
         return button
     }()
     
@@ -77,7 +78,7 @@ class LocationViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.locationView.showCurrentLocation()
+        self.locationView.fetchLocationData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,6 +92,7 @@ class LocationViewController: BaseViewController {
     private func fetchLocation() {
         Task {
             self.spinnerView.startAnimating()
+            self.reloadDataButton.isHidden = true
             defer {
                 self.spinnerView.stopAnimating()
                 self.reloadDataButton.isHidden = false

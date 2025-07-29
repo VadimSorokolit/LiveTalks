@@ -28,9 +28,9 @@ extension LocationView {
             static let visualEffectViewAlpha: CGFloat = 0.6
             static let columnSpacing: CGFloat = 16.0
             static let rowSpacing: CGFloat = 8.0
-            static let visualEffectViewHorizontalInset: CGFloat = 20.0
+            static let visualEffectViewHorizontalInset: CGFloat = 10.0
             static let visualEffectViewBottomOInset: CGFloat = 50.0
-            static let stackViewInset: CGFloat = 12.0
+            static let stackViewInset: CGFloat = 8.0
         }
         
         // MARK: - Properties. Public

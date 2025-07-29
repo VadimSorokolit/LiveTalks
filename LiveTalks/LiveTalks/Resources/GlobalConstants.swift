@@ -17,5 +17,8 @@ struct GlobalConstants {
     static let userDefaultsAppRatingKey: String = "appRating"
     static let fillStarImageName: String = "star.fill"
     static let emptyStarImageName: String = "star"
+    static let emptyStarImageColor: Int = 0xCDCDCD
+    static let fillStarImageColor: Int = 0xFFC553
+    static let ratingStarImageName: String = "ratingStar"
 }
 

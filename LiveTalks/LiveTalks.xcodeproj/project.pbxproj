@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD0D2FC52E390F5400BDF380 /* StarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0D2FC42E390F5300BDF380 /* StarView.swift */; };
+		DD0D2FC72E39184000BDF380 /* StarsRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0D2FC62E39183F00BDF380 /* StarsRateView.swift */; };
+		DD0D2FC92E39299700BDF380 /* RatingModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0D2FC82E39299600BDF380 /* RatingModalViewController.swift */; };
 		DD2BABBD2E2E5C26004DF3F4 /* Friend+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABB92E2E5C26004DF3F4 /* Friend+CoreDataClass.swift */; };
 		DD2BABBE2E2E5C26004DF3F4 /* Friend+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABBA2E2E5C26004DF3F4 /* Friend+CoreDataProperties.swift */; };
 		DD2BABBF2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2BABBC2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift */; };
@@ -49,6 +52,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD0D2FC42E390F5300BDF380 /* StarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarView.swift; sourceTree = "<group>"; };
+		DD0D2FC62E39183F00BDF380 /* StarsRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsRateView.swift; sourceTree = "<group>"; };
+		DD0D2FC82E39299600BDF380 /* RatingModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingModalViewController.swift; sourceTree = "<group>"; };
 		DD2BABB92E2E5C26004DF3F4 /* Friend+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DD2BABBA2E2E5C26004DF3F4 /* Friend+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DD2BABBB2E2E5C26004DF3F4 /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -291,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				DDD5B46A2E2E0C9900664B3A /* SettingsViewController.swift */,
+				DD0D2FC82E39299600BDF380 /* RatingModalViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -300,6 +307,8 @@
 			children = (
 				DD93F2B02E353B170074BD49 /* Cell */,
 				DDD5B4832E2E136500664B3A /* SettingsView.swift */,
+				DD0D2FC42E390F5300BDF380 /* StarView.swift */,
+				DD0D2FC62E39183F00BDF380 /* StarsRateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -500,6 +509,8 @@
 				DD93F2B22E353B310074BD49 /* SettingsCell.swift in Sources */,
 				DDD5B4802E2E12AA00664B3A /* LocationView.swift in Sources */,
 				DD53339D2E302241003E0CE5 /* GlobalConstants.swift in Sources */,
+				DD0D2FC72E39184000BDF380 /* StarsRateView.swift in Sources */,
+				DD0D2FC52E390F5400BDF380 /* StarView.swift in Sources */,
 				DDD5B4692E2E0C3A00664B3A /* LocationViewController.swift in Sources */,
 				DDD5B4842E2E136C00664B3A /* SettingsView.swift in Sources */,
 				DDD5B45F2E2E0AD100664B3A /* ChatViewController.swift in Sources */,
@@ -508,6 +519,7 @@
 				DD2BABC52E2E8B19004DF3F4 /* MessageCell.swift in Sources */,
 				DD2BABBD2E2E5C26004DF3F4 /* Friend+CoreDataClass.swift in Sources */,
 				DD2BABBE2E2E5C26004DF3F4 /* Friend+CoreDataProperties.swift in Sources */,
+				DD0D2FC92E39299700BDF380 /* RatingModalViewController.swift in Sources */,
 				DD5333A22E30C857003E0CE5 /* NetworkService.swift in Sources */,
 				DD2BABBF2E2E5C26004DF3F4 /* Message+CoreDataProperties.swift in Sources */,
 				DD2BABC02E2E5C26004DF3F4 /* Message+CoreDataClass.swift in Sources */,
