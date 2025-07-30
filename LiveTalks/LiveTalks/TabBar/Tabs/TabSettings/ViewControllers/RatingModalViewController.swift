@@ -57,7 +57,7 @@ class RatingModalViewController: UIViewController {
     private lazy var submitButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(Localizable.submitButtonTitle, for: .normal)
-        button.titleLabel?.font = UIFont(name: GlobalConstants.boldFont,size: Constants.titleLabelFontSize)
+        button.titleLabel?.font = UIFont(name: GlobalConstants.demiFont,size: Constants.titleLabelFontSize)
         button.isEnabled = false
         button.addTarget(self, action: #selector(self.didTapSubmit), for: .touchUpInside)
         return button

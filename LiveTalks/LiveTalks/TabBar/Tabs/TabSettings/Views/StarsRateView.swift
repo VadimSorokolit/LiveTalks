@@ -30,7 +30,6 @@ class StarsRateView: UIControl {
             if oldValue != starsSelected {
                 self.updateStarViewsState()
                 self.sendActions(for: .valueChanged)
-                UserDefaults.standard.set(starsSelected, forKey: GlobalConstants.userDefaultsAppRatingKey)
             }
         }
     }
