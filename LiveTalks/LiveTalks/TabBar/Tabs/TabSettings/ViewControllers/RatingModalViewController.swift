@@ -49,14 +49,15 @@ class RatingModalViewController: UIViewController {
     private lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(Localizable.cancelButtonTitle, for: .normal)
+        button.titleLabel?.font = UIFont(name: GlobalConstants.demiFont,size: Constants.titleLabelFontSize)
         button.addTarget(self, action: #selector(self.didTapCancel), for: .touchUpInside)
         return button
-        
     }()
     
     private lazy var submitButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(Localizable.submitButtonTitle, for: .normal)
+        button.titleLabel?.font = UIFont(name: GlobalConstants.demiFont,size: Constants.titleLabelFontSize)
         button.isEnabled = false
         button.addTarget(self, action: #selector(self.didTapSubmit), for: .touchUpInside)
         return button
