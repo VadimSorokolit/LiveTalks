@@ -85,9 +85,14 @@ class LocationView: UIView {
         self.mapOverlayView.clearData()
     }
     
-    func fetchLocationData() {
-        guard self.location == nil else { return }
-        self.delegate?.getData()
+    func loadLocationIfNeeded() {
+        if self.location == nil {
+            self.delegate?.getData()
+        } else {
+            if let location = self.location {
+                self.update(location)
+            }
+        }
     }
     
     func update(_ location: Location) {

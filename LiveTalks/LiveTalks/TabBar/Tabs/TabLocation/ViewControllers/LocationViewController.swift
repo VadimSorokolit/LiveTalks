@@ -75,10 +75,10 @@ class LocationViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.containerView)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        self.locationView.fetchLocationData()
+        self.locationView.loadLocationIfNeeded()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

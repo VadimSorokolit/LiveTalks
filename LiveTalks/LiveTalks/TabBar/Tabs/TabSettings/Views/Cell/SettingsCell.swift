@@ -81,12 +81,12 @@ final class SettingsCell: UITableViewCell {
         self.contentView.addSubview(self.titleLabel)
         
         self.starStackView.snp.makeConstraints {
-            $0.trailing.equalTo(self.contentView.layoutMarginsGuide.snp.trailing)
+            $0.trailing.equalTo(self.contentView.layoutMarginsGuide.snp.trailing).inset(4.0)
             $0.centerY.equalToSuperview()
         }
         
         self.titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(22.0)
+            $0.leading.equalToSuperview().inset(16.0)
             $0.centerY.equalToSuperview()
         }
     }
