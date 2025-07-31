@@ -8,7 +8,7 @@
 * Database - **CoreData**
 * Map – **MapKit**
 * Dependencies - **Swift Package Manager** 
-* Localization** – **English, German** 
+* Localization – **English, German** 
 
 <br />
 <img src = "https://github.com/user-attachments/assets/c6f8d0fb-63fc-4ac9-856d-d7191f77b1e1" width = 48.8%>
