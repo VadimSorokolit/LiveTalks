@@ -6,4 +6,5 @@
 * Networking - **URLSession + Swift Concurrency (async/await)**
 * Notifications – **Notification Center**  
 * Database - **CoreData**
-* Map – **MapKit** 
+* Map – **MapKit**
+*Localization** – **English, German** 
