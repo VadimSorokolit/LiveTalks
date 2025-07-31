@@ -24,8 +24,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navAppearance.titleTextAttributes = [.font: UIFont(name: GlobalConstants.demiFont, size: 20.0) ?? UIFont.systemFont(ofSize: 20.0) as Any,
                                              .foregroundColor: UIColor.darkGray
         ]
-        UINavigationBar.appearance().standardAppearance = navAppearance
         
+        UINavigationBar.appearance().standardAppearance = navAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navAppearance
+
         self.window = UIWindow(windowScene: windowScene)
         
         let startViewController = TabBarController()

@@ -101,8 +101,10 @@ class TabBarController: UITabBarController {
         appearance.stackedLayoutAppearance.selected.titleTextAttributes = selectedAttrs
         appearance.stackedLayoutAppearance.normal.titlePositionAdjustment   = UIOffset(horizontal: 0.0, vertical: -3.0)
         appearance.stackedLayoutAppearance.selected.titlePositionAdjustment = UIOffset(horizontal: 0.0, vertical: -3.0)
-        self.tabBar.standardAppearance = appearance
         
+        self.tabBar.standardAppearance = appearance
+        self.tabBar.scrollEdgeAppearance = appearance
+  
         self.viewControllers = Tab.allCases.map { tab in
             let navigationController = UINavigationController(rootViewController: tab.rootViewController)
             navigationController.tabBarItem.imageInsets = UIEdgeInsets(top: -6.0, left: 0.0, bottom: 6.0, right: 0.0)
