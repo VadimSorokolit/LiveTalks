@@ -59,11 +59,12 @@
 
 "settingsTitle" = "Einstellungen";
 "rateAppButtonTitle" = "Anmerkungen";
-"contactUsButtonTitle" = "Kontaktieren Sie uns";
+"contactUsButtonTitle" = "Kontaktieren sie uns";
 "rateAppTitleHeader" = "Die sternebewertung spiegelt die allgemeine zufriedenheit mit der app wider";
 "contactUsTitleHeader" = "Kontaktinformationen für fragen oder hilfe werden bereitgestellt";
 "invalidUrlStringTitle" = "Der link kann derzeit nicht geöffnet werden";
 "submitButtonTitle" = "Einreichen";
 "cancelButtonTitle" = "Stornieren";
+"shareAppTitle" = "Schauen sie sich diese app an!";
 "alertTitle" = "Fehler";
 "alertActionButtonTitle" = "OKAY";

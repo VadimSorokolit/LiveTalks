@@ -24,7 +24,7 @@ class SettingsViewController: UIViewController {
     
     private struct Constants {
         static let shareImageName: String = "square.and.arrow.up"
-        static let shareAppMessageText: String = "Check out this app!"
+        static let shareAppMessageText: String = Localizable.shareAppMessageTitle
         static let shareAppURLString: String = "https://apps.apple.com/app/id88"
     }
     

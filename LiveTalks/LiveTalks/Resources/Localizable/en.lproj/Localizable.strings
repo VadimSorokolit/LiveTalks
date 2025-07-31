@@ -64,6 +64,7 @@
 "contactUsTitleHeader" = "Info";
 "submitButtonTitle" = "Submit";
 "cancelButtonTitle" = "Cancel";
+"shareAppTitle" = "Check out this app!";
 "invalidUrlStringTitle" = "Unable to open the link right now";
 "alertTitle" = "Error";
 "alertActionButtonTitle" = "OK";

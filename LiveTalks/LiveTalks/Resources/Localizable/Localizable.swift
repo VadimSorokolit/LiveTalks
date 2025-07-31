@@ -128,11 +128,17 @@ enum Localizable {
     static var submitButtonTitle: String {
         NSLocalizedString("submitButtonTitle", comment: "Title of the submit")
     }
+    
     static var cancelButtonTitle: String {
         NSLocalizedString("cancelButtonTitle", comment: "Title of the cancel")
     }
+    
     static var invalidUrlTitle: String {
         NSLocalizedString("invalidUrlStringTitle", comment: "Title of the invalid url")
+    }
+    
+    static var shareAppMessageTitle: String {
+        NSLocalizedString("shareAppTitle", comment: "Title of the share app")
     }
     
 }
