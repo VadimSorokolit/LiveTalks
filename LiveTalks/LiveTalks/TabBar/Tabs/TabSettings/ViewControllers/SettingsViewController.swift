@@ -8,7 +8,13 @@
 import UIKit
 
 protocol SettingsViewProtocol: AnyObject {
+    /**
+     Presents an alert prompting to rate the app
+     */
     func showRatingAlert()
+    /**
+     Presents an alert indicating that the provided URL is invalid or cannot be opened
+     */
     func showInvalidUrlAlert()
 }
 

@@ -9,20 +9,88 @@ import Foundation
 import CoreData
 
 protocol LocalStorageProtocol: AnyObject {
+    /**
+     Retrieves all chat friends stored locally.
+     
+     - Parameter completion: A closure called with the result containing an array of `Friend` objects on success,
+     or an `Error` on failure.
+     */
     func fetchChats(completion: @escaping (Result<[Friend], Error>) -> Void)
+    
+    /**
+     Retrieves all messages for the specified friend from local storage.
+     
+     - Parameters:
+     - friend: The `Friend` whose messages should be fetched.
+     - completion: A closure called with the result containing an array of `Message` objects on success,
+     or an `Error` on failure.
+     */
     func fetchMessages(for friend: Friend,
                        completion: @escaping (Result<[Message], Error>) -> Void)
+    
+    /**
+     Looks up and retrieves a friend by their name from local storage.
+     
+     - Parameters:
+     - name: The name of the friend to search for.
+     - completion: A closure called when the operation completes.
+     On success, it returns an optional `Friend` (nil if no match was found).
+     On failure, it returns an `Error` describing what went wrong.
+     */
     func fetchFriend(named name: String, completion: @escaping (Result<Friend?, Error>) -> Void)
+    
+    /**
+     Creates a new chat session with the specified name and stores it in local storage.
+     
+     - Parameters:
+     - name: The name to assign to the new chat.
+     - completion: A closure that is called when the operation finishes.
+     On success, it returns the newly created `Friend` instance.
+     On failure, it returns an `Error` describing the problem.
+     */
     func createChat(_ name: String,
                     completion: @escaping (Result<Friend, Error>) -> Void)
+    
+    /**
+     Creates a new message for the specified friend and stores it in local storage.
+     
+     - Parameters:
+     - text: The text content of the message.
+     - isIncoming: A Boolean indicating whether the message is incoming (`true`) or outgoing (`false`).
+     - friend: The `Friend` instance to which this message belongs.
+     - completion: An optional closure that is called when the operation completes.
+     On success, it returns the newly created `Message`.
+     On failure, it returns an `Error` describing what went wrong.
+     
+     - Returns: The newly created `Message` object, regardless of whether a completion handler is provided.
+     */
     func createMessage(text: String,
                        isIncoming: Bool,
                        for friend: Friend,
                        completion: ((Result<Message, Error>) -> Void)?) -> Message
+    
+    /**
+     Saves a message to local storage without returning the message object.
+     
+     - Parameters:
+     - text: The text content of the message to save.
+     - isIncoming: A Boolean indicating whether the message is incoming (`true`) or outgoing (`false`).
+     - friend: The `Friend` instance associated with this message.
+     - completion: An optional closure that is called when the save operation completes.
+     If an error occurs, it is passed to the closure; otherwise, `nil` is passed on success.
+     */
     func saveMessage(text: String,
                      isIncoming: Bool,
                      for friend: Friend,
                      completion: ((Error?) -> Void)?)
+    
+    /**
+     Deletes the chat associated with the specified friend from local storage.
+     
+     - Parameters:
+     - friend: The `Friend` whose chat should be deleted.
+     - completion: An optional closure called with an `Error` if the delete operation fails, or `nil` on success.
+     */
     func deleteChatWith(_ friend: Friend, completion: ((Error?) -> Void)?)
 }
 

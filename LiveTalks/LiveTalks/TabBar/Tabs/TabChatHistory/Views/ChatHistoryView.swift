@@ -16,7 +16,18 @@ struct ChatList {
 }
 
 protocol ChatHistoryViewProtocol: AnyObject {
+    /**
+     Presents the chat history for the specified chat list.
+     
+     - Parameter chat: The `ChatList` instance whose history should be displayed.
+     */
     func present(_ chat: ChatList)
+    
+    /**
+     Displays an alert for the given error.
+     
+     - Parameter error: The `Error` instance containing details about what went wrong.
+     */
     func showAlert(_ error: Error)
 }
 

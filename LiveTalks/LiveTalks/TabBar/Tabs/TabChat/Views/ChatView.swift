@@ -9,6 +9,13 @@ import UIKit
 import SnapKit
 
 protocol ChatViewProtocol: AnyObject {
+    /**
+     Called when the user taps the send button in the chat view.
+     
+     - Parameters:
+     - chatView: The `ChatView` instance where the send button was tapped.
+     - button: The `UIButton` instance representing the send button.
+     */
     func chatView(_ chatView: ChatView, didSelectSendButton button: UIButton)
 }
 

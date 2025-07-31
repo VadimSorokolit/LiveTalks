@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 
 protocol NetworkServiceProtocol: AnyObject {
+    /**
+     Asynchronously fetches the current location.
+
+     - Returns: A `Location` object containing the fetched location data.
+     - Throws: An error if the fetch operation fails
+     */
     func fetchLocation() async throws -> Location
 }
 

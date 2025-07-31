@@ -18,6 +18,11 @@ enum FriendName: String, CaseIterable {
 }
 
 protocol ChatViewControllerProtocol: AnyObject {
+    /**
+     Saves the given `Friend` instance.
+     
+     - Parameter friend: The `Friend` object that needs to be saved
+     */
     func save(_ friend: Friend)
 }
 

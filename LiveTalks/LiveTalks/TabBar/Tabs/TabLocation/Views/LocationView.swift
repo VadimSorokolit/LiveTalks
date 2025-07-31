@@ -10,6 +10,11 @@ import MapKit
 import SnapKit
 
 protocol LocationViewDelegate: AnyObject {
+    /**
+     Triggers the loading or refreshing of location data.
+     
+     Implementers should fetch or update the necessary location information when this method is called.
+     */
     func getData()
 }
 
