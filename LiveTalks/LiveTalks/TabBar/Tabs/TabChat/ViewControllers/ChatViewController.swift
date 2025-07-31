@@ -26,8 +26,8 @@ class ChatViewController: BaseViewController {
     // MARK: - Objects
     
     private struct Constants {
-        static let chooseFriendButtonIconName = "person.fill.badge.plus"
-        static let contexMenuTitle: String = Localizable.contextMenuTitle
+        static let chooseFriendButtonIconName: String = "person.fill.badge.plus"
+        static let contextMenuTitle: String = Localizable.contextMenuTitle
     }
     
     // MARK: - Properites. Private
@@ -60,7 +60,7 @@ class ChatViewController: BaseViewController {
         super.viewDidLoad()
         
         self.chatView.delegate = self
-        self.configureContexMenuButton()
+        self.configureContextMenuButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,7 +138,7 @@ class ChatViewController: BaseViewController {
         self.chatView.isHidden = self.friend == nil
     }
     
-    func removeAllMessagesIfNeeded() {
+    private func removeAllMessagesIfNeeded() {
         if self.friend != nil {
             DispatchQueue.main.async {
                 self.chatView.removeAllMessages()
@@ -154,13 +154,13 @@ class ChatViewController: BaseViewController {
         }
     }
     
-    private func configureContexMenuButton() {
+    private func configureContextMenuButton() {
         let actions = FriendName.allCases.map { name in
             UIAction(title: name.rawValue.capitalized) { [weak self] _ in
                 self?.didSelectFriendName(name)
             }
         }
-        let contexMenu = UIMenu(title: Constants.contexMenuTitle, children: actions)
+        let contexMenu = UIMenu(title: Constants.contextMenuTitle, children: actions)
         let chooseFriendButton = UIBarButtonItem(
             image: UIImage(systemName: Constants.chooseFriendButtonIconName),
             primaryAction: nil,
@@ -238,6 +238,7 @@ class ChatViewController: BaseViewController {
         guard let reply = replies.randomElement() else {
             return
         }
+        // Delay before displaying the incoming message
         let delay = Double.random(in: 0.6...1.4)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
@@ -262,7 +263,7 @@ class ChatViewController: BaseViewController {
 
 extension ChatViewController: ChatViewProtocol {
     
-    func chatView(_ chatView: ChatView, didSelectedSendButton button: UIButton) {
+    func chatView(_ chatView: ChatView, didSelectSendButton button: UIButton) {
         guard let friend = self.friend, let text = self.extractMessageText(), !text.isEmpty else {
             return
         }

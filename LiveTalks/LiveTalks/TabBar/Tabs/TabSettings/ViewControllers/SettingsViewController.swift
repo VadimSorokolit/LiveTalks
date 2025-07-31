@@ -9,6 +9,7 @@ import UIKit
 
 protocol SettingsViewProtocol: AnyObject {
     func showRatingAlert()
+    func showInvalidUrlAlert()
 }
 
 class SettingsViewController: UIViewController {
@@ -17,7 +18,7 @@ class SettingsViewController: UIViewController {
     
     private struct Constants {
         static let shareImageName: String = "square.and.arrow.up"
-        static  let shareAppMessageText: String = "Check out this app!"
+        static let shareAppMessageText: String = "Check out this app!"
         static let shareAppURLString: String = "https://apps.apple.com/app/id88"
     }
     
@@ -50,10 +51,14 @@ class SettingsViewController: UIViewController {
     @objc
     private func didTapShareAppButton() {
         let text = Constants.shareAppMessageText
-        let url = URL(string: Constants.shareAppURLString)!
         
-        let viewController = UIActivityViewController(activityItems: [text, url], applicationActivities: nil)
-        present(viewController, animated: true)
+        if let urlString = URL(string: Constants.shareAppURLString) {
+            let url = urlString
+            let viewController = UIActivityViewController(activityItems: [text, url], applicationActivities: nil)
+            present(viewController, animated: true)
+        } else {
+            self.showInvalidUrlAlert()
+        }
     }
     
 }
@@ -61,6 +66,12 @@ class SettingsViewController: UIViewController {
 // MARK: - SettingsViewProtocol
 
 extension SettingsViewController: SettingsViewProtocol {
+    
+    func showInvalidUrlAlert() {
+        let alert = UIAlertController(title: Localizable.alertScreenTitle, message: Localizable.invalidUrlTitle, preferredStyle: .alert)
+        alert.addAction(.init(title: Localizable.alertScreenActionButtonTitle, style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
     
     func showRatingAlert() {
         let viewController = RatingModalViewController()

@@ -28,6 +28,8 @@ protocol LocalStorageProtocol: AnyObject {
 
 final class CoreDataService: LocalStorageProtocol {
     
+    // MARK: - Properties. Public
+    
     static let shared = CoreDataService()
     
     // MARK: - Initializer
@@ -41,7 +43,7 @@ final class CoreDataService: LocalStorageProtocol {
         }
     }
     
-    // Properties. Private
+    // MARK: - Properties. Private
     
     private let persistentContainer: NSPersistentContainer
     
@@ -49,10 +51,10 @@ final class CoreDataService: LocalStorageProtocol {
         return self.persistentContainer.viewContext
     }
     
-    // MARK: - Methods
+    // MARK: - Methods. Public
     
     func fetchChats(completion: @escaping (Result<[Friend], Error>) -> Void) {
-        context.perform {
+        self.context.perform {
             let request: NSFetchRequest<Friend> = Friend.fetchRequest()
             request.sortDescriptors = [ NSSortDescriptor(key: "name", ascending: true) ]
             request.predicate = NSPredicate(format: "messages.@count > 0")
@@ -119,7 +121,7 @@ final class CoreDataService: LocalStorageProtocol {
     
     func createChat(_ name: String,
                     completion: @escaping (Result<Friend, Error>) -> Void) {
-        context.perform {
+        self.context.perform {
             let friend = Friend(context: self.context)
             friend.name = name
 

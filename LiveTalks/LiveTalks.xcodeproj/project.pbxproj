@@ -24,9 +24,8 @@
 		DD5333A22E30C857003E0CE5 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5333A12E30C855003E0CE5 /* NetworkService.swift */; };
 		DD5333A52E30CA92003E0CE5 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5333A42E30CA8D003E0CE5 /* Location.swift */; };
 		DD5333A72E30E13A003E0CE5 /* AvenirNextCyr-Demi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD5333A62E30E13A003E0CE5 /* AvenirNextCyr-Demi.ttf */; };
-		DD93F22B2E33C3490074BD49 /* AlertsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93F22A2E33C3470074BD49 /* AlertsManager.swift */; };
 		DD93F22D2E33C9BE0074BD49 /* NotificationName+customNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93F22C2E33C9BD0074BD49 /* NotificationName+customNames.swift */; };
-		DD93F22F2E33D6B80074BD49 /* UIViewController+errorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93F22E2E33D6B70074BD49 /* UIViewController+errorHandling.swift */; };
+		DD93F22F2E33D6B80074BD49 /* UIViewController+notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93F22E2E33D6B70074BD49 /* UIViewController+notifications.swift */; };
 		DD93F2312E33DB910074BD49 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93F2302E33DB900074BD49 /* BaseViewController.swift */; };
 		DD93F2332E340B9C0074BD49 /* MapOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93F2322E340B920074BD49 /* MapOverlayView.swift */; };
 		DD93F2352E34D1780074BD49 /* UIButton+animateTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93F2342E34D1770074BD49 /* UIButton+animateTap.swift */; };
@@ -69,9 +68,8 @@
 		DD5333A12E30C855003E0CE5 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		DD5333A42E30CA8D003E0CE5 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		DD5333A62E30E13A003E0CE5 /* AvenirNextCyr-Demi.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AvenirNextCyr-Demi.ttf"; sourceTree = "<group>"; };
-		DD93F22A2E33C3470074BD49 /* AlertsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsManager.swift; sourceTree = "<group>"; };
 		DD93F22C2E33C9BD0074BD49 /* NotificationName+customNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+customNames.swift"; sourceTree = "<group>"; };
-		DD93F22E2E33D6B70074BD49 /* UIViewController+errorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+errorHandling.swift"; sourceTree = "<group>"; };
+		DD93F22E2E33D6B70074BD49 /* UIViewController+notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+notifications.swift"; sourceTree = "<group>"; };
 		DD93F2302E33DB900074BD49 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DD93F2322E340B920074BD49 /* MapOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapOverlayView.swift; sourceTree = "<group>"; };
 		DD93F2342E34D1770074BD49 /* UIButton+animateTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+animateTap.swift"; sourceTree = "<group>"; };
@@ -145,7 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				DD93F2342E34D1770074BD49 /* UIButton+animateTap.swift */,
-				DD93F22E2E33D6B70074BD49 /* UIViewController+errorHandling.swift */,
+				DD93F22E2E33D6B70074BD49 /* UIViewController+notifications.swift */,
 				DD93F22C2E33C9BD0074BD49 /* NotificationName+customNames.swift */,
 				DD2BABC92E2ECA6D004DF3F4 /* UIColor+Hex.swift */,
 			);
@@ -198,14 +196,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		DD93F2292E33C3000074BD49 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				DD93F22A2E33C3470074BD49 /* AlertsManager.swift */,
-			);
-			path = Managers;
-			sourceTree = "<group>";
-		};
 		DD93F2B02E353B170074BD49 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,7 +236,6 @@
 				DD5333A32E30CA6B003E0CE5 /* Model */,
 				DDD5B46D2E2E0D5B00664B3A /* TabBar */,
 				DD2BABC32E2E70FF004DF3F4 /* Services */,
-				DD93F2292E33C3000074BD49 /* Managers */,
 				DD2BABC82E2ECA59004DF3F4 /* Extensions */,
 				DD53338E2E3020D8003E0CE5 /* Resources */,
 				DD93F2B32E36B7B30074BD49 /* SupportingFiles */,
@@ -495,13 +484,12 @@
 				DDD5B4822E2E135200664B3A /* ChatHistoryView.swift in Sources */,
 				DD93F2312E33DB910074BD49 /* BaseViewController.swift in Sources */,
 				DDD5B46F2E2E0D9F00664B3A /* TabBarController.swift in Sources */,
-				DD93F22F2E33D6B80074BD49 /* UIViewController+errorHandling.swift in Sources */,
+				DD93F22F2E33D6B80074BD49 /* UIViewController+notifications.swift in Sources */,
 				DD93F2332E340B9C0074BD49 /* MapOverlayView.swift in Sources */,
 				DD93F2352E34D1780074BD49 /* UIButton+animateTap.swift in Sources */,
 				DDD5B45D2E2E0AD100664B3A /* LiveTalks.xcdatamodeld in Sources */,
 				DDD5B47E2E2E11E100664B3A /* ChatView.swift in Sources */,
 				DDD5B46B2E2E0CA500664B3A /* SettingsViewController.swift in Sources */,
-				DD93F22B2E33C3490074BD49 /* AlertsManager.swift in Sources */,
 				DD2BABCA2E2ECA6F004DF3F4 /* UIColor+Hex.swift in Sources */,
 				DDD5B45E2E2E0AD100664B3A /* SceneDelegate.swift in Sources */,
 				DDFAD23E2E32203F008E9ABE /* ChatHistoryCell.swift in Sources */,

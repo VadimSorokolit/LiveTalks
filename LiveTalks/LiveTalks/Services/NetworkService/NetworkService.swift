@@ -52,10 +52,9 @@ final class NetworkService: NetworkServiceProtocol {
         components.host   = Constants.host
         components.path   = Constants.path
         
-        let fieldsItem = URLQueryItem(name: "fields", value: "61439")
         let languageCode  = Locale.current.language.languageCode?.identifier ?? "en"
         let languageItem  = URLQueryItem(name: "lang", value: languageCode)
-        components.queryItems = [fieldsItem, languageItem]
+        components.queryItems = [languageItem]
         return components.url
     }
     

@@ -161,7 +161,7 @@ class RatingModalViewController: UIViewController {
     
     @objc
     private func ratingChanged(_ sender: StarsRateView) {
-        self.submitButton.isEnabled = sender.starsSelected > 0 && self.fillStarCount != sender.starsSelected
+        self.submitButton.isEnabled = (sender.starsSelected > 0) && (self.fillStarCount != sender.starsSelected)
     }
     
 }

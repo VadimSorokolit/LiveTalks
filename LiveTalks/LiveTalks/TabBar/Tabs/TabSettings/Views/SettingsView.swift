@@ -93,20 +93,27 @@ class SettingsView: UIView {
 extension SettingsView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Section(rawValue: section)!.rows.count
+        guard let sectionType = Section(rawValue: section) else {
+            return 0
+        }
+        return sectionType.rows.count
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let section = Section(rawValue: indexPath.section)!
-        let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseID, for: indexPath) as? SettingsCell
-        
-        if section == .rate {
-            cell?.configure(text: section.rows[indexPath.row], rating: self.appRating)
+        if let section = Section(rawValue: indexPath.section) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseID, for: indexPath) as? SettingsCell
+            
+            if section == .rate {
+                cell?.configure(text: section.rows[indexPath.row], rating: self.appRating)
+            } else {
+                cell?.configure(text: section.rows[indexPath.row], rating: nil)
+            }
+            
+            return cell ?? SettingsCell()
         } else {
-            cell?.configure(text: section.rows[indexPath.row], rating: nil)
+            return SettingsCell()
         }
-        
-        return cell ?? SettingsCell()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -114,7 +121,7 @@ extension SettingsView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Section(rawValue: section)!.title
+        return Section(rawValue: section)?.title ?? nil
     }
     
 }
@@ -125,15 +132,20 @@ extension SettingsView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let section = Section(rawValue: indexPath.section)!
         
-        if section == .rate {
-            delegate?.showRatingAlert()
-        }
-        if section == .contact {
-            if let url = URL(string: contactUsURL) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        if let section = Section(rawValue: indexPath.section) {
+            if section == .rate {
+                self.delegate?.showRatingAlert()
             }
+            if section == .contact {
+                if let url = URL(string: self.contactUsURL) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    self.delegate?.showInvalidUrlAlert()
+                }
+            }
+        } else {
+            return
         }
     }
     

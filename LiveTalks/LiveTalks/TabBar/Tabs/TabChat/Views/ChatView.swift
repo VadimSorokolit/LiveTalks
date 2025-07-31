@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol ChatViewProtocol: AnyObject {
-    func chatView(_ chatView: ChatView, didSelectedSendButton button: UIButton)
+    func chatView(_ chatView: ChatView, didSelectSendButton button: UIButton)
 }
 
 class ChatView: UIView {
@@ -44,7 +44,7 @@ class ChatView: UIView {
                                              "Great!","Sounds good to me", "Thanks for sharing", "Let’s discuss it!", "Have a great day!"]
     
     private lazy var repliesMessages: [String] = {
-         defaultReplies.map { NSLocalizedString($0, comment: "") }
+        self.defaultReplies.map { NSLocalizedString($0, comment: "") }
      }()
     
     private lazy var tableView: UITableView = {
@@ -171,7 +171,7 @@ class ChatView: UIView {
     }
     
     func extractMessageText() -> String? {
-        return textView.text?
+        return self.textView.text?
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
@@ -241,13 +241,14 @@ class ChatView: UIView {
         }
     }
     
-    @objc private func dismissKeyboard() {
+    @objc
+    private func dismissKeyboard() {
         self.endEditing(true)
     }
     
     @objc
     private func handleSend() {
-        self.delegate?.chatView(self, didSelectedSendButton: self.sendButton)
+        self.delegate?.chatView(self, didSelectSendButton: self.sendButton)
     }
     
 }
@@ -281,7 +282,7 @@ extension ChatView: UITableViewDataSource {
             isGroupHeaderMessage = true
         }
 
-        cell?.transform = CGAffineTransform(scaleX: 1, y: -1)
+        cell?.transform = CGAffineTransform(scaleX: 1.0, y: -1.0)
         cell?.configure(with: message, isGroupHeaderMessage: isGroupHeaderMessage)
         
         return cell ?? MessageCell()

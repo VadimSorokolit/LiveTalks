@@ -29,7 +29,7 @@ extension LocationView {
             static let columnSpacing: CGFloat = 16.0
             static let rowSpacing: CGFloat = 8.0
             static let visualEffectViewHorizontalInset: CGFloat = 10.0
-            static let visualEffectViewBottomOInset: CGFloat = 50.0
+            static let visualEffectViewBottomInset: CGFloat = 50.0
             static let stackViewInset: CGFloat = 8.0
         }
         
@@ -101,7 +101,7 @@ extension LocationView {
         
         private func setupViews() {
             self.isUserInteractionEnabled = false
-            self.addSubview(overlayView)
+            self.addSubview(self.overlayView)
             self.overlayView.addSubview(self.visualEffectView)
             self.visualEffectView.contentView.addSubview(self.stackView)
             
@@ -111,7 +111,7 @@ extension LocationView {
             
             self.visualEffectView.snp.makeConstraints {
                 $0.centerX.equalToSuperview()
-                $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).inset(Constants.visualEffectViewBottomOInset)
+                $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).inset(Constants.visualEffectViewBottomInset)
                 $0.width.lessThanOrEqualToSuperview().inset(Constants.visualEffectViewHorizontalInset)
             }
             

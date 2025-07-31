@@ -5,37 +5,12 @@
   Created by Vadim Sorokolit on 24.07.2025.
 */
 
+// MARK: - Tab Chat
+
 "chatTitle" = "Chat";
 "customChatTitle" = "Chat with";
-"locationTitle" = "Location";
-"historyTitle" = "History";
-"settingsTitle" = "Settings";
-"alertTitle" = "Error";
-"alertActionButtonTitle" = "OK";
 "contextMenuTitle" = "Select Friend";
-"chatHistoryTableViewTitle" = "You have no chats";
 "textViewPlaceholderTitle" = "Message";
-"overlayViewButtonTitle" = "Reload data";
-"statusTitle" = "Status:";
-"ipAddressTitle" = "IP:";
-"countryTitle" = "Country:";
-"countryCodeTitle" = "Country Code:";
-"regionTitle" = "Region:";
-"regionNameTitle" = "Region name:";
-"cityTitle" = "City:";
-"zipTitle" = "Zip:";
-"timeZoneTitle" = "Time zone:";
-"ispTitle" = "ISP:";
-"orgTitle" = "Org:";
-"latitudeTitle" = "Latitude:";
-"longitudeTitle" = "Longitude:";
-"asTitle" = "As info:";
-"rateAppButtonTitle" = "Rate App";
-"contactUsButtonTitle" = "Contact Us";
-"rateAppTitleHeader" = "Rating";
-"contactUsTitleHeader" = "Info";
-"submitButtonTitle" = "Submit";
-"cancelButtonTitle" = "Cancel";
 "Hello" = "Hello!";
 "Hi there 👋" = "Hi there 👋";
 "How are you doing today?" = "How are you doing today?";
@@ -56,4 +31,42 @@
 "Thanks for sharing" = "Thanks for sharing";
 "Let’s discuss it!" = "Let’s discuss it!";
 "Have a great day!" = "Have a great day!";
+
+// MARK: - Tab Location
+
+"locationTitle" = "Location";
+"statusTitle" = "Status:";
+"ipAddressTitle" = "IP:";
+"countryTitle" = "Country:";
+"countryCodeTitle" = "Country Code:";
+"regionTitle" = "Region:";
+"regionNameTitle" = "Region name:";
+"cityTitle" = "City:";
+"zipTitle" = "Zip:";
+"timeZoneTitle" = "Time zone:";
+"ispTitle" = "ISP:";
+"orgTitle" = "Org:";
+"latitudeTitle" = "Latitude:";
+"longitudeTitle" = "Longitude:";
+"asTitle" = "As info:";
+
+// MARK: - Tab History
+
+"historyTitle" = "History";
+"chatHistoryTableViewTitle" = "You have no chats";
+
+// MARK: - Tab Settings
+
+"settingsTitle" = "Settings";
+"rateAppButtonTitle" = "Rate App";
+"contactUsButtonTitle" = "Contact Us";
+"rateAppTitleHeader" = "Rating";
+"contactUsTitleHeader" = "Info";
+"submitButtonTitle" = "Submit";
+"cancelButtonTitle" = "Cancel";
+"invalidUrlStringTitle" = "Unable to open the link right now";
+"alertTitle" = "Error";
+"alertActionButtonTitle" = "OK";
+
+
 

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class SettingsCell: UITableViewCell {
+class SettingsCell: UITableViewCell {
     
     // MARK: - Objects
     
@@ -102,7 +102,7 @@ final class SettingsCell: UITableViewCell {
             guard let baseImage = UIImage(named: GlobalConstants.ratingStarImageName) else {
                 return
             }
-
+            
             let templateImage = baseImage.withRenderingMode(.alwaysTemplate)
             
             for (index, imageView) in self.starImageViews.enumerated() {

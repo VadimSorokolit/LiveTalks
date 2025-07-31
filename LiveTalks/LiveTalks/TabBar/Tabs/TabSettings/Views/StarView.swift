@@ -21,7 +21,6 @@ class StarView: UIView {
     init(fillColor: UIColor, emptyColor: UIColor) {
         guard let base = UIImage(named: GlobalConstants.ratingStarImageName) else {
             fatalError("Missing star image")
-            
         }
         
         self.templateImage = base.withRenderingMode(.alwaysTemplate)
@@ -36,7 +35,9 @@ class StarView: UIView {
         self.setSelected(false)
     }
     
-    required init?(coder: NSCoder) { fatalError() }
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()

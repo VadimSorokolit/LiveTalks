@@ -23,7 +23,7 @@ class TabBarController: UITabBarController {
     
     enum Tab: CaseIterable {
         case chat
-        case locations
+        case location
         case chatHistory
         case settings
         
@@ -39,7 +39,7 @@ class TabBarController: UITabBarController {
                     )
                     return viewController
                     
-                case .locations:
+                case .location:
                     let viewController = LocationViewController()
                     viewController.title = Localizable.locationScreenTitle
                     viewController.tabBarItem = UITabBarItem(
@@ -102,10 +102,6 @@ class TabBarController: UITabBarController {
         appearance.stackedLayoutAppearance.normal.titlePositionAdjustment   = UIOffset(horizontal: 0.0, vertical: -3.0)
         appearance.stackedLayoutAppearance.selected.titlePositionAdjustment = UIOffset(horizontal: 0.0, vertical: -3.0)
         self.tabBar.standardAppearance = appearance
-        
-        if #available(iOS 15.0, *) {
-            self.tabBar.scrollEdgeAppearance = appearance
-        }
         
         self.viewControllers = Tab.allCases.map { tab in
             let navigationController = UINavigationController(rootViewController: tab.rootViewController)

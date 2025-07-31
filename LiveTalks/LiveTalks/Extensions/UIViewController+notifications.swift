@@ -1,5 +1,5 @@
 //
-//  UIViewContoller+showErrorAlert.swift
+//  UIViewContoller+notifications.swift
 //  LiveTalks
 //
 //  Created by Vadim Sorokolit on 25.07.2025.

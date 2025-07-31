@@ -26,7 +26,7 @@ class LocationViewController: BaseViewController {
     private lazy var reloadDataButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: Constants.reloadDataButtonImageName), for: .normal)
-        button.addTarget(self, action: #selector(reloadDataButtonDidTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.reloadDataButtonDidTap), for: .touchUpInside)
         button.isHidden = true
         return button
     }()
@@ -87,9 +87,21 @@ class LocationViewController: BaseViewController {
         self.locationView.resetAllData()
     }
     
-    // MARK: - Methods. Private
+    // MARK: - Events
     
-    private func fetchLocation() {
+    @objc
+    private func reloadDataButtonDidTap() {
+        self.reloadDataButton.isHidden = true
+        self.getData()
+    }
+
+}
+
+// MARK: -  LocationViewDelegate
+
+extension LocationViewController: LocationViewDelegate {
+    
+    func getData() {
         Task {
             self.spinnerView.startAnimating()
             self.reloadDataButton.isHidden = true
@@ -104,24 +116,6 @@ class LocationViewController: BaseViewController {
                 self.notify(name: .errorNotification, errorMessage: error.localizedDescription)
             }
         }
-    }
-    
-    // MARK: - Events
-    
-    @objc
-    private func reloadDataButtonDidTap() {
-        self.reloadDataButton.isHidden = true
-        self.fetchLocation()
-    }
-
-}
-
-// MARK: -  LocationViewDelegate
-
-extension LocationViewController: LocationViewDelegate {
-    
-    func getData() {
-        self.fetchLocation()
     }
     
 }

@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 
 struct ChatList {
-  let friend: Friend
-  let title: String
-  let subtitle: String
-  let date: Date?
+    let friend: Friend
+    let title: String
+    let subtitle: String
+    let date: Date?
 }
 
 protocol ChatHistoryViewProtocol: AnyObject {
@@ -169,7 +169,7 @@ extension ChatHistoryView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-        let chat = chats[indexPath.row]
+        let chat = self.chats[indexPath.row]
         
         self.delegate?.present(chat)
     }

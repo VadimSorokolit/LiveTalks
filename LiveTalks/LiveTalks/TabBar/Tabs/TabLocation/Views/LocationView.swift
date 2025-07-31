@@ -86,12 +86,10 @@ class LocationView: UIView {
     }
     
     func loadLocationIfNeeded() {
-        if self.location == nil {
-            self.delegate?.getData()
+        if let location = self.location {
+            self.update(location)
         } else {
-            if let location = self.location {
-                self.update(location)
-            }
+            self.delegate?.getData()
         }
     }
     

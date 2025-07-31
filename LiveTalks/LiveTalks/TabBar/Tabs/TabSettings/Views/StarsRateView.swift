@@ -56,9 +56,10 @@ class StarsRateView: UIControl {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        guard !self.starsViews.isEmpty else {
+        if self.starsViews.isEmpty {
             return
         }
+        
         var x = Constants.contentInsets.left
         let y = Constants.contentInsets.top
         for star in self.starsViews {
@@ -68,8 +69,8 @@ class StarsRateView: UIControl {
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let totalWidth = CGFloat(starsCount) * Constants.starSize.width
-        + CGFloat(starsCount - 1) * Constants.spacing
+        let totalWidth = CGFloat(self.starsCount) * Constants.starSize.width
+        + CGFloat(self.starsCount - 1) * Constants.spacing
         + Constants.contentInsets.left + Constants.contentInsets.right
         
         let totalHeight = Constants.starSize.height + Constants.contentInsets.top + Constants.contentInsets.bottom
@@ -89,7 +90,7 @@ class StarsRateView: UIControl {
         let rawX = touchPoint.x - Constants.contentInsets.left
         let clampedX = min(max(0.0, rawX), totalWidth)
         let fraction = clampedX / totalWidth
-        let selected = Int(floor(fraction * CGFloat(starsCount))) + 1
+        let selected = Int(floor(fraction * CGFloat(self.starsCount))) + 1
         self.starsSelected = selected
     }
     

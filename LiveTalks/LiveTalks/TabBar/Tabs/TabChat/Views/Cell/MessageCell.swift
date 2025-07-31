@@ -26,7 +26,7 @@ class MessageCell: UITableViewCell {
         static let messageLabelNumberOfLines: Int = 0
         static let timeLabelFontSize: CGFloat = 12.0
         static let messageLabelFontSize: CGFloat = 16.0
-        static let dateFormatter: String = "h:mm a"
+        static let dateFormat: String = "h:mm a"
     }
     
     // MARK: - Properites. Private
@@ -75,7 +75,7 @@ class MessageCell: UITableViewCell {
     
     private func setupViews() {
         self.selectionStyle = .none
-        self.contentView.addSubview(bubbleView)
+        self.contentView.addSubview(self.bubbleView)
         
         self.bubbleView.addSubview(self.messageLabel)
         self.bubbleView.addSubview(self.timeLabel)
@@ -101,7 +101,7 @@ class MessageCell: UITableViewCell {
         
         if let date = message.date {
             let dateFormater = DateFormatter()
-            dateFormater.dateFormat = Constants.dateFormatter
+            dateFormater.dateFormat = Constants.dateFormat
             
             self.timeLabel.text = dateFormater.string(from: date)
             self.timeLabel.textColor = message.isIncoming ? UIColor(hex: Constants.incomingMessageTimeLabelColor) : UIColor(hex: Constants.outgoingMessageTimeLabelColor)
