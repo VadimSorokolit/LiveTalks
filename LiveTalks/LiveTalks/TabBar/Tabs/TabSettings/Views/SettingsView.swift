@@ -32,7 +32,7 @@ class SettingsView: UIView {
     
     // MARK: — Properties. Private
     
-    private let contactUsURL: String = "https://healthy-metal-aa6.notion.site/iOS-Developer-12831b2ac19680068ac3fcd91252b819"
+    private let contactUsURL: String = "https://docs.google.com/document/d/1sdHDWiiIiaLvSqFz5PknqWQh9Cb43vnP/edit?usp=drive_link&ouid=103632119606691530495&rtpof=true&sd=true"
     private var appRating: Int {
         get { UserDefaults.standard.integer(forKey: GlobalConstants.userDefaultsAppRatingKey) }
     }
